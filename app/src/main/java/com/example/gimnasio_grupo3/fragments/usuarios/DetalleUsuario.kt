@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import com.example.gimnasio_grupo3.R
 
 class DetalleUsuario : Fragment() {
-
+    lateinit var v : View
     companion object {
         fun newInstance() = DetalleUsuario()
     }
@@ -20,7 +20,8 @@ class DetalleUsuario : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_detalle_usuario, container, false)
+        v = inflater.inflate(R.layout.fragment_detalle_usuario, container, false)
+        return v
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import com.example.gimnasio_grupo3.R
 
 class PaquetesLista : Fragment() {
-
+    lateinit var v : View
     companion object {
         fun newInstance() = PaquetesLista()
     }
@@ -20,7 +20,8 @@ class PaquetesLista : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_paquetes_lista, container, false)
+        v = inflater.inflate(R.layout.fragment_paquetes_lista, container, false)
+        return v
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

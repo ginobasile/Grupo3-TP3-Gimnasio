@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import com.example.gimnasio_grupo3.R
 
 class CrearTurno : Fragment() {
-
+    lateinit var v : View
     companion object {
         fun newInstance() = CrearTurno()
     }
@@ -20,7 +20,8 @@ class CrearTurno : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_crear_turno, container, false)
+        v = inflater.inflate(R.layout.fragment_crear_turno, container, false)
+        return v
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

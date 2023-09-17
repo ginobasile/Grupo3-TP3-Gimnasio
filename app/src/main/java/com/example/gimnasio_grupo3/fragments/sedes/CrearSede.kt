@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import com.example.gimnasio_grupo3.R
 
 class CrearSede : Fragment() {
-
+    lateinit var v : View
     companion object {
         fun newInstance() = CrearSede()
     }
@@ -20,7 +20,8 @@ class CrearSede : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_crear_sede, container, false)
+        v = inflater.inflate(R.layout.fragment_crear_sede, container, false)
+        return v
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

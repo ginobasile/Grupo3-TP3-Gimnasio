@@ -10,6 +10,7 @@ import com.example.gimnasio_grupo3.R
 
 class CrearActividad : Fragment() {
 
+    lateinit var v : View
     companion object {
         fun newInstance() = CrearActividad()
     }
@@ -20,7 +21,8 @@ class CrearActividad : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_crear_actividad, container, false)
+        v = inflater.inflate(R.layout.fragment_crear_actividad, container, false)
+        return v
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
