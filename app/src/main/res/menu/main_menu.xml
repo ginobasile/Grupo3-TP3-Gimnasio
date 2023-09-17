@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/homePrincipal"
+        android:icon="@android:drawable/ic_menu_compass"
+        android:title="Home" />
+    <item
+        android:id="@+id/profesoresLista"
+        android:icon="@android:drawable/ic_menu_myplaces"
+        android:title="Profesores" />
+    <item
+        android:id="@+id/paquetesLista"
+        android:icon="@android:drawable/ic_menu_today"
+        android:title="Paquetes" />
+    <item
+        android:id="@+id/turnosLista"
+        android:icon="@android:drawable/ic_menu_more"
+        android:title="Turnos" />
+</menu>

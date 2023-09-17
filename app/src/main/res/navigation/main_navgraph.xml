@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navgraph"
+    app:startDestination="@id/homePrincipal">
+    <fragment
+        android:id="@+id/profesoresLista"
+        android:name="com.example.gimnasio_grupo3.fragments.profesores.ProfesoresLista"
+        android:label="fragment_profesores_lista"
+        tools:layout="@layout/fragment_profesores_lista" />
+    <fragment
+        android:id="@+id/paquetesLista"
+        android:name="com.example.gimnasio_grupo3.fragments.paquetes.PaquetesLista"
+        android:label="fragment_paquetes_lista"
+        tools:layout="@layout/fragment_paquetes_lista" />
+    <fragment
+        android:id="@+id/turnosLista"
+        android:name="com.example.gimnasio_grupo3.fragments.turnos.TurnosLista"
+        android:label="fragment_turnos_lista"
+        tools:layout="@layout/fragment_turnos_lista" />
+    <fragment
+        android:id="@+id/homePrincipal"
+        android:name="com.example.gimnasio_grupo3.fragments.Home"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+</navigation>
