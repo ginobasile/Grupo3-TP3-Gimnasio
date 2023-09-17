@@ -1,0 +1,32 @@
+package com.example.gimnasio_grupo3.fragments.sedes
+
+import androidx.lifecycle.ViewModelProvider
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import com.example.gimnasio_grupo3.R
+
+class DetalleSede : Fragment() {
+
+    companion object {
+        fun newInstance() = DetalleSede()
+    }
+
+    private lateinit var viewModel: DetalleSedeViewModel
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_detalle_sede, container, false)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel = ViewModelProvider(this).get(DetalleSedeViewModel::class.java)
+        // TODO: Use the ViewModel
+    }
+
+}
