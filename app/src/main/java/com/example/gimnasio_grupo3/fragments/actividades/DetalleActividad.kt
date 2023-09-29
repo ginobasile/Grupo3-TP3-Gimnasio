@@ -6,10 +6,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.example.gimnasio_grupo3.R
 
 class DetalleActividad : Fragment() {
     lateinit var v : View
+    lateinit var txtDesc : TextView
+    lateinit var txtNombre : TextView
+    lateinit var txtDurac : TextView
     companion object {
         fun newInstance() = DetalleActividad()
     }
@@ -21,8 +27,24 @@ class DetalleActividad : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         v = inflater.inflate(R.layout.fragment_detalle_actividad, container, false)
+        txtDesc = v.findViewById(R.id.txtDescrip)
+        txtNombre = v.findViewById(R.id.txtName)
+        txtDurac = v.findViewById(R.id.txtDuration)
         return v
     }
+
+
+    override fun onStart() {
+        super.onStart()
+        val actividad = DetalleActividadArgs.fromBundle(requireArguments()).actividad
+        txtNombre.text = actividad.name
+        txtDesc.text = actividad.description
+        txtDurac.text = actividad.duration
+
+
+
+    }
+
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

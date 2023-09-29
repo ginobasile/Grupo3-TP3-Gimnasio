@@ -5,11 +5,6 @@
     android:id="@+id/main_navgraph"
     app:startDestination="@id/homePrincipal">
     <fragment
-        android:id="@+id/profesoresLista"
-        android:name="com.example.gimnasio_grupo3.fragments.profesores.ProfesoresLista"
-        android:label="fragment_profesores_lista"
-        tools:layout="@layout/fragment_profesores_lista" />
-    <fragment
         android:id="@+id/paquetesLista"
         android:name="com.example.gimnasio_grupo3.fragments.paquetes.PaquetesLista"
         android:label="fragment_paquetes_lista"
@@ -24,4 +19,22 @@
         android:name="com.example.gimnasio_grupo3.fragments.Home"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/actividadesLista"
+        android:name="com.example.gimnasio_grupo3.fragments.actividades.ActividadesLista"
+        android:label="fragment_actividades_lista"
+        tools:layout="@layout/fragment_actividades_lista" >
+        <action
+            android:id="@+id/action_actividadesLista_to_detalleActividad"
+            app:destination="@id/detalleActividad" />
+    </fragment>
+    <fragment
+        android:id="@+id/detalleActividad"
+        android:name="com.example.gimnasio_grupo3.fragments.actividades.DetalleActividad"
+        android:label="fragment_detalle_actividad"
+        tools:layout="@layout/fragment_detalle_actividad" >
+        <argument
+            android:name="actividad"
+            app:argType="com.example.gimnasio_grupo3.entities.Actividad" />
+    </fragment>
 </navigation>
