@@ -15,23 +15,24 @@
 
         <ImageView
             android:id="@+id/imgActividad"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/txtNombreActividad"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/txtNombreActividad"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
             android:id="@+id/txtNombreActividad"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Aca va el nombre de la actividad"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:layout_width="272dp"
+            android:layout_height="22dp"
+            android:text="nombreActividad"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="237dp" />
+            app:layout_constraintStart_toEndOf="@+id/imgActividad"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>
