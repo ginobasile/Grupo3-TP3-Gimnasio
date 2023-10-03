@@ -3,25 +3,26 @@ package com.example.gimnasio_grupo3.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.gimnasio_grupo3.R
 import com.example.gimnasio_grupo3.entities.Actividad
 
 
-class ActividadAdapter( var actividades : MutableList<Actividad>,
-                        var onClick : (Int) -> Unit
-                        ) : RecyclerView.Adapter<ActividadAdapter.ActividadHolder>() {
+class ActividadAdapter( var actividades : MutableList<Actividad>
+) : RecyclerView.Adapter<ActividadAdapter.ActividadHolder>() {
 
     class ActividadHolder(v : View) : RecyclerView.ViewHolder(v)
     {
-        val itemImageView: ImageView = itemView.findViewById(R.id.imgActividad)
-        private var view : View
+        private var view: View
+
+        //private var view : View
+        val txtNombreActividad: TextView = itemView.findViewById(R.id.txtNombrePaquete)
+        val txtDuracion: TextView = itemView.findViewById(R.id.actividadDuracion)
+
         init {
-            this.view = v
+           this.view = v
         }
 
         fun setActividadName( name : String) {
@@ -32,9 +33,9 @@ class ActividadAdapter( var actividades : MutableList<Actividad>,
 
 
 
-        fun getCard() : CardView {
-            return view.findViewById(R.id.cardActividad)
-        }
+        //fun getCard() : CardView {
+        //    return view.findViewById(R.id.cardActividad)
+        //}
 
     }
 
@@ -48,15 +49,17 @@ class ActividadAdapter( var actividades : MutableList<Actividad>,
     }
 
     override fun onBindViewHolder(holder: ActividadHolder, position: Int) {
-        holder.setActividadName(actividades[position].name)
+        var actividad = actividades[position]
+        holder.txtNombreActividad.text = actividad.name
+        holder.txtDuracion.text = "Precio: $${actividad.duration}"
 
-        val context = holder.itemView.context
-        Glide.with(context)
-            .load(actividades[position].imgUrl)
-            .circleCrop()
-            .into(holder.itemImageView)
-            holder.getCard().setOnClickListener{
-            onClick(position)
+        //val context = holder.itemView.context
+        //Glide.with(context)
+         //   .load(actividades[position].imgUrl)
+         //   .circleCrop()
+         //   .into(holder.itemImageView)
+         //   holder.getCard().setOnClickListener{
+         //   onClick(position)
         }
     }
-    }
+

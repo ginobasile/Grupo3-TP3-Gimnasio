@@ -38,7 +38,6 @@ class DetalleActividad : Fragment() {
         super.onStart()
         val actividad = DetalleActividadArgs.fromBundle(requireArguments()).actividad
         txtNombre.text = actividad.name
-        txtDesc.text = actividad.description
         txtDurac.text = actividad.duration
 
 
