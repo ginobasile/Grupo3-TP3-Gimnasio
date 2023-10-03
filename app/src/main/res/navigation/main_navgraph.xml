@@ -8,7 +8,11 @@
         android:id="@+id/paquetesLista"
         android:name="com.example.gimnasio_grupo3.fragments.paquetes.PaquetesLista"
         android:label="fragment_paquetes_lista"
-        tools:layout="@layout/fragment_paquetes_lista" />
+        tools:layout="@layout/fragment_paquetes_lista" >
+        <action
+            android:id="@+id/action_paquetesLista_to_crearPaquete"
+            app:destination="@id/crearPaquete" />
+    </fragment>
     <fragment
         android:id="@+id/turnosLista"
         android:name="com.example.gimnasio_grupo3.fragments.turnos.TurnosLista"
@@ -37,4 +41,9 @@
             android:name="actividad"
             app:argType="com.example.gimnasio_grupo3.entities.Actividad" />
     </fragment>
+    <fragment
+        android:id="@+id/crearPaquete"
+        android:name="com.example.gimnasio_grupo3.fragments.paquetes.CrearPaquete"
+        android:label="fragment_crear_paquete"
+        tools:layout="@layout/fragment_crear_paquete" />
 </navigation>

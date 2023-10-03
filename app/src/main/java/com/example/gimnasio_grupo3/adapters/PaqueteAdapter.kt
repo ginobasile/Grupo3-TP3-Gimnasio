@@ -3,9 +3,7 @@ package com.example.gimnasio_grupo3.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gimnasio_grupo3.R
 import com.example.gimnasio_grupo3.entities.Paquete
@@ -34,18 +32,7 @@ class PaqueteAdapter(var paquetes : MutableList<Paquete>
         var paquete = paquetes[position]
 
         holder.txtNombrePaquete.text = paquete.nombre
-        holder.txtPrecioPaquete.text = "Precio: ${paquete.precio}"
-        holder.txtTickets.text = "Tickets: ${paquete.cantTickets}"
+        holder.txtPrecioPaquete.text = "Precio: $${paquete.precio}"
+        holder.txtTickets.text = "Cantidad de tickets: ${paquete.cantTickets}"
     }
-//        holder.setPaqueteName(paquetes[position].nombre)
-//
-//        val context = holder.itemView.context
-//        Glide.with(context)
-//            .load(paquetes[position].)
-//            .circleCrop()
-//            .into(holder.itemImageView)
-//        holder.getCard().setOnClickListener{
-//            onClick(position)
-//        }
-    }
-//}
+}

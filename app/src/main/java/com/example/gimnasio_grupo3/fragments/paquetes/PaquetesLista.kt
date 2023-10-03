@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -26,6 +27,7 @@ class PaquetesLista : Fragment() {
     lateinit var reciclerPaquetes: RecyclerView
     lateinit var adapter: PaqueteAdapter
     lateinit var paquetesList: MutableList<Paquete>
+    private lateinit var btnCrearPaquete : Button
 
     companion object {
         fun newInstance() = PaquetesLista()
@@ -39,9 +41,16 @@ class PaquetesLista : Fragment() {
     ): View? {
         v = inflater.inflate(R.layout.fragment_paquetes_lista, container, false)
         reciclerPaquetes = v.findViewById(R.id.reciclerPaquetes)
-        // No inicialices el adaptador aquí
-        // adapter = PaqueteAdapter(paquetesList)
         reciclerPaquetes.layoutManager = LinearLayoutManager(requireContext())
+
+        btnCrearPaquete = v.findViewById(R.id.button1)
+
+        btnCrearPaquete.setOnClickListener{
+            val action = PaquetesListaDirections.actionPaquetesListaToCrearPaquete()
+
+            findNavController().navigate(action)
+        }
+
         return v
     }
 
