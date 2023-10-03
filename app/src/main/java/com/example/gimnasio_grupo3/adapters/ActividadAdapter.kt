@@ -25,7 +25,7 @@ class ActividadAdapter( var actividades : MutableList<Actividad>,
         }
 
         fun setActividadName( name : String) {
-            val txtName : TextView = view.findViewById(R.id.txtNombreActividad)
+            val txtName : TextView = view.findViewById(R.id.txtNombrePaquete)
             txtName.text = name
         }
 

@@ -5,9 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".fragments.paquetes.PaquetesLista">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/reciclerPaquetes"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="vista de paquetes" />
-
+        android:layout_height="match_parent" />
 </FrameLayout>

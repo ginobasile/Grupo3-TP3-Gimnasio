@@ -18,13 +18,13 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/txtNombreActividad"
+            app:layout_constraintEnd_toStartOf="@+id/txtNombrePaquete"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/txtNombreActividad"
+            android:id="@+id/txtNombrePaquete"
             android:layout_width="272dp"
             android:layout_height="22dp"
             android:text="nombreActividad"
