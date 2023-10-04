@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.gimnasio_grupo3.R
 import com.example.gimnasio_grupo3.entities.Paquete
 
-class PaqueteAdapter(var paquetes : MutableList<Paquete>
+class PaqueteAdapter(
+    var paquetes : MutableList<Paquete>,
+    private val onItemClick: (Paquete) -> Unit
 ) : RecyclerView.Adapter<PaqueteAdapter.PaqueteHolder>() {
 
     class PaqueteHolder(v : View) : RecyclerView.ViewHolder(v)
@@ -34,5 +36,10 @@ class PaqueteAdapter(var paquetes : MutableList<Paquete>
         holder.txtNombrePaquete.text = paquete.nombre
         holder.txtPrecioPaquete.text = "Precio: $${paquete.precio}"
         holder.txtTickets.text = "Cantidad de tickets: ${paquete.cantTickets}"
+
+        holder.itemView.setOnClickListener {
+            onItemClick(paquete)
+        }
     }
+
 }

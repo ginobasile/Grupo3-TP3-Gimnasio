@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_paquetesLista_to_crearPaquete"
             app:destination="@id/crearPaquete" />
+        <action
+            android:id="@+id/action_paquetesLista_to_detallePaquete"
+            app:destination="@id/detallePaquete" />
     </fragment>
     <fragment
         android:id="@+id/turnosLista"
@@ -46,4 +49,13 @@
         android:name="com.example.gimnasio_grupo3.fragments.paquetes.CrearPaquete"
         android:label="fragment_crear_paquete"
         tools:layout="@layout/fragment_crear_paquete" />
+    <fragment
+        android:id="@+id/detallePaquete"
+        android:name="com.example.gimnasio_grupo3.fragments.paquetes.DetallePaquete"
+        android:label="fragment_detalle_paquete"
+        tools:layout="@layout/fragment_detalle_paquete" >
+        <argument
+            android:name="datosPaquete"
+            app:argType="com.example.gimnasio_grupo3.entities.Paquete" />
+    </fragment>
 </navigation>

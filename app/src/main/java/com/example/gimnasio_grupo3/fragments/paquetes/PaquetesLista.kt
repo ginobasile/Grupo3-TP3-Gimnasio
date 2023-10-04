@@ -1,5 +1,6 @@
 package com.example.gimnasio_grupo3.fragments.paquetes
 
+import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,12 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gimnasio_grupo3.R
 import com.example.gimnasio_grupo3.RetroFitProviders.PaquetesProvider
-import com.example.gimnasio_grupo3.adapters.ActividadAdapter
 import com.example.gimnasio_grupo3.adapters.PaqueteAdapter
-import com.example.gimnasio_grupo3.entities.ActividadesRepository
 import com.example.gimnasio_grupo3.entities.Paquete
-import com.example.gimnasio_grupo3.fragments.actividades.ActividadesListaDirections
-import com.example.gimnasio_grupo3.interfaces.PaqueteAPI
+import com.example.gimnasio_grupo3.interfaces.APIMethods
+import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -60,8 +59,10 @@ class PaquetesLista : Fragment() {
         // TODO: Use the ViewModel
 
         val retrofit = PaquetesProvider().provideRetrofit()
-        val apiService = retrofit.create(PaqueteAPI::class.java)
+        val apiService = retrofit.create(APIMethods::class.java)
         val call = apiService.getPaquetes()
+
+
 
         call.enqueue(object : Callback<List<Paquete>> {
             override fun onResponse(call: Call<List<Paquete>>, response: Response<List<Paquete>>) {
@@ -69,8 +70,16 @@ class PaquetesLista : Fragment() {
                     paquetesList = response.body() as MutableList<Paquete>
 
                     // Después de obtener los datos, inicializa el adaptador
-                    adapter = PaqueteAdapter(paquetesList)
+                    adapter = PaqueteAdapter(paquetesList) { paquete ->
+                        val action = PaquetesListaDirections.actionPaquetesListaToDetallePaquete(paquete)
+
+                        findNavController().navigate(action)
+                        val snackbar = Snackbar.make(v, paquete.toString(), Snackbar.LENGTH_LONG)
+
+                        snackbar.show()
+                    }
                     reciclerPaquetes.adapter = adapter
+
                 } else {
                     // La llamada no fue exitosa, maneja los errores aquí
                 }
