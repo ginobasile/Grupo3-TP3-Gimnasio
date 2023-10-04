@@ -29,7 +29,7 @@ interface APIMethods {
     fun deletePaquete(@Path("id") id: String): Call<Void>
 
     // ACTIVIDADES
-    @GET("actividades")
+    @GET("Actividades")
     fun getActividades(): Call<List<Actividad>>
 
 }

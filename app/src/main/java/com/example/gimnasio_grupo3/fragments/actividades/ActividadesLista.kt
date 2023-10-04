@@ -6,13 +6,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gimnasio_grupo3.R
 import com.example.gimnasio_grupo3.RetroFitProviders.ActividadesProvider
 import com.example.gimnasio_grupo3.adapters.ActividadAdapter
+import com.example.gimnasio_grupo3.adapters.PaqueteAdapter
 import com.example.gimnasio_grupo3.entities.Actividad
+import com.example.gimnasio_grupo3.fragments.paquetes.PaquetesListaDirections
 import com.example.gimnasio_grupo3.interfaces.APIMethods
+import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -63,9 +67,16 @@ class ActividadesLista : Fragment() {
             override fun onResponse(call: Call<List<Actividad>>, response: Response<List<Actividad>>) {
                 if (response.isSuccessful) {
                     actividadesList = response.body() as MutableList<Actividad>
+                    val snackbar = Snackbar.make(v, actividadesList.toString(), Snackbar.LENGTH_INDEFINITE)
 
+                    snackbar.show()
                     // Después de obtener los datos, inicializa el adaptador
-                    adapter = ActividadAdapter(actividadesList)
+                    adapter = ActividadAdapter(actividadesList) { actividad ->
+
+                        val snackbar = Snackbar.make(v, actividad.toString(), Snackbar.LENGTH_LONG)
+
+                        snackbar.show()
+                    }
                     recyclerActividades.adapter = adapter
                 } else {
                     // La llamada no fue exitosa, maneja los errores aquí

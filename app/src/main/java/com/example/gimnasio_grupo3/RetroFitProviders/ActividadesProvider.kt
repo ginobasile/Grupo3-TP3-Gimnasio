@@ -4,7 +4,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ActividadesProvider {
     fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://646937ca03bb12ac208876f1.mockapi.io/")
+            .baseUrl("https://6460fabb491f9402f49bfa55.mockapi.io/")
+
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

@@ -19,6 +19,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 class CrearPaquete : Fragment() {
     lateinit var v : View
     private lateinit var inputNombre: EditText
@@ -52,7 +53,36 @@ class CrearPaquete : Fragment() {
 
         btnCreate.setOnClickListener {
 
-            val nuevoPaquete = Paquete(inputNombre.text.toString(),  inputPrecio.text.toString().toInt(), inputTickets.text.toString().toInt())
+            //val nuevoPaquete = Paquete(inputNombre.text.toString(),  inputPrecio.text.toString().toInt(), inputTickets.text.toString().toInt())
+            val nombre = inputNombre.text.toString()
+            val precioText = inputPrecio.text.toString()
+            val ticketsText = inputTickets.text.toString()
+
+            // Realiza validaciones
+            if (nombre.isEmpty()) {
+                // El campo de nombre está vacío, muestra un mensaje de error
+                inputNombre.error = "El nombre es obligatorio"
+                return@setOnClickListener
+            }
+
+            if (precioText.isEmpty()) {
+                // El campo de precio está vacío, muestra un mensaje de error
+                inputPrecio.error = "El precio es obligatorio"
+                return@setOnClickListener
+            }
+
+            if (ticketsText.isEmpty()) {
+                // El campo de tickets está vacío, muestra un mensaje de error
+                inputTickets.error = "La cantidad de tickets es obligatoria"
+                return@setOnClickListener
+            }
+
+            // Si todas las validaciones pasan, convierte los valores a los tipos correctos
+            val precio = precioText.toInt()
+            val tickets = ticketsText.toInt()
+
+            // Crea el objeto Paquete
+            val nuevoPaquete = Paquete(nombre, precio, tickets)
 
             val retrofit = PaquetesProvider().provideRetrofit()
             val apiService = retrofit.create(APIMethods::class.java)
