@@ -11,6 +11,7 @@ import retrofit2.http.PUT
 import retrofit2.http.Path
 
 interface APIMethods {
+    // PAQUETES
     // Create: Agregar un nuevo paquete
     @POST("paquetes")
     fun createPaquete(@Body paquete: Paquete): Call<Paquete>
@@ -27,6 +28,7 @@ interface APIMethods {
     @DELETE("paquetes/{id}")
     fun deletePaquete(@Path("id") id: String): Call<Void>
 
+    // ACTIVIDADES
     @GET("actividades")
     fun getActividades(): Call<List<Actividad>>
 
