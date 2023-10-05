@@ -1,5 +1,6 @@
 package com.example.gimnasio_grupo3.fragments.paquetes
 
+import android.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -18,6 +19,7 @@ import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.contracts.Returns
 
 class DetallePaquete : Fragment() {
     lateinit var v: View
@@ -65,13 +67,31 @@ class DetallePaquete : Fragment() {
         val retrofit = PaquetesProvider().provideRetrofit()
         val apiService = retrofit.create(APIMethods::class.java)
 
+        btnBack.setOnClickListener {
+            v.findNavController().navigateUp()
+        }
+
         btnMod.setOnClickListener {
-
             val nuevoNombre = inputNombre.text.toString()
-            val nuevoPrecio = inputPrecio.text.toString().toInt()
-            val nuevoTickets = inputTickets.text.toString().toInt()
+            val nuevoPrecio = inputPrecio.text.toString()
+            val nuevoTickets = inputTickets.text.toString()
 
-            val paqueteActualizado = Paquete(paquete.id, nuevoNombre, nuevoTickets, nuevoPrecio)
+            if (nuevoNombre.isEmpty()) {
+                inputNombre.error = "El nombre es obligatorio"
+                return@setOnClickListener
+            }
+
+            if (nuevoPrecio.isEmpty()) {
+                inputPrecio.error = "El precio es obligatorio"
+                return@setOnClickListener
+            }
+
+            if (nuevoTickets.isEmpty()) {
+                inputTickets.error = "La cantidad de tickets es obligatoria"
+                return@setOnClickListener
+            }
+
+            val paqueteActualizado = Paquete(paquete.id, nuevoNombre, nuevoTickets.toInt(), nuevoPrecio.toInt())
 
             val call = apiService.updatePaquete(paquete.id.toString(), paqueteActualizado)
 
@@ -79,7 +99,8 @@ class DetallePaquete : Fragment() {
                 override fun onResponse(call: Call<Paquete>, response: Response<Paquete>) {
                     if (response.isSuccessful) {
                         // Actualización exitosa, puedes mostrar un mensaje o realizar otras acciones si es necesario
-                        Snackbar.make(v, "Paquete actualizado exitosamente", Snackbar.LENGTH_LONG)
+                        Snackbar.make(
+                            v, "Paquete actualizado exitosamente", Snackbar.LENGTH_LONG)
                             .show()
                         v.findNavController().navigateUp()
                     } else {
@@ -119,7 +140,11 @@ class DetallePaquete : Fragment() {
 
                 override fun onFailure(call: Call<Void>, t: Throwable) {
                     // Maneja errores de conexión aquí
-                    Snackbar.make(v, "Error de conexión al eliminar el paquete", Snackbar.LENGTH_LONG)
+                    Snackbar.make(
+                        v,
+                        "Error de conexión al eliminar el paquete",
+                        Snackbar.LENGTH_LONG
+                    )
                         .show()
                 }
             })
@@ -132,4 +157,24 @@ class DetallePaquete : Fragment() {
         }
 
     }
+/*
+    fun confirmAction(action : String) {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle(action)
+        builder.setMessage("¿Estás seguro de que deseas ${action} este paquete?")
+
+        var confirm : Boolean = false
+
+        builder.setPositiveButton(action) { dialog, _ ->
+            dialog.dismiss()
+        }
+
+        builder.setNegativeButton("Cancelar") { dialog, _ ->
+            dialog.dismiss()
+        }
+
+        val dialog = builder.create()
+        dialog.show()
+    }
+*/
 }
