@@ -1,5 +1,7 @@
 package com.example.gimnasio_grupo3.fragments
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,6 +12,7 @@ import com.example.gimnasio_grupo3.R
 
 class Login : Fragment() {
     lateinit var v : View
+    private val PREF_NAME = "myPreferences"
     companion object {
         fun newInstance() = Login()
     }
@@ -22,6 +25,16 @@ class Login : Fragment() {
     ): View? {
         v = inflater.inflate(R.layout.fragment_login, container, false)
         return v
+    }
+
+    override fun onStart(){
+        super.onStart()
+
+        val sharedPref : SharedPreferences = requireContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        val editor = sharedPref.edit()
+
+        editor.putString("USER", "usuario1")
+        editor.apply()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
