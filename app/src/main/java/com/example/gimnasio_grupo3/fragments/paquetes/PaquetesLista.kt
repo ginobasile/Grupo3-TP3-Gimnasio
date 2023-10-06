@@ -1,6 +1,5 @@
 package com.example.gimnasio_grupo3.fragments.paquetes
 
-import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -26,7 +26,7 @@ class PaquetesLista : Fragment() {
     lateinit var reciclerPaquetes: RecyclerView
     lateinit var adapter: PaqueteAdapter
     lateinit var paquetesList: MutableList<Paquete>
-    private lateinit var btnCrearPaquete : Button
+    private lateinit var btnCrearPaquete: Button
 
     companion object {
         fun newInstance() = PaquetesLista()
@@ -44,7 +44,7 @@ class PaquetesLista : Fragment() {
 
         btnCrearPaquete = v.findViewById(R.id.button1)
 
-        btnCrearPaquete.setOnClickListener{
+        btnCrearPaquete.setOnClickListener {
             val action = PaquetesListaDirections.actionPaquetesListaToCrearPaquete()
 
             findNavController().navigate(action)
@@ -56,34 +56,20 @@ class PaquetesLista : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(PaquetesListaViewModel::class.java)
-        // TODO: Use the ViewModel
 
-        val retrofit = PaquetesProvider().provideRetrofit()
-        val apiService = retrofit.create(APIMethods::class.java)
-        val call = apiService.getPaquetes()
-
-        call.enqueue(object : Callback<List<Paquete>> {
-            override fun onResponse(call: Call<List<Paquete>>, response: Response<List<Paquete>>) {
-                if (response.isSuccessful) {
-                    paquetesList = response.body() as MutableList<Paquete>
-
-                    // Después de obtener los datos, inicializa el adaptador
-                    adapter = PaqueteAdapter(paquetesList) { paquete ->
-                        val action = PaquetesListaDirections.actionPaquetesListaToDetallePaquete(paquete)
-
-                        findNavController().navigate(action)
-                    }
-                    reciclerPaquetes.adapter = adapter
-
-                } else {
-                    // La llamada no fue exitosa, maneja los errores aquí
+        viewModel.obtenerPaquetes { paquetesList ->
+            if (paquetesList != null) {
+                // Después de obtener los datos, inicializa el adaptador
+                adapter = PaqueteAdapter(paquetesList.toMutableList()) { paquete ->
+                    val action =
+                        PaquetesListaDirections.actionPaquetesListaToDetallePaquete(paquete)
+                    findNavController().navigate(action)
                 }
+                reciclerPaquetes.adapter = adapter
+            } else {
+                // Maneja los errores aquí si no se pudieron obtener los paquetes
             }
-
-            override fun onFailure(call: Call<List<Paquete>>, t: Throwable) {
-                // Maneja errores de conexión aquí
-            }
-        })
+        }
     }
 }
 
