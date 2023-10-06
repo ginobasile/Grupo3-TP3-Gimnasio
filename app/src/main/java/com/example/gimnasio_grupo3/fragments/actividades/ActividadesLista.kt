@@ -25,8 +25,8 @@ class ActividadesLista : Fragment() {
 
     lateinit var v : View
     lateinit var recyclerActividades : RecyclerView
-    lateinit var actividadesList: MutableList<Actividad>
     lateinit var adapter : ActividadAdapter
+    lateinit var actividadesList: MutableList<Actividad>
 
     companion object {
         fun newInstance() = ActividadesLista()
@@ -44,32 +44,18 @@ class ActividadesLista : Fragment() {
         return v
     }
 
-    //override fun onStart() {
-    //    super.onStart()
-    //    adapter = ActividadAdapter(repoActividades.actividades){ position ->
-    //        val action = ActividadesListaDirections.actionActividadesListaToDetalleActividad(repoActividades.actividades[position])
-
-    //        findNavController().navigate(action)
-    //    }
-    //    recyclerActividades.layoutManager = LinearLayoutManager(context)
-    //    recyclerActividades.adapter = adapter
-    //}
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(ActividadesListaViewModel::class.java)
-        // TODO: Use the ViewModel
+
         val retrofit = ActividadesProvider().provideRetrofit()
         val apiService = retrofit.create(APIMethods::class.java)
-        val call = apiService.getActividades()
+        val call = apiService.getActividad()
 
         call.enqueue(object : Callback<List<Actividad>> {
             override fun onResponse(call: Call<List<Actividad>>, response: Response<List<Actividad>>) {
                 if (response.isSuccessful) {
                     actividadesList = response.body() as MutableList<Actividad>
-                    val snackbar = Snackbar.make(v, actividadesList.toString(), Snackbar.LENGTH_INDEFINITE)
-
-                    snackbar.show()
                     // Después de obtener los datos, inicializa el adaptador
                     adapter = ActividadAdapter(actividadesList) { actividad ->
 
@@ -88,5 +74,4 @@ class ActividadesLista : Fragment() {
             }
         })
     }
-
 }

@@ -11,25 +11,66 @@ import retrofit2.http.PUT
 import retrofit2.http.Path
 
 interface APIMethods {
-    // PAQUETES
-    // Create: Agregar un nuevo paquete
+    // PAQUETES-PAQUETES-PAQUETES-PAQUETES-PAQUETES-PAQUETES
+    // Create
     @POST("paquetes")
     fun createPaquete(@Body paquete: Paquete): Call<Paquete>
 
-    // Read: Obtener todos los paquetes
+    // Read
     @GET("paquetes")
     fun getPaquetes(): Call<List<Paquete>>
 
-    // Update: Actualizar un paquete existente
+    // Update
     @PUT("paquetes/{id}")
     fun updatePaquete(@Path("id") id: String, @Body paquete: Paquete): Call<Paquete>
 
-    // Delete: Eliminar un paquete
+    // Delete
     @DELETE("paquetes/{id}")
     fun deletePaquete(@Path("id") id: String): Call<Void>
 
-    // ACTIVIDADES
+    // ACTIVIDADES-ACTIVIDADES-ACTIVIDADES-ACTIVIDADES-ACTIVIDADES
+    // Create
+    @POST("Actividades")
+    fun createActividad(@Body paquete: Actividad): Call<Actividad>
+
+    // Read
     @GET("Actividades")
-    fun getActividades(): Call<List<Actividad>>
+    fun getActividad(): Call<List<Actividad>>
+
+    // Update
+    @PUT("Actividades/{id}")
+    fun updateActividad(@Path("id") id: String, @Body paquete: Actividad): Call<Actividad>
+
+    // Delete
+    @DELETE("Actividades/{id}")
+    fun deleteActividad(@Path("id") id: String): Call<Void>
+
+    // PROFESORES-PROFESORES-PROFESORES-PROFESORES-PROFESORES
+    // Create
+
+    // Read
+
+    // Update
+
+    // Delete
+
+    // TURNOS-TURNOS-TURNOS-TURNOS-TURNOS-TURNOS-TURNOS-TURNOS
+    // Create
+
+    // Read
+
+    // Update
+
+    // Delete
+
+    // USUARIOS-USUARIOS-USUARIOS-USUARIOS-USUARIOS-USUARIOS
+    // Create
+
+    // Read
+
+    // Update
+
+    // Delete
+
 
 }

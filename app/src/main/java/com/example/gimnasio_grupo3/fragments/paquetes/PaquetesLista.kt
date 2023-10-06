@@ -59,7 +59,6 @@ class PaquetesLista : Fragment() {
 
         viewModel.obtenerPaquetes { paquetesList ->
             if (paquetesList != null) {
-                // Después de obtener los datos, inicializa el adaptador
                 adapter = PaqueteAdapter(paquetesList.toMutableList()) { paquete ->
                     val action =
                         PaquetesListaDirections.actionPaquetesListaToDetallePaquete(paquete)

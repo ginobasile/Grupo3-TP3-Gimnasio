@@ -16,27 +16,8 @@ class ActividadAdapter( var actividades : MutableList<Actividad>,
 
     class ActividadHolder(v : View) : RecyclerView.ViewHolder(v)
     {
-        private var view: View
-
-        //private var view : View
         val txtNombreActividad: TextView = itemView.findViewById(R.id.txtNombreActividad)
         val txtDuracion: TextView = itemView.findViewById(R.id.actividadDuracion)
-
-        init {
-           this.view = v
-        }
-
-        // setActividadName( name : String) {
-         //   val txtName : TextView = view.findViewById(R.id.txtNombreActividad)
-        //    txtName.text = name
-        //}
-
-
-
-
-        //fun getCard() : CardView {
-        //    return view.findViewById(R.id.cardActividad)
-        //}
 
     }
 
@@ -51,19 +32,13 @@ class ActividadAdapter( var actividades : MutableList<Actividad>,
 
     override fun onBindViewHolder(holder: ActividadHolder, position: Int) {
         var actividad = actividades[position]
+
         holder.txtNombreActividad.text = actividad.name
         holder.txtDuracion.text = "Duracion: ${actividad.duration}"
 
         holder.itemView.setOnClickListener {
             onItemClick(actividad)
         }
-        //val context = holder.itemView.context
-        //Glide.with(context)
-         //   .load(actividades[position].imgUrl)
-         //   .circleCrop()
-         //   .into(holder.itemImageView)
-         //   holder.getCard().setOnClickListener{
-         //   onClick(position)
-        }
     }
+}
 

@@ -8,6 +8,6 @@ import kotlinx.parcelize.Parcelize
 data class Actividad(
     var id: Int,
     var name: String,
-    var duration: String,
+    var duration: Int,
 
 ): Parcelable
