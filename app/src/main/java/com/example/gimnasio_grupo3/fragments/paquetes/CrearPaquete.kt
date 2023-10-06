@@ -1,5 +1,6 @@
 package com.example.gimnasio_grupo3.fragments.paquetes
 
+import android.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -80,35 +81,40 @@ class CrearPaquete : Fragment() {
 
             val nuevoPaquete = Paquete(nombre, precio, tickets)
 
-            val retrofit = PaquetesProvider().provideRetrofit()
-            val apiService = retrofit.create(APIMethods::class.java)
+            confirmAction("Crear") { confirmed ->
+                if (confirmed) {
+                    // Llama a la función en el ViewModel y pasa un callback
+                    viewModel.crearPaquete(nuevoPaquete) { estado ->
+                        Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
 
-            val call = apiService.createPaquete(nuevoPaquete)
-
-            call.enqueue(object : Callback<Paquete> {
-                override fun onResponse(call: Call<Paquete>, response: Response<Paquete>) {
-                    if (response.isSuccessful) {
-                        // Actualización exitosa, puedes mostrar un mensaje o realizar otras acciones si es necesario
-                        Snackbar.make(v, "Paquete creado exitosamente", Snackbar.LENGTH_LONG)
-                            .show()
-                        v.findNavController().navigateUp()
-                    } else {
-                        // La actualización no fue exitosa, maneja los errores aquí
-                        Snackbar.make(v, "Error al crear el paquete", Snackbar.LENGTH_LONG)
-                            .show()
+                        if (estado == "Paquete creado exitosamente") {
+                            v.findNavController().navigateUp()
+                        }
                     }
+                } else {
+                    Snackbar.make(v, "Acción cancelada", Snackbar.LENGTH_LONG).show()
                 }
-
-                override fun onFailure(call: Call<Paquete>, t: Throwable) {
-                    // Maneja errores de conexión aquí
-                    Snackbar.make(
-                        v,
-                        "Error de conexión al crear el paquete",
-                        Snackbar.LENGTH_LONG
-                    ).show()
-                }
-            })
+            }
         }
+    }
+
+    private fun confirmAction(action: String, callback: (Boolean) -> Unit) {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle(action)
+        builder.setMessage("¿Estás seguro de que deseas $action este paquete?")
+
+        builder.setPositiveButton(action) { dialog, _ ->
+            callback(true) // Llama al callback con 'true' cuando el usuario confirma
+            dialog.dismiss()
+        }
+
+        builder.setNegativeButton("Cancelar") { dialog, _ ->
+            callback(false) // Llama al callback con 'false' cuando el usuario cancela
+            dialog.dismiss()
+        }
+
+        val dialog = builder.create()
+        dialog.show()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
