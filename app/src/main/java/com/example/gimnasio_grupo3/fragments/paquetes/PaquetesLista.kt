@@ -62,8 +62,6 @@ class PaquetesLista : Fragment() {
         val apiService = retrofit.create(APIMethods::class.java)
         val call = apiService.getPaquetes()
 
-
-
         call.enqueue(object : Callback<List<Paquete>> {
             override fun onResponse(call: Call<List<Paquete>>, response: Response<List<Paquete>>) {
                 if (response.isSuccessful) {
@@ -74,9 +72,6 @@ class PaquetesLista : Fragment() {
                         val action = PaquetesListaDirections.actionPaquetesListaToDetallePaquete(paquete)
 
                         findNavController().navigate(action)
-                        val snackbar = Snackbar.make(v, paquete.toString(), Snackbar.LENGTH_LONG)
-
-                        snackbar.show()
                     }
                     reciclerPaquetes.adapter = adapter
 

@@ -4,4 +4,5 @@ import androidx.lifecycle.ViewModel
 
 class DetalleUsuarioViewModel : ViewModel() {
     // TODO: Implement the ViewModel
+
 }
