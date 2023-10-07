@@ -30,19 +30,19 @@ interface APIMethods {
 
     // ACTIVIDADES-ACTIVIDADES-ACTIVIDADES-ACTIVIDADES-ACTIVIDADES
     // Create
-    @POST("Actividades")
+    @POST("actividades")
     fun createActividad(@Body paquete: Actividad): Call<Actividad>
 
     // Read
-    @GET("Actividades")
+    @GET("actividades")
     fun getActividad(): Call<List<Actividad>>
 
     // Update
-    @PUT("Actividades/{id}")
+    @PUT("actividades/{id}")
     fun updateActividad(@Path("id") id: String, @Body paquete: Actividad): Call<Actividad>
 
     // Delete
-    @DELETE("Actividades/{id}")
+    @DELETE("actividades/{id}")
     fun deleteActividad(@Path("id") id: String): Call<Void>
 
     // PROFESORES-PROFESORES-PROFESORES-PROFESORES-PROFESORES
