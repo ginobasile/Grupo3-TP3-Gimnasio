@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,10 +24,11 @@ import retrofit2.Response
 
 class ActividadesLista : Fragment() {
 
-    lateinit var v : View
-    lateinit var recyclerActividades : RecyclerView
-    lateinit var adapter : ActividadAdapter
+    lateinit var v: View
+    lateinit var recyclerActividades: RecyclerView
+    lateinit var adapter: ActividadAdapter
     lateinit var actividadesList: MutableList<Actividad>
+    private lateinit var btnCrearActividad: Button
 
     companion object {
         fun newInstance() = ActividadesLista()
@@ -41,6 +43,14 @@ class ActividadesLista : Fragment() {
         v = inflater.inflate(R.layout.fragment_actividades_lista, container, false)
         recyclerActividades = v.findViewById(R.id.reciclerActividades)
         recyclerActividades.layoutManager = LinearLayoutManager(requireContext())
+        btnCrearActividad = v.findViewById(R.id.buttonActividades)
+
+        btnCrearActividad.setOnClickListener {
+            val action = ActividadesListaDirections.actionActividadesListaToCrearActividad()
+
+            findNavController().navigate(action)
+        }
+
         return v
     }
 
@@ -48,30 +58,19 @@ class ActividadesLista : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(ActividadesListaViewModel::class.java)
 
-        val retrofit = ActividadesProvider().provideRetrofit()
-        val apiService = retrofit.create(APIMethods::class.java)
-        val call = apiService.getActividad()
-
-        call.enqueue(object : Callback<List<Actividad>> {
-            override fun onResponse(call: Call<List<Actividad>>, response: Response<List<Actividad>>) {
-                if (response.isSuccessful) {
-                    actividadesList = response.body() as MutableList<Actividad>
-                    // Después de obtener los datos, inicializa el adaptador
-                    adapter = ActividadAdapter(actividadesList) { actividad ->
-
-                        val snackbar = Snackbar.make(v, actividad.toString(), Snackbar.LENGTH_LONG)
-
-                        snackbar.show()
-                    }
-                    recyclerActividades.adapter = adapter
-                } else {
-                    // La llamada no fue exitosa, maneja los errores aquí
+        viewModel.obtenerActividades { actividadesList ->
+            if (actividadesList != null) {
+                adapter = ActividadAdapter(actividadesList.toMutableList()) { actividad ->
+                    val action =
+                        ActividadesListaDirections.actionActividadesListaToDetalleActividad(
+                            actividad
+                        )
+                    findNavController().navigate(action)
                 }
-            }
+                recyclerActividades.adapter = adapter
+            } else {
 
-            override fun onFailure(call: Call<List<Actividad>>, t: Throwable) {
-                // Maneja errores de conexión aquí
             }
-        })
+        }
     }
 }

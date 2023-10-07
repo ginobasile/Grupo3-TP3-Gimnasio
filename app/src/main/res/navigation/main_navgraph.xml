@@ -34,6 +34,9 @@
         <action
             android:id="@+id/action_actividadesLista_to_detalleActividad"
             app:destination="@id/detalleActividad" />
+        <action
+            android:id="@+id/action_actividadesLista_to_crearActividad"
+            app:destination="@id/crearActividad" />
     </fragment>
     <fragment
         android:id="@+id/detalleActividad"
@@ -58,4 +61,9 @@
             android:name="datosPaquete"
             app:argType="com.example.gimnasio_grupo3.entities.Paquete" />
     </fragment>
+    <fragment
+        android:id="@+id/crearActividad"
+        android:name="com.example.gimnasio_grupo3.fragments.actividades.CrearActividad"
+        android:label="fragment_crear_actividad"
+        tools:layout="@layout/fragment_crear_actividad" />
 </navigation>
