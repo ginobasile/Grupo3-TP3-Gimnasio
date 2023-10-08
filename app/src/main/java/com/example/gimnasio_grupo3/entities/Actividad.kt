@@ -11,4 +11,6 @@ data class Actividad(
     var duration: Int,
     var url: String
 
-): Parcelable
+): Parcelable {
+    constructor(name: String, duration: Int, url: String) : this(0, name, duration, url)
+}
