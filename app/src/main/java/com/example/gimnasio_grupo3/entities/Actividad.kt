@@ -9,5 +9,6 @@ data class Actividad(
     var id: Int,
     var name: String,
     var duration: Int,
+    var url: String
 
 ): Parcelable

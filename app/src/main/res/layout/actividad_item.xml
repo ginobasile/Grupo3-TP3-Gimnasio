@@ -17,13 +17,13 @@
             android:id="@+id/txtNombreActividad"
             android:layout_width="272dp"
             android:layout_height="22dp"
-            android:layout_marginEnd="104dp"
+            android:layout_marginEnd="4dp"
             android:text="nombreActividad"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.242" />
+            app:layout_constraintVertical_bias="0.228" />
 
         <TextView
             android:id="@+id/actividadDuracion"
@@ -32,10 +32,21 @@
             android:text="duracion"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.055"
+            app:layout_constraintHorizontal_bias="0.348"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtNombreActividad"
-            app:layout_constraintVertical_bias="0.529" />
+            app:layout_constraintVertical_bias="0.567" />
+
+        <ImageView
+            android:id="@+id/imageCardActividad"
+            android:layout_width="69dp"
+            android:layout_height="64dp"
+            android:layout_marginEnd="14dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/txtNombreActividad"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>
