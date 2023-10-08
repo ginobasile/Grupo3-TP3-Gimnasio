@@ -1,19 +1,34 @@
 package com.example.gimnasio_grupo3.fragments.actividades
 
+import android.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
+import androidx.navigation.findNavController
 import com.example.gimnasio_grupo3.R
+import com.example.gimnasio_grupo3.entities.Actividad
+import com.example.gimnasio_grupo3.entities.Paquete
+import com.example.gimnasio_grupo3.fragments.paquetes.DetallePaquete
+import com.example.gimnasio_grupo3.fragments.paquetes.DetallePaqueteArgs
+import com.example.gimnasio_grupo3.fragments.paquetes.DetallePaqueteViewModel
+import com.google.android.material.snackbar.Snackbar
 
 class DetalleActividad : Fragment() {
-    lateinit var v : View
-    lateinit var txtDesc : TextView
-    lateinit var txtNombre : TextView
-    lateinit var txtDurac : TextView
+    lateinit var v: View
+    private lateinit var txtId: TextView
+    private lateinit var inputNombre: EditText
+    private lateinit var inputDuracion: EditText
+    private lateinit var inputURL: EditText
+    private lateinit var btnMod: Button
+    private lateinit var btnBack: Button
+    private lateinit var btnDelete: Button
+
     companion object {
         fun newInstance() = DetalleActividad()
     }
@@ -25,25 +40,107 @@ class DetalleActividad : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         v = inflater.inflate(R.layout.fragment_detalle_actividad, container, false)
-        txtDesc = v.findViewById(R.id.txtDescrip)
-        txtNombre = v.findViewById(R.id.txtName)
-        txtDurac = v.findViewById(R.id.txtDuration)
+        viewModel = ViewModelProvider(requireActivity()).get(DetalleActividadViewModel::class.java)
+
+        txtId = v.findViewById(R.id.textViewIDActividad)
+        inputNombre = v.findViewById(R.id.editTextAct)
+        inputDuracion = v.findViewById(R.id.editTextAct2)
+        inputURL = v.findViewById(R.id.editTextNumberAct3)
+        btnMod = v.findViewById(R.id.ActModi)
+        btnBack = v.findViewById(R.id.ActVolver)
+        btnDelete = v.findViewById(R.id.ActDelete)
+
         return v
     }
 
-
     override fun onStart() {
         super.onStart()
-        val actividad = DetalleActividadArgs.fromBundle(requireArguments()).actividad
-        txtNombre.text = actividad.name
-        txtDurac.text = actividad.duration.toString()
+
+        val actividadActual = DetalleActividadArgs.fromBundle(requireArguments()).actividad
+
+        txtId.text = "Id: ${actividadActual.id}"
+        inputNombre.setText(actividadActual.name)
+        inputDuracion.setText(actividadActual.duration.toString())
+        inputURL.setText(actividadActual.url)
+
+        btnBack.setOnClickListener {
+            v.findNavController().navigateUp()
+        }
+
+        btnMod.setOnClickListener {
+            val nuevoNombre = inputNombre.text.toString()
+            val nuevaDuracion = inputDuracion.text.toString()
+            val nuevaUrl = inputURL.text.toString()
+
+            if (nuevoNombre.isEmpty()) {
+                inputNombre.error = "El nombre es obligatorio"
+                return@setOnClickListener
+            }
+
+            if (nuevaDuracion.isEmpty()) {
+                inputDuracion.error = "La duracion es obligatoria"
+                return@setOnClickListener
+            }
+
+            if (nuevaUrl.isEmpty()) {
+                inputURL.error = "La url es obligatoria"
+                return@setOnClickListener
+            }
+
+            val ActividadActualizada = Actividad(actividadActual.id, nuevoNombre, nuevaDuracion.toInt(), nuevaUrl)
+
+            confirmAction("Modificar") { confirmed ->
+                if (confirmed) {
+                    // Llama a la función en el ViewModel y pasa un callback
+                    viewModel.actualizarActividad(ActividadActualizada) { estado ->
+                        Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
+
+                        if (estado == "Actividad actualizada exitosamente") {
+                            v.findNavController().navigateUp()
+                        }
+                    }
+                } else {
+                    Snackbar.make(v, "Acción cancelada", Snackbar.LENGTH_LONG).show()
+                }
+            }
+        }
+
+
+        btnDelete.setOnClickListener {
+            confirmAction("Eliminar") { confirmed ->
+                if (confirmed) {
+                    viewModel.eliminarActividad(actividadActual) { estado ->
+                        Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
+
+                        if (estado == "Actividad eliminada exitosamente") {
+                            v.findNavController().navigateUp()
+                        }
+                    }
+                } else {
+                    Snackbar.make(v, "Acción cancelada", Snackbar.LENGTH_LONG).show()
+                }
+            }
+        }
+
     }
 
+    private fun confirmAction(action: String, callback: (Boolean) -> Unit) {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle(action)
+        builder.setMessage("¿Estás seguro de que deseas $action esta Actividad?")
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(DetalleActividadViewModel::class.java)
-        // TODO: Use the ViewModel
+        builder.setPositiveButton(action) { dialog, _ ->
+            callback(true) // Llama al callback con 'true' cuando el usuario confirma
+            dialog.dismiss()
+        }
+
+        builder.setNegativeButton("Cancelar") { dialog, _ ->
+            callback(false) // Llama al callback con 'false' cuando el usuario cancela
+            dialog.dismiss()
+        }
+
+        val dialog = builder.create()
+        dialog.show()
     }
 
 }
