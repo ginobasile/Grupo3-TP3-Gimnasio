@@ -2,6 +2,7 @@ package com.example.gimnasio_grupo3.interfaces
 
 import com.example.gimnasio_grupo3.entities.Actividad
 import com.example.gimnasio_grupo3.entities.Paquete
+import com.example.gimnasio_grupo3.entities.Turno
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -31,7 +32,7 @@ interface APIMethods {
     // ACTIVIDADES-ACTIVIDADES-ACTIVIDADES-ACTIVIDADES-ACTIVIDADES
     // Create
     @POST("actividades")
-    fun createActividad(@Body paquete: Actividad): Call<Actividad>
+    fun createActividad(@Body actividad: Actividad): Call<Actividad>
 
     // Read
     @GET("actividades")
@@ -39,7 +40,7 @@ interface APIMethods {
 
     // Update
     @PUT("actividades/{id}")
-    fun updateActividad(@Path("id") id: String, @Body paquete: Actividad): Call<Actividad>
+    fun updateActividad(@Path("id") id: String, @Body actividad: Actividad): Call<Actividad>
 
     // Delete
     @DELETE("actividades/{id}")
@@ -56,7 +57,20 @@ interface APIMethods {
 
     // TURNOS-TURNOS-TURNOS-TURNOS-TURNOS-TURNOS-TURNOS-TURNOS
     // Create
+    @POST("turnos")
+    fun createTurno(@Body turno: Turno): Call<Turno>
 
+    // Read
+    @GET("turnos")
+    fun getTurno(): Call<List<Turno>>
+
+    // Update
+    @PUT("turnos/{id}")
+    fun updateTurno(@Path("id") id: String, @Body turno: Turno): Call<Turno>
+
+    // Delete
+    @DELETE("turnos/{id}")
+    fun deleteTurno(@Path("id") id: String): Call<Void>
     // Read
 
     // Update

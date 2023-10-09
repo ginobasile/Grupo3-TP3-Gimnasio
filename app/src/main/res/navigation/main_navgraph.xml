@@ -20,7 +20,14 @@
         android:id="@+id/turnosLista"
         android:name="com.example.gimnasio_grupo3.fragments.turnos.TurnosLista"
         android:label="fragment_turnos_lista"
-        tools:layout="@layout/fragment_turnos_lista" />
+        tools:layout="@layout/fragment_turnos_lista" >
+        <action
+            android:id="@+id/action_turnosLista_to_crearTurno"
+            app:destination="@id/crearTurno" />
+        <action
+            android:id="@+id/action_turnosLista_to_detalleTurno"
+            app:destination="@id/detalleTurno" />
+    </fragment>
     <fragment
         android:id="@+id/homePrincipal"
         android:name="com.example.gimnasio_grupo3.fragments.Home"
@@ -66,4 +73,14 @@
         android:name="com.example.gimnasio_grupo3.fragments.actividades.CrearActividad"
         android:label="fragment_crear_actividad"
         tools:layout="@layout/fragment_crear_actividad" />
+    <fragment
+        android:id="@+id/crearTurno"
+        android:name="com.example.gimnasio_grupo3.fragments.turnos.CrearTurno"
+        android:label="fragment_crear_turno"
+        tools:layout="@layout/fragment_crear_turno" />
+    <fragment
+        android:id="@+id/detalleTurno"
+        android:name="com.example.gimnasio_grupo3.fragments.turnos.DetalleTurno"
+        android:label="fragment_detalle_turno"
+        tools:layout="@layout/fragment_detalle_turno" />
 </navigation>
