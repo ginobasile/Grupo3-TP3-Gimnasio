@@ -32,7 +32,11 @@
         android:id="@+id/homePrincipal"
         android:name="com.example.gimnasio_grupo3.fragments.Home"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homePrincipal_to_profesoresLista"
+            app:destination="@id/profesoresLista" />
+    </fragment>
     <fragment
         android:id="@+id/actividadesLista"
         android:name="com.example.gimnasio_grupo3.fragments.actividades.ActividadesLista"
@@ -83,4 +87,9 @@
         android:name="com.example.gimnasio_grupo3.fragments.turnos.DetalleTurno"
         android:label="fragment_detalle_turno"
         tools:layout="@layout/fragment_detalle_turno" />
+    <fragment
+        android:id="@+id/profesoresLista"
+        android:name="com.example.gimnasio_grupo3.fragments.profesores.ProfesoresLista"
+        android:label="fragment_profesores_lista"
+        tools:layout="@layout/fragment_profesores_lista" />
 </navigation>
