@@ -11,10 +11,7 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.navigation.findNavController
 import com.example.gimnasio_grupo3.R
-import com.example.gimnasio_grupo3.entities.Actividad
 import com.example.gimnasio_grupo3.entities.Turno
-import com.example.gimnasio_grupo3.fragments.actividades.CrearActividad
-import com.example.gimnasio_grupo3.fragments.actividades.CrearActividadViewModel
 import com.google.android.material.snackbar.Snackbar
 
 class CrearTurno : Fragment() {

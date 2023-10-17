@@ -11,16 +11,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gimnasio_grupo3.R
-import com.example.gimnasio_grupo3.RetroFitProviders.ActividadesProvider
 import com.example.gimnasio_grupo3.adapters.ActividadAdapter
-import com.example.gimnasio_grupo3.adapters.PaqueteAdapter
 import com.example.gimnasio_grupo3.entities.Actividad
-import com.example.gimnasio_grupo3.fragments.paquetes.PaquetesListaDirections
-import com.example.gimnasio_grupo3.interfaces.APIMethods
-import com.google.android.material.snackbar.Snackbar
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import androidx.navigation.findNavController
 
 class ActividadesLista : Fragment() {
 
@@ -29,7 +22,7 @@ class ActividadesLista : Fragment() {
     lateinit var adapter: ActividadAdapter
     lateinit var actividadesList: MutableList<Actividad>
     private lateinit var btnCrearActividad: Button
-
+    private lateinit var btnBack: Button
     companion object {
         fun newInstance() = ActividadesLista()
     }
@@ -44,11 +37,16 @@ class ActividadesLista : Fragment() {
         recyclerActividades = v.findViewById(R.id.reciclerActividades)
         recyclerActividades.layoutManager = LinearLayoutManager(requireContext())
         btnCrearActividad = v.findViewById(R.id.buttonActividades)
+        btnBack = v.findViewById(R.id.button7)
 
         btnCrearActividad.setOnClickListener {
             val action = ActividadesListaDirections.actionActividadesListaToCrearActividad()
 
             findNavController().navigate(action)
+        }
+
+        btnBack.setOnClickListener {
+            v.findNavController().navigateUp()
         }
 
         return v
@@ -68,8 +66,6 @@ class ActividadesLista : Fragment() {
                     findNavController().navigate(action)
                 }
                 recyclerActividades.adapter = adapter
-            } else {
-
             }
         }
     }

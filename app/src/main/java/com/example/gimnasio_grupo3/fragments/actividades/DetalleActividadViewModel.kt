@@ -3,7 +3,6 @@ package com.example.gimnasio_grupo3.fragments.actividades
 import androidx.lifecycle.ViewModel
 import com.example.gimnasio_grupo3.RetroFitProviders.ActividadesProvider
 import com.example.gimnasio_grupo3.entities.Actividad
-import com.example.gimnasio_grupo3.entities.Paquete
 import com.example.gimnasio_grupo3.interfaces.APIMethods
 import retrofit2.Call
 import retrofit2.Callback

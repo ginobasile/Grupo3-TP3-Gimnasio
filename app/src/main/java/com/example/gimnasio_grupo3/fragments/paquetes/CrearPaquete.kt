@@ -9,18 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import androidx.navigation.findNavController
 import com.example.gimnasio_grupo3.R
-import com.example.gimnasio_grupo3.RetroFitProviders.PaquetesProvider
 import com.example.gimnasio_grupo3.entities.Paquete
-import com.example.gimnasio_grupo3.interfaces.APIMethods
 import com.google.android.material.snackbar.Snackbar
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-
-
 class CrearPaquete : Fragment() {
     lateinit var v : View
     private lateinit var inputNombre: EditText

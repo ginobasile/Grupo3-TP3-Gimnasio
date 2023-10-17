@@ -13,10 +13,6 @@ import android.widget.TextView
 import androidx.navigation.findNavController
 import com.example.gimnasio_grupo3.R
 import com.example.gimnasio_grupo3.entities.Actividad
-import com.example.gimnasio_grupo3.entities.Paquete
-import com.example.gimnasio_grupo3.fragments.paquetes.DetallePaquete
-import com.example.gimnasio_grupo3.fragments.paquetes.DetallePaqueteArgs
-import com.example.gimnasio_grupo3.fragments.paquetes.DetallePaqueteViewModel
 import com.google.android.material.snackbar.Snackbar
 
 class DetalleActividad : Fragment() {
@@ -24,7 +20,6 @@ class DetalleActividad : Fragment() {
     private lateinit var txtId: TextView
     private lateinit var inputNombre: EditText
     private lateinit var inputDuracion: EditText
-    private lateinit var inputURL: EditText
     private lateinit var btnMod: Button
     private lateinit var btnBack: Button
     private lateinit var btnDelete: Button
@@ -45,7 +40,6 @@ class DetalleActividad : Fragment() {
         txtId = v.findViewById(R.id.textViewIDActividad)
         inputNombre = v.findViewById(R.id.editTextAct)
         inputDuracion = v.findViewById(R.id.editTextAct2)
-        inputURL = v.findViewById(R.id.editTextNumberAct3)
         btnMod = v.findViewById(R.id.ActModi)
         btnBack = v.findViewById(R.id.ActVolver)
         btnDelete = v.findViewById(R.id.ActDelete)
@@ -61,7 +55,6 @@ class DetalleActividad : Fragment() {
         txtId.text = "Id: ${actividadActual.id}"
         inputNombre.setText(actividadActual.name)
         inputDuracion.setText(actividadActual.duration.toString())
-        inputURL.setText(actividadActual.url)
 
         btnBack.setOnClickListener {
             v.findNavController().navigateUp()
@@ -70,7 +63,6 @@ class DetalleActividad : Fragment() {
         btnMod.setOnClickListener {
             val nuevoNombre = inputNombre.text.toString()
             val nuevaDuracion = inputDuracion.text.toString()
-            val nuevaUrl = inputURL.text.toString()
 
             if (nuevoNombre.isEmpty()) {
                 inputNombre.error = "El nombre es obligatorio"
@@ -82,12 +74,7 @@ class DetalleActividad : Fragment() {
                 return@setOnClickListener
             }
 
-            if (nuevaUrl.isEmpty()) {
-                inputURL.error = "La url es obligatoria"
-                return@setOnClickListener
-            }
-
-            val ActividadActualizada = Actividad(actividadActual.id, nuevoNombre, nuevaDuracion.toInt(), nuevaUrl)
+            val ActividadActualizada = Actividad(actividadActual.id, nuevoNombre, nuevaDuracion.toInt())
 
             confirmAction("Modificar") { confirmed ->
                 if (confirmed) {

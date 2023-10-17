@@ -6,10 +6,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.navigation.fragment.findNavController
 import com.example.gimnasio_grupo3.R
 
 class Home : Fragment() {
     lateinit var v : View
+    lateinit var btnProfesores : Button
+    private var imagesList = mutableListOf<Int>()
+
     companion object {
         fun newInstance() = Home()
     }
@@ -21,6 +26,8 @@ class Home : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         v = inflater.inflate(R.layout.fragment_home, container, false)
+        btnProfesores = v.findViewById(R.id.btnProfesores)
+
         return v
     }
 
@@ -30,4 +37,25 @@ class Home : Fragment() {
         // TODO: Use the ViewModel
     }
 
+
+    // [Tomas] Agregado para testear Profesores - START
+    override fun onStart() {
+        super.onStart()
+
+        btnProfesores.setOnClickListener() {
+            val action = HomeDirections.actionHomePrincipalToProfesoresLista()
+            findNavController().navigate(action)
+        }
+    }
+    // [Tomas] Agregado para probar Profesores - END
+
+    private fun addToList(image: Int){
+        imagesList.add(image)
+    }
+
+    private fun postToList(){
+        for(i in 1..5){
+            addToList(R.mipmap.ic_launcher_round)
+        }
+    }
 }

@@ -1,6 +1,5 @@
 package com.example.gimnasio_grupo3.fragments.turnos
 
-import android.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,10 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import androidx.navigation.findNavController
 import com.example.gimnasio_grupo3.R
-import com.example.gimnasio_grupo3.entities.Turno
-import com.google.android.material.snackbar.Snackbar
 
 class DetalleTurno : Fragment() {
     lateinit var v: View
@@ -42,7 +38,7 @@ class DetalleTurno : Fragment() {
         txtId = v.findViewById(R.id.textViewIDTurno)
         actividadTurno = v.findViewById(R.id.editTextActTurno)
         profesorTurno = v.findViewById(R.id.editTextProfe)
-        cantPersonas = v.findViewById(R.id.textViewCantPersonas)
+        //cantPersonas = v.findViewById(R.id.textViewCantPersonas)
         fechaTurno = v.findViewById(R.id.editTextfecha)
         btnMod = v.findViewById(R.id.ActModi)
         btnBack = v.findViewById(R.id.ActVolver)

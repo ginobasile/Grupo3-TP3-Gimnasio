@@ -32,7 +32,11 @@
         android:id="@+id/homePrincipal"
         android:name="com.example.gimnasio_grupo3.fragments.Home"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homePrincipal_to_profesoresLista"
+            app:destination="@id/profesoresLista" />
+    </fragment>
     <fragment
         android:id="@+id/actividadesLista"
         android:name="com.example.gimnasio_grupo3.fragments.actividades.ActividadesLista"
@@ -83,4 +87,27 @@
         android:name="com.example.gimnasio_grupo3.fragments.turnos.DetalleTurno"
         android:label="fragment_detalle_turno"
         tools:layout="@layout/fragment_detalle_turno" />
+    <fragment
+        android:id="@+id/profesoresLista"
+        android:name="com.example.gimnasio_grupo3.fragments.profesores.ProfesoresLista"
+        android:label="fragment_profesores_lista"
+        tools:layout="@layout/fragment_profesores_lista" >
+        <action
+            android:id="@+id/action_profesoresLista_to_crearProfesor"
+            app:destination="@id/crearProfesor" />
+        <action
+            android:id="@+id/action_profesoresLista_to_detalleProfesor"
+            app:destination="@id/detalleProfesor" />
+    </fragment>
+    <fragment
+        android:id="@+id/crearProfesor"
+        android:name="com.example.gimnasio_grupo3.fragments.actividades.CrearProfesor"
+        android:label="CrearProfesor" />
+    <fragment
+        android:id="@+id/detalleProfesor"
+        android:name="com.example.gimnasio_grupo3.fragments.profesores.DetalleProfesor"
+        android:label="DetalleProfesor" >
+        <argument android:name="datosProfesor"
+            app:argType="com.example.gimnasio_grupo3.entities.Profesor" />
+    </fragment>
 </navigation>

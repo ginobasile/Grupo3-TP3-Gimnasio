@@ -1,9 +1,7 @@
 package com.example.gimnasio_grupo3.fragments.turnos
 
 import androidx.lifecycle.ViewModel
-import com.example.gimnasio_grupo3.RetroFitProviders.ActividadesProvider
 import com.example.gimnasio_grupo3.RetroFitProviders.TurnosProvider
-import com.example.gimnasio_grupo3.entities.Actividad
 import com.example.gimnasio_grupo3.entities.Turno
 import com.example.gimnasio_grupo3.interfaces.APIMethods
 import retrofit2.Call

@@ -2,6 +2,7 @@ package com.example.gimnasio_grupo3.interfaces
 
 import com.example.gimnasio_grupo3.entities.Actividad
 import com.example.gimnasio_grupo3.entities.Paquete
+import com.example.gimnasio_grupo3.entities.Profesor
 import com.example.gimnasio_grupo3.entities.Turno
 import com.example.gimnasio_grupo3.entities.Usuario
 import retrofit2.Call
@@ -49,12 +50,20 @@ interface APIMethods {
 
     // PROFESORES-PROFESORES-PROFESORES-PROFESORES-PROFESORES
     // Create
+    @POST("profesores")
+    fun createProfesor(@Body profesor: Profesor): Call<Profesor>
 
     // Read
+    @GET("profesores")
+    fun getProfesores(): Call<List<Profesor>>
 
     // Update
+    @PUT("profesores/{id}")
+    fun updateProfesor(@Path("id") id: String, @Body profesor: Profesor): Call<Profesor>
 
     // Delete
+    @DELETE("profesores/{id}")
+    fun deleteProfesor(@Path("id") id: String): Call<Void>
 
     // TURNOS-TURNOS-TURNOS-TURNOS-TURNOS-TURNOS-TURNOS-TURNOS
     // Create

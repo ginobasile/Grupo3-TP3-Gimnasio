@@ -7,19 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gimnasio_grupo3.R
-import com.example.gimnasio_grupo3.RetroFitProviders.PaquetesProvider
 import com.example.gimnasio_grupo3.adapters.PaqueteAdapter
 import com.example.gimnasio_grupo3.entities.Paquete
-import com.example.gimnasio_grupo3.interfaces.APIMethods
-import com.google.android.material.snackbar.Snackbar
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class PaquetesLista : Fragment() {
     lateinit var v: View
@@ -27,6 +20,7 @@ class PaquetesLista : Fragment() {
     lateinit var adapter: PaqueteAdapter
     lateinit var paquetesList: MutableList<Paquete>
     private lateinit var btnCrearPaquete: Button
+    private lateinit var btnBack: Button
 
     companion object {
         fun newInstance() = PaquetesLista()
@@ -41,6 +35,7 @@ class PaquetesLista : Fragment() {
         v = inflater.inflate(R.layout.fragment_paquetes_lista, container, false)
         reciclerPaquetes = v.findViewById(R.id.reciclerPaquetes)
         reciclerPaquetes.layoutManager = LinearLayoutManager(requireContext())
+        btnBack = v.findViewById(R.id.button6)
 
         btnCrearPaquete = v.findViewById(R.id.button1)
 
@@ -48,6 +43,10 @@ class PaquetesLista : Fragment() {
             val action = PaquetesListaDirections.actionPaquetesListaToCrearPaquete()
 
             findNavController().navigate(action)
+        }
+
+        btnBack.setOnClickListener {
+            findNavController().navigateUp()
         }
 
         return v
@@ -65,8 +64,6 @@ class PaquetesLista : Fragment() {
                     findNavController().navigate(action)
                 }
                 reciclerPaquetes.adapter = adapter
-            } else {
-                // Maneja los errores aquí si no se pudieron obtener los paquetes
             }
         }
     }

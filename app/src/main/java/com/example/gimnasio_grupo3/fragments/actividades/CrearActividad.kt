@@ -12,9 +12,6 @@ import android.widget.EditText
 import androidx.navigation.findNavController
 import com.example.gimnasio_grupo3.R
 import com.example.gimnasio_grupo3.entities.Actividad
-import com.example.gimnasio_grupo3.entities.Paquete
-import com.example.gimnasio_grupo3.fragments.paquetes.CrearPaquete
-import com.example.gimnasio_grupo3.fragments.paquetes.CrearPaqueteViewModel
 import com.google.android.material.snackbar.Snackbar
 
 class CrearActividad : Fragment() {
@@ -25,6 +22,7 @@ class CrearActividad : Fragment() {
     private lateinit var inputUrl: EditText
     private lateinit var btnCreate: Button
     private lateinit var btnBack: Button
+
     companion object {
         fun newInstance() = CrearActividad()
     }
@@ -39,7 +37,6 @@ class CrearActividad : Fragment() {
 
         inputNombre = v.findViewById(R.id.editNombreActividad)
         inputDuracion = v.findViewById(R.id.editDuracion)
-        inputUrl = v.findViewById(R.id.editURL)
         btnCreate = v.findViewById(R.id.actividadCrear)
         btnBack = v.findViewById(R.id.volver)
 
@@ -56,7 +53,6 @@ class CrearActividad : Fragment() {
         btnCreate.setOnClickListener {
             val nombre = inputNombre.text.toString()
             val duracionText = inputDuracion.text.toString()
-            val url = inputUrl.text.toString()
 
             if (nombre.isEmpty()) {
                 inputNombre.error = "El nombre es obligatorio"
@@ -64,16 +60,12 @@ class CrearActividad : Fragment() {
             }
 
             if (duracionText.isEmpty()) {
-                inputDuracion.error = "El precio es obligatorio"
+                inputDuracion.error = "El campo es obligatorio"
                 return@setOnClickListener
             }
 
-            if (url.isEmpty()) {
-                inputUrl.error = "Debe ingresar un URL de imagen"
-                return@setOnClickListener
-            }
             val dur = duracionText.toInt()
-            val nuevoActividad = Actividad(nombre, dur, url)
+            val nuevoActividad = Actividad(nombre, duracionText.toInt())
 
             confirmAction("Crear") { confirmed ->
                 if (confirmed) {
