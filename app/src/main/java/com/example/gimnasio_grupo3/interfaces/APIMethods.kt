@@ -3,6 +3,7 @@ package com.example.gimnasio_grupo3.interfaces
 import com.example.gimnasio_grupo3.entities.Actividad
 import com.example.gimnasio_grupo3.entities.Paquete
 import com.example.gimnasio_grupo3.entities.Turno
+import com.example.gimnasio_grupo3.entities.Usuario
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -81,6 +82,8 @@ interface APIMethods {
     // Create
 
     // Read
+    @GET("Usuarios")
+    fun getUsuarios(): Call<List<Usuario>>
 
     // Update
 

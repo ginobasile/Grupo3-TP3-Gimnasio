@@ -10,6 +10,8 @@ import com.example.gimnasio_grupo3.R
 
 class DetalleUsuario : Fragment() {
     lateinit var v : View
+
+
     companion object {
         fun newInstance() = DetalleUsuario()
     }
