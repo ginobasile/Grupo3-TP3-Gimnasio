@@ -27,10 +27,10 @@
         android:id="@+id/textViewApellido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Apellido"
+        android:text="Apellido:"
         android:textAlignment="textStart"
         android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/inputModifApellidoProfesor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
@@ -42,13 +42,11 @@
         android:id="@+id/inputModifApellidoProfesor"
         android:layout_width="293dp"
         android:layout_height="54dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="124dp"
         android:ems="10"
         android:hint="Ingrese el apellido del profesor"
         android:inputType="text"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintBottom_toTopOf="@+id/btnVolverProfesor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,11 +56,10 @@
         android:id="@+id/textViewNombre2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:layout_marginBottom="18dp"
-        android:text="Nombre"
+        android:text="Nombre:"
         android:textAlignment="textStart"
         android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/inputCrearNombreProfesor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
@@ -73,8 +70,6 @@
         android:id="@+id/inputCrearNombreProfesor"
         android:layout_width="294dp"
         android:layout_height="54dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginBottom="24dp"
         android:ems="10"
         android:hint="Ingrese el nombre del profesor"
         android:inputType="text"
@@ -85,34 +80,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewNombre2" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="408dp"
-        android:layout_height="57dp"
-        android:layout_marginBottom="116dp"
-        android:gravity="center"
-        android:orientation="horizontal"
+    <Button
+        android:id="@+id/btnVolverProfesor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Volver"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnCrearProfesor"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnCrearProfesor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Crear Profesor"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputModifApellidoProfesor">
-
-        <Button
-            android:id="@+id/btnVolverProfesor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Volver"
-            android:textSize="20sp" />
-
-        <!-- Add 16dp margin to create space -->
-        <Button
-            android:id="@+id/btnCrearProfesor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:text="Crear"
-            android:textSize="20sp" />
-    </LinearLayout>
+        app:layout_constraintStart_toEndOf="@+id/btnVolverProfesor" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

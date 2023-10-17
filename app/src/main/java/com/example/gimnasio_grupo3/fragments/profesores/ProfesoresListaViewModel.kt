@@ -2,11 +2,8 @@ package com.example.gimnasio_grupo3.fragments.profesores
 
 import androidx.lifecycle.ViewModel
 import com.example.gimnasio_grupo3.RetroFitProviders.ProfesoresProvider
-import com.example.gimnasio_grupo3.adapters.ProfesorAdapter
 import com.example.gimnasio_grupo3.entities.Profesor
-import com.example.gimnasio_grupo3.entities.Paquete
 import com.example.gimnasio_grupo3.interfaces.APIMethods
-import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

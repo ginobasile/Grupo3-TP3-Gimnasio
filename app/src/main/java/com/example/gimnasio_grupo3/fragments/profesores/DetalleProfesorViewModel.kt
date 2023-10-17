@@ -22,7 +22,7 @@ class DetalleProfesorViewModel : ViewModel() {
             override fun onResponse(call: Call<Profesor>, response: Response<Profesor>) {
                 if (response.isSuccessful) {
                     // Actualización exitosa
-                    callback("Profesor actualizada exitosamente")
+                    callback("Profesor actualizado exitosamente")
                 } else {
                     // La actualización no fue exitosa, maneja los errores aquí
                     callback("Error al actualizar Profesor")
@@ -43,7 +43,7 @@ class DetalleProfesorViewModel : ViewModel() {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 if (response.isSuccessful) {
                     // Eliminación exitosa
-                    callback("Profesor eliminada exitosamente")
+                    callback("Profesor eliminado exitosamente")
                 } else {
                     // La eliminación no fue exitosa, maneja los errores aquí
                     callback("Error al eliminar Profesor")

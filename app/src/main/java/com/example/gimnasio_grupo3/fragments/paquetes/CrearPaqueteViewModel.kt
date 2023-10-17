@@ -1,18 +1,14 @@
 package com.example.gimnasio_grupo3.fragments.paquetes
 
 import androidx.lifecycle.ViewModel
-import androidx.navigation.findNavController
 import com.example.gimnasio_grupo3.RetroFitProviders.PaquetesProvider
 import com.example.gimnasio_grupo3.entities.Paquete
 import com.example.gimnasio_grupo3.interfaces.APIMethods
-import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class CrearPaqueteViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
-
     fun crearPaquete (nuevoPaquete : Paquete, callback: (String) -> Unit){
 
         val retrofit = PaquetesProvider().provideRetrofit()

@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayoutActividad"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".fragments.actividades.CrearActividad">
 
     <TextView
@@ -27,92 +26,76 @@
         android:id="@+id/textViewNombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nombre Actividad:"
+        android:text="Nombre de la Actividad:"
         android:textAlignment="textStart"
         android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@+id/titleCrearActividad"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/editNombreActividad"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/editNombreActividad" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleCrearActividad" />
 
     <EditText
         android:id="@+id/editNombreActividad"
-        android:layout_width="293dp"
+        android:layout_width="wrap_content"
         android:layout_height="54dp"
         android:ems="10"
         android:hint="Ingrese nombre Actividad"
         android:inputType="text"
-        android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNombre"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewDuracion"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewNombre" />
 
     <TextView
         android:id="@+id/textViewDuracion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Duración:"
+        android:text="Duración: (en MIN)"
         android:textAlignment="textStart"
         android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@+id/editNombreActividad"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/editDuracion"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/editNombreActividad" />
 
     <EditText
         android:id="@+id/editDuracion"
-        android:layout_width="293dp"
+        android:layout_width="wrap_content"
         android:layout_height="54dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:ems="10"
-        android:hint="Ingrese duración de Actividad"
+        android:hint="Duración de la actividad"
         android:inputType="number"
         android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDuracion"
+        app:layout_constraintBottom_toTopOf="@+id/actividadCrear"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ingrese URL de la imagen:"
-        android:textAlignment="textStart"
-        android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@+id/editDuracion"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <EditText
-        android:id="@+id/editURL"
-        android:layout_width="293dp"
-        android:layout_height="54dp"
-        android:ems="10"
-        android:hint="URL"
-        android:inputType="text"
-        android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewDuracion" />
 
     <Button
         android:id="@+id/actividadCrear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Crear"
+        android:layout_marginBottom="8dp"
+        android:text="Crear Actividad"
         android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@+id/editURL"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/volver" />
 
     <Button
         android:id="@+id/volver"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
         android:text="Volver"
         android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@+id/actividadCrear"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/actividadCrear"
+        app:layout_constraintStart_toStartOf="parent" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

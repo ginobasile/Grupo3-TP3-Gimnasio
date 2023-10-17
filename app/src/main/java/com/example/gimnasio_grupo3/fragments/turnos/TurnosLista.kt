@@ -11,11 +11,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gimnasio_grupo3.R
-import com.example.gimnasio_grupo3.adapters.ActividadAdapter
 import com.example.gimnasio_grupo3.adapters.TurnoAdapter
-import com.example.gimnasio_grupo3.entities.Actividad
 import com.example.gimnasio_grupo3.entities.Turno
-import com.example.gimnasio_grupo3.fragments.actividades.ActividadesListaDirections
 
 class TurnosLista : Fragment() {
     lateinit var v : View
@@ -61,8 +58,6 @@ class TurnosLista : Fragment() {
                     findNavController().navigate(action)
                 }
                 recyclerTurnos.adapter = adapter
-            } else {
-
             }
         }
     }

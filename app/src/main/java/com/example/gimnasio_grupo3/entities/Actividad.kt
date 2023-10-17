@@ -9,8 +9,8 @@ data class Actividad(
     var id: Int,
     var name: String,
     var duration: Int,
-    var url: String
 
 ): Parcelable {
-    constructor(name: String, duration: Int, url: String) : this(0, name, duration, url)
+    constructor(name: String, duration: Int) : this(0, name, duration)
 }
+

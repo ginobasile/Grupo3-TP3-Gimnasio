@@ -31,13 +31,15 @@ class TurnoAdapter(var turnos : MutableList<Turno>,
     }
 
     override fun onBindViewHolder(holder: TurnoHolder, position: Int) {
-        var turno = turnos[position]
+        val turno = turnos[position]
 
-        holder.txtActividad.text = turno.idActividad
-        holder.txtProfesor.text = turno.idProfesor
-        holder.cantPersonas.text = turno.cantPersonasLim.toString()
-        holder.txtfecha.text = turno.fecha.toString()
+        holder.txtActividad.text = "ID: ${turno.idActividad}"
+        holder.txtProfesor.text = "Profesor: ${turno.idProfesor}"
+        holder.cantPersonas.text = "Límite personas: ${turno.cantPersonasLim.toString()}"
+        holder.txtfecha.text = "Fecha: ${turno.fecha.toString()}"
 
-
+        holder.itemView.setOnClickListener {
+            onItemClick(turno)
+        }
     }
 }

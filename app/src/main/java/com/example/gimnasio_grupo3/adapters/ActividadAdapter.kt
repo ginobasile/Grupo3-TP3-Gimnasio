@@ -3,14 +3,10 @@ package com.example.gimnasio_grupo3.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.gimnasio_grupo3.R
 import com.example.gimnasio_grupo3.entities.Actividad
-import com.example.gimnasio_grupo3.entities.Paquete
-
 
 class ActividadAdapter( var actividades : MutableList<Actividad>,
                         private val onItemClick: (Actividad) -> Unit
@@ -20,7 +16,6 @@ class ActividadAdapter( var actividades : MutableList<Actividad>,
     {
         val txtNombreActividad: TextView = itemView.findViewById(R.id.txtNombreActividad)
         val txtDuracion: TextView = itemView.findViewById(R.id.actividadDuracion)
-        val imgActividad: ImageView = itemView.findViewById(R.id.imageCardActividad)
 
     }
 
@@ -37,13 +32,7 @@ class ActividadAdapter( var actividades : MutableList<Actividad>,
         var actividad = actividades[position]
 
         holder.txtNombreActividad.text = actividad.name
-        holder.txtDuracion.text = "Duracion: ${actividad.duration}"
-
-        val context = holder.itemView.context
-        Glide.with(context)
-            .load(actividad.url)
-            .circleCrop()
-            .into(holder.imgActividad)
+        holder.txtDuracion.text = "Duración: ${actividad.duration} minutos"
 
         holder.itemView.setOnClickListener {
             onItemClick(actividad)

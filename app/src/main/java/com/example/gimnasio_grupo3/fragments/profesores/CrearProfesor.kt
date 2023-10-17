@@ -59,7 +59,7 @@ class CrearProfesor : Fragment() {
             }
 
             if (apellido.isEmpty()) {
-                inputApellido.error = "El precio es obligatorio"
+                inputApellido.error = "El apellido es obligatorio"
                 return@setOnClickListener
             }
 
@@ -72,7 +72,7 @@ class CrearProfesor : Fragment() {
                     viewModel.crearProfesor(nuevoProfesor) { estado ->
                         Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
 
-                        if (estado == "Profesor creada exitosamente") {
+                        if (estado == "Profesor creado exitosamente") {
                             v.findNavController().navigateUp()
                         }
                     }

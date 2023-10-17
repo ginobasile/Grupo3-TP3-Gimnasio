@@ -20,16 +20,16 @@ class CrearProfesorViewModel : ViewModel() {
             override fun onResponse(call: Call<Profesor>, response: Response<Profesor>) {
                 if (response.isSuccessful) {
                     // Actualización exitosa, puedes mostrar un mensaje o realizar otras acciones si es necesario
-                    callback("Profesor creada exitosamente")
+                    callback("Profesor creado exitosamente")
                 } else {
                     // La actualización no fue exitosa, maneja los errores aquí
-                    callback("Error al crear la profesor")
+                    callback("Error al crear el profesor")
                 }
             }
 
             override fun onFailure(call: Call<Profesor>, t: Throwable) {
                 // Maneja errores de conexión aquí
-                callback("Error de conexión al crear la profesor")
+                callback("Error de conexión al crear el profesor")
             }
         })
     }

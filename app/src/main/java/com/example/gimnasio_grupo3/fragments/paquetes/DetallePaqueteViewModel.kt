@@ -9,8 +9,6 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class DetallePaqueteViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
-
     val retrofit = PaquetesProvider().provideRetrofit()
     val apiService = retrofit.create(APIMethods::class.java)
 

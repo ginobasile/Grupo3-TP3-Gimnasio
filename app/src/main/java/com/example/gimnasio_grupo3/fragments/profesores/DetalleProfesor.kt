@@ -83,7 +83,7 @@ class DetalleProfesor : Fragment() {
                     viewModel.actualizarProfesor(ProfesorActualizada) { estado ->
                         Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
 
-                        if (estado == "Profesor actualizada exitosamente") {
+                        if (estado == "Profesor actualizado exitosamente") {
                             v.findNavController().navigateUp()
                         }
                     }
@@ -100,7 +100,7 @@ class DetalleProfesor : Fragment() {
                     viewModel.eliminarProfesor(profesorActual) { estado ->
                         Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
 
-                        if (estado == "Profesor eliminada exitosamente") {
+                        if (estado == "Profesor eliminado exitosamente") {
                             v.findNavController().navigateUp()
                         }
                     }
@@ -115,7 +115,7 @@ class DetalleProfesor : Fragment() {
     private fun confirmAction(action: String, callback: (Boolean) -> Unit) {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle(action)
-        builder.setMessage("¿Estás seguro de que deseas $action esta Profesor?")
+        builder.setMessage("¿Estás seguro de que deseas $action este Profesor?")
 
         builder.setPositiveButton(action) { dialog, _ ->
             callback(true) // Llama al callback con 'true' cuando el usuario confirma

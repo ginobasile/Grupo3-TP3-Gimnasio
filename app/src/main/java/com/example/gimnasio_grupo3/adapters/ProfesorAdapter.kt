@@ -3,14 +3,10 @@ package com.example.gimnasio_grupo3.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.gimnasio_grupo3.R
 import com.example.gimnasio_grupo3.entities.Profesor
-import com.example.gimnasio_grupo3.entities.Paquete
-
 
 class ProfesorAdapter(var profesores : MutableList<Profesor>,
                       private val onItemClick: (Profesor) -> Unit
@@ -19,7 +15,6 @@ class ProfesorAdapter(var profesores : MutableList<Profesor>,
     class ProfesorHolder(v : View) : RecyclerView.ViewHolder(v)
     {
         val txtNombreProfesor: TextView = itemView.findViewById(R.id.txtNombreProfesor)
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfesorHolder {
@@ -32,10 +27,9 @@ class ProfesorAdapter(var profesores : MutableList<Profesor>,
     }
 
     override fun onBindViewHolder(holder: ProfesorHolder, position: Int) {
-        var profesor = profesores[position]
+        val profesor = profesores[position]
 
-        holder.txtNombreProfesor.text = profesor.nombre
-
+        holder.txtNombreProfesor.text = "${profesor.nombre}, ${profesor.apellido}"
 
         holder.itemView.setOnClickListener {
             onItemClick(profesor)

@@ -3,7 +3,6 @@ package com.example.gimnasio_grupo3.entities
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
-
 @Parcelize
 data class Turno(
 
