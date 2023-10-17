@@ -12,4 +12,5 @@ data class Profesor(
 
     ): Parcelable {
     constructor( nombre: String, apellido: String) : this( 0, nombre, apellido)
+    constructor( id: Number , nombre: String, apellido: String) : this( 0, nombre, apellido)
 }

@@ -58,7 +58,7 @@ interface APIMethods {
 
     // Update
     @PUT("profesores/{id}")
-    fun updateProfesores(@Path("id") id: String, @Body profesor: Profesor): Call<Profesor>
+    fun updateProfesor(@Path("id") id: String, @Body profesor: Profesor): Call<Profesor>
 
     // Delete
     @DELETE("profesores/{id}")
