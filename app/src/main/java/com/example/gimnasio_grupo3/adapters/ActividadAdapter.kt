@@ -19,6 +19,7 @@ class ActividadAdapter( var actividades : MutableList<Actividad>,
 
     }
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActividadHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.actividad_item,parent,false)
         return (ActividadHolder(view))

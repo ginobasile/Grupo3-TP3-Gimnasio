@@ -5,74 +5,25 @@
     android:id="@+id/frameLayoutTurno"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".fragments.turnos.CrearTurno">
+
 
     <TextView
         android:id="@+id/titleTurnoCrear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:gravity="center"
         android:paddingTop="32dp"
         android:paddingBottom="16dp"
         android:text="Crear Turno"
         android:textSize="34sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayoutActividad"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.456"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/txtViewTurnoAct"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Seleccione Actividad:"
-        android:textAlignment="textStart"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/inputAct"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleTurnoCrear" />
-
-    <EditText
-        android:id="@+id/inputAct"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Seleccione act"
-        android:inputType="text"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/textViewProfesor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtViewTurnoAct" />
-
-    <TextView
-        android:id="@+id/textViewProfesor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Seleccione un Profesor:"
-        android:textAlignment="textStart"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/editProfesor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputAct" />
-
-    <EditText
-        android:id="@+id/editProfesor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="profesor"
-        android:inputType="number"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/txtCantCrear"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewProfesor" />
 
     <TextView
         android:id="@+id/txtCantCrear"
@@ -85,7 +36,7 @@
         app:layout_constraintBottom_toTopOf="@+id/inputCantPersonasCrear"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editProfesor" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutProfesor" />
 
     <EditText
         android:id="@+id/inputCantPersonasCrear"
@@ -95,9 +46,9 @@
         android:hint="Cant Personas"
         android:inputType="text"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/txtFechaCrear"
+        app:layout_constraintBottom_toTopOf="@+id/inputFecha"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtCantCrear" />
 
@@ -109,20 +60,21 @@
         android:textAlignment="textStart"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/inputFechaCrear"
+        app:layout_constraintBottom_toTopOf="@+id/volver"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.598"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputCantPersonasCrear" />
+        app:layout_constraintTop_toBottomOf="@+id/inputCantPersonasCrear"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/inputFechaCrear"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="input de fecha*"
-        android:inputType="text"
-        android:textSize="24sp"
+        android:id="@+id/inputFecha"
+        android:layout_width="256dp"
+        android:layout_height="59dp"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:hint="Seleccionar fecha"
+        android:inputType="none"
         app:layout_constraintBottom_toTopOf="@+id/actividadCrear"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -132,22 +84,50 @@
         android:id="@+id/actividadCrear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:text="Crear Turno"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/volver" />
+        app:layout_constraintStart_toEndOf="@+id/volver"
+        app:layout_constraintTop_toBottomOf="@+id/inputFecha" />
 
     <Button
         android:id="@+id/volver"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:text="Volver"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/actividadCrear"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.072"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/actividadCrear"
+        app:layout_constraintVertical_bias="0.946" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutProfesor"
+        android:layout_width="334dp"
+        android:layout_height="67dp"
+
+
+
+        app:layout_constraintBottom_toTopOf="@+id/txtCantCrear"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutActividad" />
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+
+        android:id="@+id/textInputLayoutActividad"
+        android:layout_width="340dp"
+        android:layout_height="75dp"
+
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayoutProfesor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleTurnoCrear" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

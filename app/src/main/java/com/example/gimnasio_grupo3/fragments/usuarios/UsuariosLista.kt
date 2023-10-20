@@ -38,25 +38,25 @@ class UsuariosLista : Fragment() {
         return v
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(UsuariosListaViewModel::class.java)
+    //override fun onActivityCreated(savedInstanceState: Bundle?) {
+   //     super.onActivityCreated(savedInstanceState)
+   //     viewModel = ViewModelProvider(this).get(UsuariosListaViewModel::class.java)
 
-        viewModel.obtenerUsuarios { usuariosList ->
-            if (usuariosList != null) {
+   //     viewModel.obtenerUsuarios { usuariosList ->
+    //        if (usuariosList != null) {
 
-                adapter = UsuarioAdapter(usuariosList.toMutableList()) { usuario ->
-                    val action =
-                        UsuariosListaDirections.actionUsuariosListaToDetalleUsuario()
-                    findNavController().navigate(action)
-                }
+   //             adapter = UsuarioAdapter(usuariosList.toMutableList()) { usuario ->
+     //               val action =
+     //                   UsuariosListaDirections.actionUsuariosListaToDetalleUsuario()
+     //               findNavController().navigate(action)
+     //           }
 
-                recyclerUsuarios.adapter = adapter
-            } else {
-                // Maneja los errores aquí si no se pudieron obtener los paquetes
-            }
-        }
-    }
+       //         recyclerUsuarios.adapter = adapter
+       //     } else {
+        //        // Maneja los errores aquí si no se pudieron obtener los paquetes
+      //      }
+     //   }
+  //  }
 
 
 
