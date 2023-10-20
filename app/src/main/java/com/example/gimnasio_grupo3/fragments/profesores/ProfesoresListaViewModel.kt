@@ -9,6 +9,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class ProfesoresListaViewModel : ViewModel() {
+
     fun obtenerProfesores(callback: (List<Profesor>?) -> Unit) {
         val retrofit = ProfesoresProvider().provideRetrofit()
         val apiService = retrofit.create(APIMethods::class.java)

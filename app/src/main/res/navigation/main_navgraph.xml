@@ -36,6 +36,9 @@
         <action
             android:id="@+id/action_homePrincipal_to_profesoresLista"
             app:destination="@id/profesoresLista" />
+        <action
+            android:id="@+id/action_homePrincipal_to_usuariosLista"
+            app:destination="@id/usuariosLista" />
     </fragment>
     <fragment
         android:id="@+id/actividadesLista"
@@ -110,4 +113,25 @@
         <argument android:name="datosProfesor"
             app:argType="com.example.gimnasio_grupo3.entities.Profesor" />
     </fragment>
+    <fragment
+        android:id="@+id/usuariosLista"
+        android:name="com.example.gimnasio_grupo3.fragments.usuarios.UsuariosLista"
+        android:label="UsuariosLista" >
+        <action
+            android:id="@+id/action_usuariosLista_to_crearUsuario"
+            app:destination="@id/crearUsuario" />
+        <action
+            android:id="@+id/action_usuariosLista_to_detalleUsuario"
+            app:destination="@id/detalleUsuario" />
+    </fragment>
+    <fragment
+        android:id="@+id/crearUsuario"
+        android:name="com.example.gimnasio_grupo3.fragments.usuarios.CrearUsuario"
+        android:label="fragment_crear_usuario"
+        tools:layout="@layout/fragment_crear_usuario" />
+    <fragment
+        android:id="@+id/detalleUsuario"
+        android:name="com.example.gimnasio_grupo3.fragments.usuarios.DetalleUsuario"
+        android:label="fragment_detalle_usuario"
+        tools:layout="@layout/fragment_detalle_usuario" />
 </navigation>

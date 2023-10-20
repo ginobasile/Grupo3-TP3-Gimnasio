@@ -1,18 +1,23 @@
 package com.example.gimnasio_grupo3.fragments.turnos
 
 import android.app.AlertDialog
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Spinner
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.gimnasio_grupo3.R
+import com.example.gimnasio_grupo3.entities.Actividad
+import com.example.gimnasio_grupo3.entities.Profesor
 import com.example.gimnasio_grupo3.entities.Turno
 import com.google.android.material.snackbar.Snackbar
+
 
 class CrearTurno : Fragment() {
     lateinit var v : View
@@ -22,6 +27,9 @@ class CrearTurno : Fragment() {
     private lateinit var inputFecha: EditText
     private lateinit var btnCreate: Button
     private lateinit var btnBack: Button
+    lateinit var actividadesList: MutableList<Actividad>
+    lateinit var profesoresList: MutableList<Profesor>
+    lateinit var actividadesSpinner: Spinner
     companion object {
         fun newInstance() = CrearTurno()
     }
@@ -34,12 +42,13 @@ class CrearTurno : Fragment() {
     ): View? {
         v = inflater.inflate(R.layout.fragment_crear_turno, container, false)
 
-        inputActividad = v.findViewById(R.id.inputAct)
         inputProfesor = v.findViewById(R.id.editProfesor)
         inputCantPersonas = v.findViewById(R.id.inputCantPersonasCrear)
         inputFecha = v.findViewById(R.id.inputFechaCrear)
         btnCreate = v.findViewById(R.id.actividadCrear)
         btnBack = v.findViewById(R.id.volver)
+        actividadesSpinner = v.findViewById(R.id.planets_spinner)
+
 
         return v
     }
@@ -94,6 +103,24 @@ class CrearTurno : Fragment() {
                 }
             }
         }
+
+        viewModel.obtenerProfesores { listaProfesores ->
+            if (listaProfesores != null) {
+                profesoresList = listaProfesores as MutableList<Profesor>
+            }
+        }
+
+        viewModel.obtenerActividades { listaActividades->
+            if (listaActividades != null) {
+                actividadesList = listaActividades as MutableList<Actividad>
+
+                val adapter = ArrayAdapter(v.context, android.R.layout.simple_spinner_item, actividadesList)
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                actividadesSpinner.adapter = adapter
+            }
+        }
+
+
     }
 
     private fun confirmAction(action: String, callback: (Boolean) -> Unit) {
