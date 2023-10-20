@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.gimnasio_grupo3.R
 import com.example.gimnasio_grupo3.adapters.TurnoAdapter
 import com.example.gimnasio_grupo3.entities.Turno
+import com.google.android.material.snackbar.Snackbar
 
 class TurnosLista : Fragment() {
     lateinit var v : View
@@ -38,9 +39,9 @@ class TurnosLista : Fragment() {
 
         btnCrearTurno.setOnClickListener {
             val action = TurnosListaDirections.actionTurnosListaToCrearTurno()
-
             findNavController().navigate(action)
         }
+
         return v
     }
 

@@ -1,10 +1,12 @@
 package com.example.gimnasio_grupo3.fragments.turnos
 
 import android.app.AlertDialog
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
@@ -17,12 +19,11 @@ import com.example.gimnasio_grupo3.entities.Actividad
 import com.example.gimnasio_grupo3.entities.Profesor
 import com.example.gimnasio_grupo3.entities.Turno
 import com.google.android.material.snackbar.Snackbar
+import java.util.Calendar
 
 
 class CrearTurno : Fragment() {
     lateinit var v : View
-    private lateinit var inputActividad: EditText
-    private lateinit var inputProfesor: EditText
     private lateinit var inputCantPersonas: EditText
     private lateinit var inputFecha: EditText
     private lateinit var btnCreate: Button
@@ -30,6 +31,9 @@ class CrearTurno : Fragment() {
     lateinit var actividadesList: MutableList<Actividad>
     lateinit var profesoresList: MutableList<Profesor>
     lateinit var actividadesSpinner: Spinner
+    lateinit var profesoresSpinner: Spinner
+    lateinit var idActividad: String
+    lateinit var idProfesor: String
     companion object {
         fun newInstance() = CrearTurno()
     }
@@ -42,13 +46,15 @@ class CrearTurno : Fragment() {
     ): View? {
         v = inflater.inflate(R.layout.fragment_crear_turno, container, false)
 
-        inputProfesor = v.findViewById(R.id.editProfesor)
         inputCantPersonas = v.findViewById(R.id.inputCantPersonasCrear)
-        inputFecha = v.findViewById(R.id.inputFechaCrear)
         btnCreate = v.findViewById(R.id.actividadCrear)
         btnBack = v.findViewById(R.id.volver)
         actividadesSpinner = v.findViewById(R.id.planets_spinner)
-
+        profesoresSpinner = v.findViewById(R.id.planets_spinner2)
+        inputFecha = v.findViewById(R.id.inputFecha)
+        inputFecha.setOnClickListener {
+            mostrarCalendario(v)
+        }
 
         return v
     }
@@ -61,21 +67,10 @@ class CrearTurno : Fragment() {
         }
 
         btnCreate.setOnClickListener {
-            val actividad = inputActividad.text.toString()
-            val profesor = inputProfesor.text.toString()
+            val actividad = idActividad
+            val profesor =  idProfesor
             val cantPersonas = inputCantPersonas.text.toString()
             val fecha = inputFecha.text.toString()
-
-
-            if (actividad.isEmpty()) {
-                inputActividad.error = "La actividad es obligatoria"
-                return@setOnClickListener
-            }
-
-            if (profesor.isEmpty()) {
-                inputProfesor.error = "El profesor es obligatorio"
-                return@setOnClickListener
-            }
 
             if (cantPersonas.isEmpty()) {
                 inputCantPersonas.error = "Debe indicar cantidad de personas"
@@ -86,7 +81,7 @@ class CrearTurno : Fragment() {
                 return@setOnClickListener
             }
 
-            val nuevoTurno = Turno(profesor, actividad, fecha,cantPersonas.toInt())
+            val nuevoTurno = Turno(profesor, actividad, fecha, cantPersonas.toInt())
 
             confirmAction("Crear") { confirmed ->
                 if (confirmed) {
@@ -107,20 +102,91 @@ class CrearTurno : Fragment() {
         viewModel.obtenerProfesores { listaProfesores ->
             if (listaProfesores != null) {
                 profesoresList = listaProfesores as MutableList<Profesor>
+
+                val adapter = ArrayAdapter(
+                    v.context,
+                    android.R.layout.simple_spinner_item,
+                    formatoProfesor(profesoresList)
+                )
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                profesoresSpinner.adapter = adapter
             }
         }
 
-        viewModel.obtenerActividades { listaActividades->
+        profesoresSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                idProfesor = profesoresList[position].id.toString()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+        }
+
+        viewModel.obtenerActividades { listaActividades ->
             if (listaActividades != null) {
                 actividadesList = listaActividades as MutableList<Actividad>
 
-                val adapter = ArrayAdapter(v.context, android.R.layout.simple_spinner_item, actividadesList)
+                val adapter = ArrayAdapter(
+                    v.context,
+                    android.R.layout.simple_spinner_item,
+                    formatoActividad(actividadesList)
+                )
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 actividadesSpinner.adapter = adapter
             }
         }
 
+        actividadesSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                idActividad = actividadesList[position].id.toString()
+            }
 
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+        }
+    }
+
+    fun formatoActividad(actividadesList: MutableList<Actividad>): List<String> {
+        return actividadesList.map { "${it.name}, ${it.duration} min" }
+    }
+
+    fun formatoProfesor(profesoresList: MutableList<Profesor>): List<String> {
+        return profesoresList.map { "${it.nombre}, ${it.apellido}" }
+    }
+
+    fun mostrarCalendario(view: View) {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+        val datePickerDialog = DatePickerDialog(
+            requireContext(),
+            {_ , selectedYear, selectedMonth, selectedDay ->
+                val selectedDate = "$selectedDay/${selectedMonth + 1}/$selectedYear"
+                inputFecha.setText(selectedDate)
+            },
+            year,
+            month,
+            day
+        )
+
+        datePickerDialog.datePicker.minDate = System.currentTimeMillis() - 1000
+        datePickerDialog.show()
     }
 
     private fun confirmAction(action: String, callback: (Boolean) -> Unit) {

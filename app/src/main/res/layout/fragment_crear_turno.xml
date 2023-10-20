@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayoutTurno"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     app:layoutDescription="@xml/fragment_crear_turno_scene"
     tools:context=".fragments.turnos.CrearTurno">
 
@@ -18,20 +17,41 @@
         android:paddingBottom="16dp"
         android:text="Crear Turno"
         android:textSize="34sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/txtViewTurnoAct"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txtViewTurnoAct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
         android:text="Seleccione Actividad:"
         android:textAlignment="textStart"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/planets_spinner"
+        app:layout_constraintStart_toStartOf="@+id/titleTurnoCrear"
+        app:layout_constraintTop_toBottomOf="@+id/titleTurnoCrear" />
+
+    <Spinner
+        android:id="@+id/planets_spinner"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/textField"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtViewTurnoAct" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textField"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/textViewProfesor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/planets_spinner">
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -43,16 +63,19 @@
         android:text="Seleccione un Profesor:"
         android:textAlignment="textStart"
         android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/planets_spinner2"
+        app:layout_constraintStart_toStartOf="@+id/planets_spinner"
+        app:layout_constraintTop_toBottomOf="@+id/textField" />
 
-    <EditText
-        android:id="@+id/editProfesor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="profesor"
-        android:inputType="number"
-        android:textSize="24sp" />
+    <Spinner
+        android:id="@+id/planets_spinner2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtCantCrear"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewProfesor" />
 
     <TextView
         android:id="@+id/txtCantCrear"
@@ -61,34 +84,49 @@
         android:text="Ingrese Cant Personas"
         android:textAlignment="textStart"
         android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/inputCantPersonasCrear"
+        app:layout_constraintStart_toStartOf="@+id/planets_spinner2"
+        app:layout_constraintTop_toBottomOf="@+id/planets_spinner2" />
 
     <EditText
         android:id="@+id/inputCantPersonasCrear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
         android:ems="10"
-        android:hint="Cant Personas"
-        android:inputType="text"
-        android:textSize="24sp" />
+        android:hint="Personas límite"
+        android:inputType="number"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/txtFechaCrear"
+        app:layout_constraintStart_toStartOf="@+id/txtCantCrear"
+        app:layout_constraintTop_toBottomOf="@+id/txtCantCrear" />
 
     <TextView
         android:id="@+id/txtFechaCrear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="59dp"
         android:text="Ingrese una Fecha"
         android:textAlignment="textStart"
         android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/actividadCrear"
+        app:layout_constraintStart_toStartOf="@+id/inputCantPersonasCrear"
+        app:layout_constraintTop_toBottomOf="@+id/inputCantPersonasCrear" />
 
     <EditText
-        android:id="@+id/inputFechaCrear"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="input de fecha*"
-        android:inputType="text"
-        android:textSize="24sp" />
+        android:id="@+id/inputFecha"
+        android:layout_width="193dp"
+        android:layout_height="68dp"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:hint="Seleccionar fecha"
+        android:inputType="none"
+        app:layout_constraintBottom_toTopOf="@+id/actividadCrear"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtFechaCrear" />
 
     <Button
         android:id="@+id/actividadCrear"
@@ -96,19 +134,20 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="Crear Turno"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/volver"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtFechaCrear" />
 
     <Button
         android:id="@+id/volver"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="192dp"
         android:text="Volver"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/actividadCrear" />
 
-    <Spinner
-        android:id="@+id/planets_spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp" />
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
