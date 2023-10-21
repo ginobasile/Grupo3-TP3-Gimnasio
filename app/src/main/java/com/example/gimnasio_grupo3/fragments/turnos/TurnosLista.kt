@@ -7,12 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gimnasio_grupo3.R
 import com.example.gimnasio_grupo3.adapters.TurnoAdapter
 import com.example.gimnasio_grupo3.entities.Turno
+import com.google.android.material.snackbar.Snackbar
 
 class TurnosLista : Fragment() {
     lateinit var v : View
@@ -20,6 +22,7 @@ class TurnosLista : Fragment() {
     lateinit var adapter: TurnoAdapter
     lateinit var turnosList: MutableList<Turno>
     private lateinit var btnCrearTurno: Button
+    private lateinit var btnBack: Button
 
     companion object {
         fun newInstance() = TurnosLista()
@@ -35,12 +38,17 @@ class TurnosLista : Fragment() {
         recyclerTurnos = v.findViewById(R.id.reciclerTurnos)
         recyclerTurnos.layoutManager = LinearLayoutManager(requireContext())
         btnCrearTurno = v.findViewById(R.id.buttonTurnos)
+        btnBack = v.findViewById(R.id.button8)
 
         btnCrearTurno.setOnClickListener {
             val action = TurnosListaDirections.actionTurnosListaToCrearTurno()
-
             findNavController().navigate(action)
         }
+
+        btnBack.setOnClickListener {
+            v.findNavController().navigateUp()
+        }
+
         return v
     }
 
@@ -53,7 +61,7 @@ class TurnosLista : Fragment() {
                 adapter = TurnoAdapter(turnosList.toMutableList()) { turno ->
                     val action =
                         TurnosListaDirections.actionTurnosListaToDetalleTurno(
-
+                            turno
                         )
                     findNavController().navigate(action)
                 }

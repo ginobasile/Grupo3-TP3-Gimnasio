@@ -5,65 +5,109 @@
     android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layoutDescription="@xml/fragment_detalle_turno_scene"
     tools:context=".fragments.turnos.DetalleTurno">
 
-    <EditText
-        android:id="@+id/editTextProfe"
+    <TextView
+        android:id="@+id/textViewDetalleActividad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="number"
-        android:text="nombre profesor"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/textViewCantPersonas"
+        android:layout_marginBottom="32dp"
+        android:gravity="center"
+        android:paddingTop="32dp"
+        android:paddingBottom="16dp"
+        android:text="Detalle de Turno"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textViewIDTurno"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewActividad" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_conversion_absoluteHeight="93dp"
+        tools:layout_conversion_absoluteWidth="250dp" />
 
-    <EditText
-        android:id="@+id/editTextCantPersonas"
+    <TextView
+        android:id="@+id/textViewIDTurno"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="number"
-        android:text="CantPersonasLimite"
+        android:layout_marginBottom="32dp"
+        android:text="ID: 1"
+        android:textAlignment="center"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/textViewCantPersonas2"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textViewActividad"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.406"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewCantPersonas" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewDetalleActividad"
+        tools:layout_conversion_absoluteHeight="32dp"
+        tools:layout_conversion_absoluteWidth="49dp" />
 
     <TextView
         android:id="@+id/textViewActividad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:text="Profesor:"
         android:textAlignment="textStart"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/editTextProfe"
+        app:layout_constraintBottom_toTopOf="@+id/spinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextActTurno" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewIDTurno"
+        tools:layout_conversion_absoluteHeight="32dp"
+        tools:layout_conversion_absoluteWidth="101dp" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewActividad2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewActividad"
+        tools:layout_conversion_absoluteHeight="50dp"
+        tools:layout_conversion_absoluteWidth="118dp" />
 
     <TextView
         android:id="@+id/textViewActividad2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:text="Actividad:"
         android:textAlignment="textStart"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/editTextActTurno"
+        app:layout_constraintBottom_toTopOf="@+id/spinner2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewIDTurno" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner"
+        tools:layout_conversion_absoluteHeight="32dp"
+        tools:layout_conversion_absoluteWidth="108dp" />
+
+    <TextView
+        android:id="@+id/textViewCantPersonas2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Fecha:"
+        android:textAlignment="textStart"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/inputFecha"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextCantPersonas"
+        tools:layout_conversion_absoluteHeight="32dp"
+        tools:layout_conversion_absoluteWidth="72dp" />
 
     <TextView
         android:id="@+id/textViewCantPersonas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:text="CantPersonas"
         android:textAlignment="textStart"
         android:textSize="24sp"
@@ -71,73 +115,52 @@
         app:layout_constraintBottom_toTopOf="@+id/editTextCantPersonas"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextProfe" />
-
-    <TextView
-        android:id="@+id/textViewCantPersonas2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Fecha:"
-        android:textAlignment="textStart"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/editTextfecha"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextCantPersonas" />
-
-    <TextView
-        android:id="@+id/textViewDetalleActividad"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:paddingTop="32dp"
-        android:paddingBottom="16dp"
-        android:text="Detalle de Turno"
-        android:textSize="34sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner2"
+        tools:layout_conversion_absoluteHeight="32dp"
+        tools:layout_conversion_absoluteWidth="152dp" />
 
     <EditText
-        android:id="@+id/editTextActTurno"
+        android:id="@+id/editTextCantPersonas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Actividad del turno"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/textViewActividad"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewActividad2" />
-
-    <TextView
-        android:id="@+id/textViewIDTurno"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ID: 1"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/textViewActividad2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDetalleActividad" />
-
-    <EditText
-        android:id="@+id/editTextfecha"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:ems="10"
         android:inputType="number"
-        android:text="fecha"
+        android:text="CantPersonasLimite"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/ActModi"
+        app:layout_constraintBottom_toTopOf="@+id/textViewCantPersonas2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewCantPersonas2" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewCantPersonas"
+        tools:layout_conversion_absoluteHeight="53dp"
+        tools:layout_conversion_absoluteWidth="278dp" />
+
+    <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewCantPersonas"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewActividad2"
+        tools:layout_conversion_absoluteHeight="50dp"
+        tools:layout_conversion_absoluteWidth="118dp" />
+
+    <EditText
+        android:id="@+id/inputFecha"
+        android:layout_width="200dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="8dp"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:hint="Seleccionar fecha"
+        android:inputType="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCantPersonas2"
+        tools:layout_conversion_absoluteHeight="68dp"
+        tools:layout_conversion_absoluteWidth="193dp" />
 
     <Button
         android:id="@+id/ActModi"
@@ -148,7 +171,9 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/ActDelete"
-        app:layout_constraintStart_toEndOf="@+id/ActVolver" />
+        app:layout_constraintStart_toEndOf="@+id/ActVolver"
+        tools:layout_conversion_absoluteHeight="48dp"
+        tools:layout_conversion_absoluteWidth="136dp" />
 
     <Button
         android:id="@+id/ActDelete"
@@ -159,7 +184,9 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ActModi" />
+        app:layout_constraintStart_toEndOf="@+id/ActModi"
+        tools:layout_conversion_absoluteHeight="48dp"
+        tools:layout_conversion_absoluteWidth="124dp" />
 
     <Button
         android:id="@+id/ActVolver"
@@ -170,6 +197,8 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/ActModi"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_conversion_absoluteHeight="48dp"
+        tools:layout_conversion_absoluteWidth="106dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
