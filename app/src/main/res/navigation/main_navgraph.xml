@@ -89,7 +89,11 @@
         android:id="@+id/detalleTurno"
         android:name="com.example.gimnasio_grupo3.fragments.turnos.DetalleTurno"
         android:label="fragment_detalle_turno"
-        tools:layout="@layout/fragment_detalle_turno" />
+        tools:layout="@layout/fragment_detalle_turno" >
+        <argument
+            android:name="datosTurno"
+            app:argType="com.example.gimnasio_grupo3.entities.Turno" />
+    </fragment>
     <fragment
         android:id="@+id/profesoresLista"
         android:name="com.example.gimnasio_grupo3.fragments.profesores.ProfesoresLista"
