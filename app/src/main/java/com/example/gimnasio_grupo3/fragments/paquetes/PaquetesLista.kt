@@ -1,5 +1,6 @@
 package com.example.gimnasio_grupo3.fragments.paquetes
 
+import android.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.gimnasio_grupo3.R
 import com.example.gimnasio_grupo3.adapters.PaqueteAdapter
 import com.example.gimnasio_grupo3.entities.Paquete
+import com.example.gimnasio_grupo3.entities.Usuario
 
 class PaquetesLista : Fragment() {
     lateinit var v: View
@@ -21,7 +23,7 @@ class PaquetesLista : Fragment() {
     lateinit var paquetesList: MutableList<Paquete>
     private lateinit var btnCrearPaquete: Button
     private lateinit var btnBack: Button
-
+    val esAdmin = true
     companion object {
         fun newInstance() = PaquetesLista()
     }
@@ -38,6 +40,11 @@ class PaquetesLista : Fragment() {
         btnBack = v.findViewById(R.id.button6)
 
         btnCrearPaquete = v.findViewById(R.id.button1)
+
+
+        if (!esAdmin) {
+            btnCrearPaquete.visibility = View.GONE
+        }
 
         btnCrearPaquete.setOnClickListener {
             val action = PaquetesListaDirections.actionPaquetesListaToCrearPaquete()
@@ -59,13 +66,31 @@ class PaquetesLista : Fragment() {
         viewModel.obtenerPaquetes { paquetesList ->
             if (paquetesList != null) {
                 adapter = PaqueteAdapter(paquetesList.toMutableList()) { paquete ->
-                    val action =
-                        PaquetesListaDirections.actionPaquetesListaToDetallePaquete(paquete)
-                    findNavController().navigate(action)
+
+
+                        if (esAdmin) {
+                            // Si el usuario es admin, navega al detalle del paquete
+                            val action = PaquetesListaDirections.actionPaquetesListaToDetallePaquete(paquete)
+                            findNavController().navigate(action)
+                        } else {
+                            // Si el usuario no es admin, muestra un diálogo de confirmación
+                            val dialogBuilder = AlertDialog.Builder(requireContext())
+                            dialogBuilder.setMessage("¿Desea comprar ${paquete.nombre}? Se le acreditarán ${paquete.cantTickets} tickets.")
+                                .setPositiveButton("Sí") { _, _ ->
+                                    sumarTicketsAlUsuario(paquete)
+                                }
+                                .setNegativeButton("No") { _, _ -> }
+                            val alertDialog = dialogBuilder.create()
+                            alertDialog.show()
+                        }
                 }
                 reciclerPaquetes.adapter = adapter
             }
         }
+    }
+
+    private fun sumarTicketsAlUsuario(paquete: Paquete) {
+
     }
 }
 
