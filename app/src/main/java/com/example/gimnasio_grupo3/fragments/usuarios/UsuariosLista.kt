@@ -30,10 +30,8 @@ class UsuariosLista : Fragment() {
     ): View? {
         v = inflater.inflate(R.layout.fragment_usuarios_lista, container, false)
 
-
         recyclerUsuarios = v.findViewById(R.id.reciclerUsuarios)
         recyclerUsuarios.layoutManager = LinearLayoutManager(requireContext())
-
 
         return v
     }
@@ -47,7 +45,7 @@ class UsuariosLista : Fragment() {
 
                 adapter = UsuarioAdapter(usuariosList.toMutableList()) { usuario ->
                     val action =
-                        UsuariosListaDirections.actionUsuariosListaToDetalleUsuario()
+                        UsuariosListaDirections.actionUsuariosListaToDetalleUsuario(usuario)
                     findNavController().navigate(action)
                 }
 
@@ -57,7 +55,4 @@ class UsuariosLista : Fragment() {
             }
         }
     }
-
-
-
 }

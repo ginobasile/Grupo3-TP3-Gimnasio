@@ -1,5 +1,9 @@
 package com.example.gimnasio_grupo3.entities
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Usuario(
     var id: Int,
     var nombre: String,
@@ -14,4 +18,4 @@ data class Usuario(
     var dni: Int,
     var ticketsRestantes: Int
 
-)
+) : Parcelable

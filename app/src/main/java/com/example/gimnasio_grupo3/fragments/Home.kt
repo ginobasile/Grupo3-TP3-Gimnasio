@@ -13,6 +13,7 @@ import com.example.gimnasio_grupo3.R
 class Home : Fragment() {
     lateinit var v : View
     lateinit var btnProfesores : Button
+    lateinit var btnUsuarios : Button
     private var imagesList = mutableListOf<Int>()
 
     companion object {
@@ -27,6 +28,7 @@ class Home : Fragment() {
     ): View? {
         v = inflater.inflate(R.layout.fragment_home, container, false)
         btnProfesores = v.findViewById(R.id.btnProfesores)
+        btnUsuarios = v.findViewById(R.id.btnUsuarios)
 
         return v
     }
@@ -44,6 +46,11 @@ class Home : Fragment() {
 
         btnProfesores.setOnClickListener() {
             val action = HomeDirections.actionHomePrincipalToProfesoresLista()
+            findNavController().navigate(action)
+        }
+
+        btnUsuarios.setOnClickListener() {
+            val action = HomeDirections.actionHomePrincipalToUsuariosLista()
             findNavController().navigate(action)
         }
     }

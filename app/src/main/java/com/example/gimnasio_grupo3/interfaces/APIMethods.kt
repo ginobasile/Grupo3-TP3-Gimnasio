@@ -99,4 +99,8 @@ interface APIMethods {
     // Delete
 
 
+    @DELETE("Usuarios/{id}")
+    fun deleteUsuarios(@Path("id") id: String): Call<Void>
+
+
 }
