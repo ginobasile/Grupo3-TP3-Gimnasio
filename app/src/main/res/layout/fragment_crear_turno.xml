@@ -5,7 +5,6 @@
     android:id="@+id/frameLayoutTurno"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layoutDescription="@xml/fragment_crear_turno_scene"
     tools:context=".fragments.turnos.CrearTurno">
 
     <TextView
