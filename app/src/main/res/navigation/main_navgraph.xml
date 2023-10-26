@@ -134,4 +134,9 @@
             android:name="usuario"
             app:argType="com.example.gimnasio_grupo3.entities.Usuario" />
     </fragment>
+    <activity
+        android:id="@+id/loginActivity"
+        android:name="com.example.gimnasio_grupo3.activities.LoginActivity"
+        android:label="activity_login"
+        tools:layout="@layout/activity_login" />
 </navigation>

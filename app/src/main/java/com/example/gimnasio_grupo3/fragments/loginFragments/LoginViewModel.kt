@@ -1,4 +1,4 @@
-package com.example.gimnasio_grupo3.fragments
+package com.example.gimnasio_grupo3.fragments.loginFragments
 
 import android.view.View
 import androidx.lifecycle.ViewModel

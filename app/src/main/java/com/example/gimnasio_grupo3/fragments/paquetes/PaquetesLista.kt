@@ -23,7 +23,7 @@ class PaquetesLista : Fragment() {
     lateinit var paquetesList: MutableList<Paquete>
     private lateinit var btnCrearPaquete: Button
     private lateinit var btnBack: Button
-    val esAdmin = true
+    val esAdmin = false
     companion object {
         fun newInstance() = PaquetesLista()
     }

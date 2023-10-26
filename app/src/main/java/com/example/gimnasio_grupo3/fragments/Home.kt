@@ -1,20 +1,24 @@
 package com.example.gimnasio_grupo3.fragments
 
+import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.content.SharedPreferences
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import com.example.gimnasio_grupo3.R
+import com.google.android.material.snackbar.Snackbar
 
 class Home : Fragment() {
     lateinit var v : View
     lateinit var btnProfesores : Button
     lateinit var btnUsuarios : Button
     private var imagesList = mutableListOf<Int>()
+    private val PREF_NAME = "myPreferences"
 
     companion object {
         fun newInstance() = Home()
@@ -43,6 +47,9 @@ class Home : Fragment() {
     // [Tomas] Agregado para testear Profesores - START
     override fun onStart() {
         super.onStart()
+        val sharedPref = requireContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        val storedUser = sharedPref.getString("USER", "")
+        Snackbar.make(v, storedUser ?: "Mensaje predeterminado si no hay valor", Snackbar.LENGTH_SHORT).show()
 
         btnProfesores.setOnClickListener() {
             val action = HomeDirections.actionHomePrincipalToProfesoresLista()
