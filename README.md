@@ -10,4 +10,4 @@ Tareas que faltan:
 - Vista con todos los turnos (próximos y pasados)
 - Al anotarse a un turno, al tocar y aceptar, restar un ticket al usuario y comprobar que haya tickets o lugares disponibles (tabla TurnoPersona)
 
-- Agregar imagenes
+- Agregar imagenes (Usuarios y Actividades)
