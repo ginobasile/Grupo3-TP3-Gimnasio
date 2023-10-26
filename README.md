@@ -9,5 +9,5 @@ Tareas que faltan:
 - Que al tocar paquete se te agreguen los tickets a la cuenta logueada (con un cartel de confirm y un cartel de éxito)
 - Vista con todos los turnos (próximos y pasados)
 - Al anotarse a un turno, al tocar y aceptar, restar un ticket al usuario y comprobar que haya tickets o lugares disponibles (tabla TurnoPersona)
-
+- Agregar Diseño y colores
 - Agregar imagenes (Usuarios y Actividades)
