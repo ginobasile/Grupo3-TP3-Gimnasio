@@ -124,6 +124,9 @@
         <action
             android:id="@+id/action_usuariosLista_to_detalleUsuario"
             app:destination="@id/detalleUsuario" />
+        <action
+            android:id="@+id/action_usuariosLista_to_crearUsuario"
+            app:destination="@id/crearUsuario" />
     </fragment>
     <fragment
         android:id="@+id/detalleUsuario"
@@ -139,4 +142,9 @@
         android:name="com.example.gimnasio_grupo3.activities.LoginActivity"
         android:label="activity_login"
         tools:layout="@layout/activity_login" />
+    <fragment
+        android:id="@+id/crearUsuario"
+        android:name="com.example.gimnasio_grupo3.fragments.usuarios.CrearUsuario"
+        android:label="fragment_crear_usuario"
+        tools:layout="@layout/fragment_crear_usuario" />
 </navigation>
