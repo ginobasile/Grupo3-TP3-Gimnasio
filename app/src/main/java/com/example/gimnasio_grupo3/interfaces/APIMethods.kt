@@ -14,7 +14,7 @@ import retrofit2.http.PUT
 import retrofit2.http.Path
 
 interface APIMethods {
-    // PAQUETES-PAQUETES-PAQUETES-PAQUETES-PAQUETES-PAQUETES
+    // PAQUETES-PAQUETES-PAQUETES-PAQUETES-PAQUETES-PAQUETES-PAQUETES-PAQUETES-PAQUETES-PAQUETES-PAQUETES
     // Create
     @POST("paquetes")
     fun createPaquete(@Body paquete: Paquete): Call<Paquete>
@@ -31,7 +31,7 @@ interface APIMethods {
     @DELETE("paquetes/{id}")
     fun deletePaquete(@Path("id") id: String): Call<Void>
 
-    // ACTIVIDADES-ACTIVIDADES-ACTIVIDADES-ACTIVIDADES-ACTIVIDADES
+    // ACTIVIDADES-ACTIVIDADES-ACTIVIDADES-ACTIVIDADES-ACTIVIDADES-ACTIVIDADES-ACTIVIDADES-ACTIVIDADES-ACTIVIDADES
     // Create
     @POST("actividades")
     fun createActividad(@Body actividad: Actividad): Call<Actividad>
@@ -48,7 +48,7 @@ interface APIMethods {
     @DELETE("actividades/{id}")
     fun deleteActividad(@Path("id") id: String): Call<Void>
 
-    // PROFESORES-PROFESORES-PROFESORES-PROFESORES-PROFESORES
+    // PROFESORES-PROFESORES-PROFESORES-PROFESORES-PROFESORES-PROFESORES-PROFESORES-PROFESORES-PROFESORES
     // Create
     @POST("profesores")
     fun createProfesor(@Body profesor: Profesor): Call<Profesor>
@@ -65,7 +65,7 @@ interface APIMethods {
     @DELETE("profesores/{id}")
     fun deleteProfesor(@Path("id") id: String): Call<Void>
 
-    // TURNOS-TURNOS-TURNOS-TURNOS-TURNOS-TURNOS-TURNOS-TURNOS
+    // TURNOS-TURNOS-TURNOS-TURNOS-TURNOS-TURNOS-TURNOS-TURNOS-TURNOS-TURNOS-TURNOS-TURNOS-TURNOS-TURNOS-TURNOS
     // Create
     @POST("turnos")
     fun createTurno(@Body turno: Turno): Call<Turno>
@@ -81,26 +81,21 @@ interface APIMethods {
     // Delete
     @DELETE("turnos/{id}")
     fun deleteTurno(@Path("id") id: String): Call<Void>
-    // Read
 
-    // Update
-
-    // Delete
-
-    // USUARIOS-USUARIOS-USUARIOS-USUARIOS-USUARIOS-USUARIOS
+    // USUARIOS-USUARIOS-USUARIOS-USUARIOS-USUARIOS-USUARIOS-USUARIOS-USUARIOS-USUARIOS-USUARIOS-USUARIOS
     // Create
+    @POST("Usuarios")
+    fun createUsuario(@Body usuario: Usuario): Call<Usuario>
 
     // Read
     @GET("Usuarios")
     fun getUsuarios(): Call<List<Usuario>>
 
     // Update
+    @PUT("Usuarios/{id}")
+    fun updateUsuario(@Path("id") id: String, @Body usuario: Usuario): Call<Usuario>
 
     // Delete
-
-
     @DELETE("Usuarios/{id}")
     fun deleteUsuarios(@Path("id") id: String): Call<Void>
-
-
 }
