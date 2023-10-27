@@ -1,20 +1,24 @@
 package com.example.gimnasio_grupo3.sessions
+
 import android.content.Context
 import android.content.SharedPreferences
 import com.example.gimnasio_grupo3.entities.Usuario
+import com.google.gson.Gson
 
-
-class MyPreferences (context: Context) {
+class MyPreferences(context: Context) {
     private val PREF_NAME = "myPreferences"
     private val sharedPreferences: SharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+    private val gson = Gson()
 
     fun setUser(user: Usuario) {
         val editor = sharedPreferences.edit()
-        editor.putString("USER", user.toString())
+        val userJson = gson.toJson(user)
+        editor.putString("USER", userJson)
         editor.apply()
     }
 
-    fun getUser(): String? {
-        return sharedPreferences.getString("USER", null)
+    fun getUser(): Usuario? {
+        val userJson = sharedPreferences.getString("USER", null)
+        return gson.fromJson(userJson, Usuario::class.java)
     }
 }

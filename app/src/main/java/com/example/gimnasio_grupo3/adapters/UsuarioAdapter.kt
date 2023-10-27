@@ -58,7 +58,7 @@ class UsuarioAdapter(
         holder.setNombreCompleto(usuario.nombre, usuario.apellido)
         holder.setMail(usuario.mail)
         holder.setContacto(usuario.contacto)
-        holder.isAdmin(usuario.administrador)
+        holder.isAdmin(usuario.administrador.toString())
 
         holder.itemView.setOnClickListener {
             onItemClick(usuario)

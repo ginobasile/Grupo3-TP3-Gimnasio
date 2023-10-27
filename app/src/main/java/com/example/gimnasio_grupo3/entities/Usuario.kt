@@ -14,7 +14,7 @@ data class Usuario(
     var peso: Int,
     var edad: Int,
     var contacto: String,
-    var administrador: String,
+    var administrador: Boolean,
     var dni: Int,
     var ticketsRestantes: Int
 

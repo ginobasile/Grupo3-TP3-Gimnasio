@@ -28,7 +28,7 @@ class Login : Fragment() {
 
     var userList: List<Usuario>  = listOf(
 
-        Usuario(1, "Juan", "Ramirez", "jose@jose.com", "123", 170, 70, 25, "123456", "isAdmin", 1234, 15),
+        Usuario(1, "Juan", "Ramirez", "jose@jose.com", "123", 170, 70, 25, "123456", true, 1234, 15),
 
 
 
@@ -53,9 +53,6 @@ class Login : Fragment() {
 
     override fun onStart(){
         super.onStart()
-
-        val sharedPref : SharedPreferences = requireContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        val editor = sharedPref.edit()
 
 
         btnNavigate.setOnClickListener {

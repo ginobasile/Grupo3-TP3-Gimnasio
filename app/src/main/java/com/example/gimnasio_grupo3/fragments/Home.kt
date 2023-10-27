@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import com.example.gimnasio_grupo3.R
+import com.example.gimnasio_grupo3.sessions.MyPreferences
 import com.google.android.material.snackbar.Snackbar
 
 class Home : Fragment() {
@@ -18,7 +19,7 @@ class Home : Fragment() {
     lateinit var btnProfesores : Button
     lateinit var btnUsuarios : Button
     private var imagesList = mutableListOf<Int>()
-    private val PREF_NAME = "myPreferences"
+
 
     companion object {
         fun newInstance() = Home()
@@ -47,9 +48,11 @@ class Home : Fragment() {
     // [Tomas] Agregado para testear Profesores - START
     override fun onStart() {
         super.onStart()
-        val sharedPref = requireContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        val storedUser = sharedPref.getString("USER", "")
-        Snackbar.make(v, storedUser ?: "Mensaje predeterminado si no hay valor", Snackbar.LENGTH_SHORT).show()
+
+        //SIEMPRE QUE DE UNA VISTA QUERAMOS ACCEDER AL USUARIO QUE INICIO SESION, USAR LINEA 53 Y 54
+        val myPreferences = MyPreferences(requireContext())
+        val user = myPreferences.getUser()
+        Snackbar.make(v, user.toString() ?: "Mensaje predeterminado si no hay valor", Snackbar.LENGTH_SHORT).show()
 
         btnProfesores.setOnClickListener() {
             val action = HomeDirections.actionHomePrincipalToProfesoresLista()
