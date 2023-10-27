@@ -1,5 +1,6 @@
 package com.example.gimnasio_grupo3.fragments.paquetes
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -8,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,15 +17,20 @@ import com.example.gimnasio_grupo3.R
 import com.example.gimnasio_grupo3.adapters.PaqueteAdapter
 import com.example.gimnasio_grupo3.entities.Paquete
 import com.example.gimnasio_grupo3.entities.Usuario
+import com.example.gimnasio_grupo3.sessions.MyPreferences
+import com.google.android.material.snackbar.Snackbar
 
 class PaquetesLista : Fragment() {
     lateinit var v: View
     lateinit var reciclerPaquetes: RecyclerView
     lateinit var adapter: PaqueteAdapter
+    private lateinit var txtCantTickets : TextView
     lateinit var paquetesList: MutableList<Paquete>
     private lateinit var btnCrearPaquete: Button
     private lateinit var btnBack: Button
-    val esAdmin = false
+    private lateinit var myPreferences: MyPreferences
+    private var user: Usuario? = null
+
     companion object {
         fun newInstance() = PaquetesLista()
     }
@@ -38,11 +45,16 @@ class PaquetesLista : Fragment() {
         reciclerPaquetes = v.findViewById(R.id.reciclerPaquetes)
         reciclerPaquetes.layoutManager = LinearLayoutManager(requireContext())
         btnBack = v.findViewById(R.id.button6)
-
         btnCrearPaquete = v.findViewById(R.id.button1)
+        txtCantTickets = v.findViewById(R.id.textView6)
 
 
-        if (!esAdmin) {
+
+        myPreferences = MyPreferences(requireContext())
+        user = myPreferences.getUser()
+
+
+        if (user?.administrador != true) {
             btnCrearPaquete.visibility = View.GONE
         }
 
@@ -59,16 +71,16 @@ class PaquetesLista : Fragment() {
         return v
     }
 
+    @SuppressLint("SuspiciousIndentation")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(PaquetesListaViewModel::class.java)
-
+        txtCantTickets.text = user?.ticketsRestantes.toString()
         viewModel.obtenerPaquetes { paquetesList ->
             if (paquetesList != null) {
                 adapter = PaqueteAdapter(paquetesList.toMutableList()) { paquete ->
 
-
-                        if (esAdmin) {
+                        if (user?.administrador == true) {
                             // Si el usuario es admin, navega al detalle del paquete
                             val action = PaquetesListaDirections.actionPaquetesListaToDetallePaquete(paquete)
                             findNavController().navigate(action)
@@ -78,6 +90,7 @@ class PaquetesLista : Fragment() {
                             dialogBuilder.setMessage("¿Desea comprar ${paquete.nombre}? Se le acreditarán ${paquete.cantTickets} tickets.")
                                 .setPositiveButton("Sí") { _, _ ->
                                     sumarTicketsAlUsuario(paquete)
+
                                 }
                                 .setNegativeButton("No") { _, _ -> }
                             val alertDialog = dialogBuilder.create()
@@ -90,7 +103,17 @@ class PaquetesLista : Fragment() {
     }
 
     private fun sumarTicketsAlUsuario(paquete: Paquete) {
+        val misTickets = txtCantTickets.text.toString()
+        val actualizarTickets = misTickets.toInt() + paquete.cantTickets
 
+        user?.let { usuario ->
+            usuario.ticketsRestantes = actualizarTickets
+            txtCantTickets.text = actualizarTickets.toString()
+
+            myPreferences.setUser(usuario)
+
+            Snackbar.make(requireView(), "${paquete.cantTickets} sumados con éxito", Snackbar.LENGTH_SHORT).show()
+        }
     }
 }
 

@@ -28,7 +28,8 @@ class Login : Fragment() {
 
     var userList: List<Usuario>  = listOf(
 
-        Usuario(1, "Juan", "Ramirez", "jose@jose.com", "123", 170, 70, 25, "123456", true, 1234, 15),
+        Usuario(1, "Admin", "Admin", "admin@admin.com", "admin", 170, 70, 25, "123456", true, 1234, 0),
+        Usuario(2, "Juan", "Ramirez", "jose@jose.com", "123", 170, 70, 25, "123456", false, 1234, 15),
 
 
 

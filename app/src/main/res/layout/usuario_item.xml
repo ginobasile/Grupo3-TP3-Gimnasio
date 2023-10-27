@@ -10,53 +10,98 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="203dp">
 
         <TextView
             android:id="@+id/txtNombreApellido"
-            android:layout_width="333dp"
+            android:layout_width="0dp"
             android:layout_height="49dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="8dp"
             android:gravity="center"
             android:text="Nombre Apellido"
-            android:textSize="20sp"
-            android:textStyle="bold"
+            android:textSize="24sp"
+            android:textStyle="bold|italic"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
         <TextView
             android:id="@+id/txtEmail"
-            android:layout_width="309dp"
-            android:layout_height="34dp"
-            android:layout_marginTop="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:gravity="center"
             android:text="Email"
+            android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/txtContacto"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/txtEmail2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtNombreApellido" />
 
         <TextView
-            android:id="@+id/txtContacto"
-            android:layout_width="309dp"
-            android:layout_height="34dp"
-            android:layout_marginBottom="15dp"
+            android:id="@+id/txtEmail2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:gravity="center"
-            android:text="Contacto"
+            android:text="Dni"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/txtEmail3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/txtEmail"
+            app:layout_constraintTop_toBottomOf="@+id/txtNombreApellido" />
+
+        <TextView
+            android:id="@+id/txtEmail3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:text="Tickets"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/txtContacto" />
+
+        <TextView
+            android:id="@+id/txtContacto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:text="Contacto"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/txtEmail3"
+            app:layout_constraintHorizontal_bias="0.51"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/txtAdmin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="7dp"
-            android:layout_marginEnd="15dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
             android:text="Admin"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textSize="20sp"
+            android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="ID: 1"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/txtNombreApellido"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

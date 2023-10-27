@@ -18,4 +18,7 @@ data class Usuario(
     var dni: Int,
     var ticketsRestantes: Int
 
-) : Parcelable
+) : Parcelable {
+    constructor(nombre: String, apellido: String, mail: String, password: String, altura: Int, peso: Int, edad: Int, contacto: String, administrador: Boolean, dni: Int, ticketsRestantes: Int):
+            this(0, nombre, apellido, mail, password, altura, peso, edad, contacto, administrador, dni, ticketsRestantes)
+}
