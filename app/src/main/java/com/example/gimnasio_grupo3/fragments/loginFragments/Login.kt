@@ -16,6 +16,7 @@ import com.example.gimnasio_grupo3.R
 import com.example.gimnasio_grupo3.activities.LoginActivity
 import com.example.gimnasio_grupo3.activities.MainActivity
 import com.example.gimnasio_grupo3.entities.Usuario
+import com.example.gimnasio_grupo3.sessions.MyPreferences
 import com.google.android.material.snackbar.Snackbar
 
 class Login : Fragment() {
@@ -69,8 +70,9 @@ class Login : Fragment() {
                 val user = userList.find { it.mail == inputUser }
                 if (user != null) {
                     if (user.password == inputPass) {
-                        editor.putString("USER", user.toString())
-                        editor.apply()
+                        //Gino Agrego nuevo
+                        val myPreferences = MyPreferences(requireContext())
+                        myPreferences.setUser(user)
                         val intent = Intent(activity?.applicationContext, MainActivity::class.java)
                         startActivity(intent)
                     } else {
