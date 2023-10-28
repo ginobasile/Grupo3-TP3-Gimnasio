@@ -17,8 +17,26 @@ class MyPreferences(context: Context) {
         editor.apply()
     }
 
+    fun deleteUser() {
+        val editor = sharedPreferences.edit()
+        editor.clear()
+        editor.apply()
+    }
+
     fun getUser(): Usuario? {
         val userJson = sharedPreferences.getString("USER", null)
         return gson.fromJson(userJson, Usuario::class.java)
+    }
+
+    fun isAdmin(): Boolean {
+        var isAdmin = false
+        val user = getUser()
+        if (user != null) {
+            if (user.administrador) {
+                isAdmin = true
+            }
+        }
+
+        return isAdmin
     }
 }
