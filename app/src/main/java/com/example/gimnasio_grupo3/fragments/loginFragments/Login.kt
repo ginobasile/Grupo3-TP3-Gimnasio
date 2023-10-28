@@ -22,13 +22,7 @@ class Login : Fragment() {
     lateinit var inputUserEmail : EditText
     lateinit var inputUserPass : EditText
     lateinit var v : View
-
-    var userList: List<Usuario>  = listOf(
-
-        Usuario(1, "Admin", "Admin", "admin@admin.com", "admin", 170, 70, 25, "123456", true, 1234, 0),
-        Usuario(2, "Juan", "Ramirez", "jose@jose.com", "123", 170, 70, 25, "123456", false, 1234, 15),
-
-    )
+    lateinit var userList: List<Usuario>
     companion object {
         fun newInstance() = Login()
     }
@@ -48,8 +42,13 @@ class Login : Fragment() {
         return v
     }
 
-    override fun onStart(){
-        super.onStart()
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+
+        viewModel.obtenerUsuarios { usuarios ->
+            userList = usuarios ?: emptyList()
+        }
 
         btnNavigate2.setOnClickListener {
             val action = LoginDirections.actionLoginToCrearUsuario()
@@ -80,12 +79,6 @@ class Login : Fragment() {
                 }
             }
         }
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
 }
