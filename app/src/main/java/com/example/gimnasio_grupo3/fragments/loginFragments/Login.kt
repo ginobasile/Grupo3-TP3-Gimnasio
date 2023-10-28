@@ -1,8 +1,6 @@
 package com.example.gimnasio_grupo3.fragments.loginFragments
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,7 +11,6 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.navigation.fragment.findNavController
 import com.example.gimnasio_grupo3.R
-import com.example.gimnasio_grupo3.activities.LoginActivity
 import com.example.gimnasio_grupo3.activities.MainActivity
 import com.example.gimnasio_grupo3.entities.Usuario
 import com.example.gimnasio_grupo3.sessions.MyPreferences
@@ -21,17 +18,15 @@ import com.google.android.material.snackbar.Snackbar
 
 class Login : Fragment() {
     lateinit var btnNavigate : Button
+    lateinit var btnNavigate2 : Button
     lateinit var inputUserEmail : EditText
     lateinit var inputUserPass : EditText
     lateinit var v : View
-    private val PREF_NAME = "myPreferences"
 
     var userList: List<Usuario>  = listOf(
 
         Usuario(1, "Admin", "Admin", "admin@admin.com", "admin", 170, 70, 25, "123456", true, 1234, 0),
         Usuario(2, "Juan", "Ramirez", "jose@jose.com", "123", 170, 70, 25, "123456", false, 1234, 15),
-
-
 
     )
     companion object {
@@ -47,6 +42,7 @@ class Login : Fragment() {
         v = inflater.inflate(R.layout.fragment_login, container, false)
 
         btnNavigate = v.findViewById(R.id.btnNavigate)
+        btnNavigate2 = v.findViewById(R.id.btnNavigate2)
         inputUserEmail = v.findViewById(R.id.inputMail)
         inputUserPass = v.findViewById(R.id.inputPass)
         return v
@@ -55,6 +51,10 @@ class Login : Fragment() {
     override fun onStart(){
         super.onStart()
 
+        btnNavigate2.setOnClickListener {
+            val action = LoginDirections.actionLoginToCrearUsuario()
+            findNavController().navigate(action)
+        }
 
         btnNavigate.setOnClickListener {
             val inputUser = inputUserEmail.text.toString()
@@ -68,7 +68,6 @@ class Login : Fragment() {
                 val user = userList.find { it.mail == inputUser }
                 if (user != null) {
                     if (user.password == inputPass) {
-                        //Gino Agrego nuevo
                         val myPreferences = MyPreferences(requireContext())
                         myPreferences.setUser(user)
                         val intent = Intent(activity?.applicationContext, MainActivity::class.java)

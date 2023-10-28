@@ -13,6 +13,14 @@
         <action
             android:id="@+id/action_login_to_main_navgraph"
             app:destination="@id/main_navgraph" />
+        <action
+            android:id="@+id/action_login_to_crearUsuario"
+            app:destination="@id/crearUsuario" />
     </fragment>
     <include app:graph="@navigation/main_navgraph" />
+    <fragment
+        android:id="@+id/crearUsuario"
+        android:name="com.example.gimnasio_grupo3.fragments.loginFragments.CrearUsuario"
+        android:label="fragment_crear_usuario"
+        tools:layout="@layout/fragment_crear_usuario" />
 </navigation>

@@ -265,25 +265,13 @@
                 android:textAlignment="viewStart"
                 android:textSize="24sp" />
 
-            <TextView
-                android:id="@+id/txtDetallesAdmin"
+            <Switch
+                android:id="@+id/switch2"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginBottom="10dp"
-                android:gravity="center"
+                android:buttonTint="#673AB7"
+                android:checked="false"
                 android:text="Administrador:"
-                android:textAlignment="viewStart"
-                android:textSize="24sp" />
-
-            <EditText
-                android:id="@+id/editDetallesAdmin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="25dp"
-                android:ems="10"
-                android:gravity="center"
-                android:hint="cambiar por boton"
-                android:inputType="text"
                 android:textAlignment="viewStart"
                 android:textSize="24sp" />
 

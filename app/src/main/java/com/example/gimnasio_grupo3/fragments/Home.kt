@@ -9,6 +9,9 @@ import android.view.View
 import android.content.SharedPreferences
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.gimnasio_grupo3.R
 import com.example.gimnasio_grupo3.sessions.MyPreferences
@@ -18,9 +21,12 @@ class Home : Fragment() {
     lateinit var v : View
     lateinit var btnProfesores : Button
     lateinit var btnUsuarios : Button
-    private var imagesList = mutableListOf<Int>()
 
-
+    lateinit var txtNombreCompleto : TextView
+    lateinit var txtEmail : TextView
+    lateinit var txtDni : TextView
+    lateinit var txtContacto : TextView
+    lateinit var txtTickets : TextView
     companion object {
         fun newInstance() = Home()
     }
@@ -34,6 +40,12 @@ class Home : Fragment() {
         v = inflater.inflate(R.layout.fragment_home, container, false)
         btnProfesores = v.findViewById(R.id.btnProfesores)
         btnUsuarios = v.findViewById(R.id.btnUsuarios)
+
+        txtNombreCompleto = v.findViewById(R.id.txtNombreApellido)
+        txtEmail = v.findViewById(R.id.txtEmail)
+        txtDni = v.findViewById(R.id.txtEmail2)
+        txtContacto = v.findViewById(R.id.txtContacto)
+        txtTickets = v.findViewById(R.id.txtEmail3)
 
         return v
     }
@@ -49,10 +61,16 @@ class Home : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        //SIEMPRE QUE DE UNA VISTA QUERAMOS ACCEDER AL USUARIO QUE INICIO SESION, USAR LINEA 53 Y 54
         val myPreferences = MyPreferences(requireContext())
         val user = myPreferences.getUser()
-        Snackbar.make(v, user.toString() ?: "Mensaje predeterminado si no hay valor", Snackbar.LENGTH_SHORT).show()
+
+        if (user != null) {
+            setNombreCompleto(user.nombre, user.apellido)
+            setContacto(user.contacto)
+            setDni(user.dni.toString())
+            setMail(user.mail)
+            setTickets(user.ticketsRestantes.toString())
+        }
 
         btnProfesores.setOnClickListener() {
             val action = HomeDirections.actionHomePrincipalToProfesoresLista()
@@ -63,16 +81,34 @@ class Home : Fragment() {
             val action = HomeDirections.actionHomePrincipalToUsuariosLista()
             findNavController().navigate(action)
         }
+
+        val cardView = v.findViewById<CardView>(R.id.detallesUsuario)
+        cardView.setOnClickListener {
+            if (user != null) {
+                val action = HomeDirections.actionHomePrincipalToDetalleUsuario(user)
+                findNavController().navigate(action)
+            }
+        }
     }
     // [Tomas] Agregado para probar Profesores - END
 
-    private fun addToList(image: Int){
-        imagesList.add(image)
+    fun setNombreCompleto(nombre: String, apellido: String){
+        txtNombreCompleto.text = "${apellido}, ${nombre}"
     }
 
-    private fun postToList(){
-        for(i in 1..5){
-            addToList(R.mipmap.ic_launcher_round)
-        }
+    fun setMail(mail: String){
+        txtEmail.text = "Mail: ${mail}"
+    }
+
+    fun setContacto(contacto: String){
+        txtContacto.text = "Contacto: ${contacto}"
+    }
+
+    fun setDni(dni: String){
+        txtDni.text =  "DNI: ${dni}"
+    }
+
+    fun setTickets(tickets: String){
+        txtTickets.text = "Tickets: ${tickets}"
     }
 }
