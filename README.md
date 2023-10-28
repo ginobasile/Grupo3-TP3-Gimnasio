@@ -1,6 +1,8 @@
 # Grupo3-TP3-Gimnasio
 Proyecto de TP3, grupo 3
 
+## ENDPOINT USERS: https://645ae28c95624ceb210d09ed.mockapi.io/Usuarios
+
 Tareas que faltan:  
 - TERMINADO - Login (A medias) - Juampi
 - TERMINADO - Registro para usuarios nuevos - Juampi
