@@ -1,6 +1,7 @@
 package com.example.gimnasio_grupo3.fragments
 
 import android.content.Context
+import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -14,6 +15,8 @@ import androidx.cardview.widget.CardView
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.gimnasio_grupo3.R
+import com.example.gimnasio_grupo3.activities.LoginActivity
+import com.example.gimnasio_grupo3.activities.MainActivity
 import com.example.gimnasio_grupo3.sessions.MyPreferences
 import com.google.android.material.snackbar.Snackbar
 
@@ -21,6 +24,7 @@ class Home : Fragment() {
     lateinit var v : View
     lateinit var btnProfesores : Button
     lateinit var btnUsuarios : Button
+    lateinit var btnLogOut : Button
 
     lateinit var txtNombreCompleto : TextView
     lateinit var txtEmail : TextView
@@ -40,12 +44,20 @@ class Home : Fragment() {
         v = inflater.inflate(R.layout.fragment_home, container, false)
         btnProfesores = v.findViewById(R.id.btnProfesores)
         btnUsuarios = v.findViewById(R.id.btnUsuarios)
+        btnLogOut = v.findViewById(R.id.btnLogOut)
 
         txtNombreCompleto = v.findViewById(R.id.txtNombreApellido)
         txtEmail = v.findViewById(R.id.txtEmail)
         txtDni = v.findViewById(R.id.txtEmail2)
         txtContacto = v.findViewById(R.id.txtContacto)
         txtTickets = v.findViewById(R.id.txtEmail3)
+
+        btnLogOut.setOnClickListener {
+            val myPreferences = MyPreferences(requireContext())
+            myPreferences.deleteUser()
+            val intent = Intent(activity?.applicationContext, LoginActivity::class.java)
+            startActivity(intent)
+        }
 
         return v
     }
@@ -56,8 +68,6 @@ class Home : Fragment() {
         // TODO: Use the ViewModel
     }
 
-
-    // [Tomas] Agregado para testear Profesores - START
     override fun onStart() {
         super.onStart()
 
@@ -72,9 +82,15 @@ class Home : Fragment() {
             setTickets(user.ticketsRestantes.toString())
         }
 
-        btnProfesores.setOnClickListener() {
+        btnProfesores.setOnClickListener {
             val action = HomeDirections.actionHomePrincipalToProfesoresLista()
             findNavController().navigate(action)
+        }
+
+        btnLogOut.setOnClickListener {
+            myPreferences.deleteUser()
+            val intent = Intent(activity?.applicationContext, LoginActivity::class.java)
+            startActivity(intent)
         }
 
         btnUsuarios.setOnClickListener() {
@@ -90,7 +106,6 @@ class Home : Fragment() {
             }
         }
     }
-    // [Tomas] Agregado para probar Profesores - END
 
     fun setNombreCompleto(nombre: String, apellido: String){
         txtNombreCompleto.text = "${apellido}, ${nombre}"
