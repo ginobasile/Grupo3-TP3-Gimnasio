@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -107,10 +108,26 @@ class PaquetesLista : Fragment() {
         val actualizarTickets = misTickets.toInt() + paquete.cantTickets
 
         user?.let { usuario ->
-            usuario.ticketsRestantes = actualizarTickets
+            val usuarioActualizado = Usuario(
+                usuario.id,
+                usuario.nombre,
+                usuario.apellido,
+                usuario.mail,
+                usuario.password,
+                usuario.altura,
+                usuario.peso,
+                usuario.edad,
+                usuario.contacto,
+                usuario.administrador,
+                usuario.dni,
+                actualizarTickets
+            )
+            viewModel.actualizarTickets(usuarioActualizado){ estado ->
+                Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
+                myPreferences.setUser(usuarioActualizado)
+            }
             txtCantTickets.text = actualizarTickets.toString()
 
-            myPreferences.setUser(usuario)
 
             Snackbar.make(requireView(), "${paquete.cantTickets} sumados con éxito", Snackbar.LENGTH_SHORT).show()
         }
