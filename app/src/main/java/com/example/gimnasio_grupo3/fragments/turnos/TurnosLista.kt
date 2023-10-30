@@ -1,5 +1,6 @@
 package com.example.gimnasio_grupo3.fragments.turnos
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -17,6 +18,7 @@ import com.example.gimnasio_grupo3.R
 import com.example.gimnasio_grupo3.adapters.TurnoAdapter
 import com.example.gimnasio_grupo3.entities.Paquete
 import com.example.gimnasio_grupo3.entities.Turno
+import com.example.gimnasio_grupo3.entities.TurnoPersona
 import com.example.gimnasio_grupo3.entities.Usuario
 import com.example.gimnasio_grupo3.sessions.MyPreferences
 import com.google.android.material.snackbar.Snackbar
@@ -79,16 +81,29 @@ class TurnosLista : Fragment() {
                             )
                         findNavController().navigate(action)
                     }else{
-                        // Si el usuario no es admin, muestra un diálogo de confirmación
-                        val dialogBuilder = AlertDialog.Builder(requireContext())
-                        dialogBuilder.setMessage("¿Desea reservar el turno en la fecha: ${turno.fecha}? Se le descontaran 1 tickets.")
-                            .setPositiveButton("Sí") { _, _ ->
-                                restarTicketsAlUsuario()
-
+                            viewModel.obtenerTurnoPersonasParaFecha(turno.id) { cantidadInscriptos ->
+                                if(cantidadInscriptos != null) {
+                                    if (cantidadInscriptos >= turno.cantPersonasLim){
+                                        Snackbar.make(requireView(), "No hay lugar en el turno seleccionado", Snackbar.LENGTH_SHORT).show()
+                                    }else{
+                                        val dialogBuilder = AlertDialog.Builder(requireContext())
+                                        dialogBuilder.setMessage("¿Desea reservar el turno en la fecha: ${turno.fecha}? Se le descontaran 1 tickets.")
+                                            .setPositiveButton("Sí") { _, _ ->
+                                                restarTicketsAlUsuario()
+                                                val nuevoTurnoPersona =
+                                                    user?.id?.let { TurnoPersona(it, turno.id) }
+                                                if (nuevoTurnoPersona != null) {
+                                                    viewModel.crearTurnoPersona(nuevoTurnoPersona) { estado ->
+                                                        Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
+                                                    }
+                                                }
+                                            }
+                                            .setNegativeButton("No") { _, _ -> }
+                                        val alertDialog = dialogBuilder.create()
+                                        alertDialog.show()
+                                    }
+                                }
                             }
-                            .setNegativeButton("No") { _, _ -> }
-                        val alertDialog = dialogBuilder.create()
-                        alertDialog.show()
                     }
                 }
                 recyclerTurnos.adapter = adapter
@@ -96,6 +111,7 @@ class TurnosLista : Fragment() {
         }
     }
 
+    @SuppressLint("SuspiciousIndentation")
     private fun restarTicketsAlUsuario() {
         val misTickets = user?.ticketsRestantes
 
