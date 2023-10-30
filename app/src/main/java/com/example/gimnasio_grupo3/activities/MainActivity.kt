@@ -20,4 +20,5 @@ class MainActivity : AppCompatActivity() {
 
         NavigationUI.setupWithNavController(bottonNavView, navHostFragment.navController)
     }
+
 }

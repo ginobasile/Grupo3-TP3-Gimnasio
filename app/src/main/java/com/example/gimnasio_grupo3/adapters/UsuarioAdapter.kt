@@ -22,25 +22,40 @@ class UsuarioAdapter(
 
         fun setNombreCompleto(nombre: String, apellido: String){
             val txtNombreApellido: TextView = view.findViewById(R.id.txtNombreApellido)
-            txtNombreApellido.text = "${nombre} ${apellido}"
+            txtNombreApellido.text = "${apellido}, ${nombre}"
         }
 
         fun setMail(mail: String){
             val txtEmail: TextView = view.findViewById(R.id.txtEmail)
-            txtEmail.text = mail
+            txtEmail.text = "Mail: ${mail}"
         }
 
         fun setContacto(contacto: String){
             val txtContacto: TextView = view.findViewById(R.id.txtContacto)
-            txtContacto.text = contacto
+            txtContacto.text = "Contacto: ${contacto}"
         }
 
-        fun isAdmin(admin: String){
+        fun isAdmin(admin: Boolean){
             val brandTxtView : TextView = view.findViewById(R.id.txtAdmin)
 
-            if (admin != "true"){
+            if (!admin){
                 brandTxtView.text = "";
             }
+        }
+
+        fun setDni(dni: String){
+            val txtDni: TextView = view.findViewById(R.id.txtEmail2)
+            txtDni.text =  "DNI: ${dni}"
+        }
+
+        fun setTickets(tickets: String){
+            val txtTickets: TextView = view.findViewById(R.id.txtEmail3)
+            txtTickets.text = "Tickets: ${tickets}"
+        }
+
+        fun setId(id: String){
+            val txtId: TextView = view.findViewById(R.id.textView6)
+            txtId.text = "ID: ${id}"
         }
 
     }
@@ -59,6 +74,10 @@ class UsuarioAdapter(
         holder.setMail(usuario.mail)
         holder.setContacto(usuario.contacto)
         holder.isAdmin(usuario.administrador)
+        holder.isAdmin(usuario.administrador)
+        holder.setDni(usuario.dni.toString())
+        holder.setTickets(usuario.ticketsRestantes.toString())
+        holder.setId(usuario.id.toString())
 
         holder.itemView.setOnClickListener {
             onItemClick(usuario)

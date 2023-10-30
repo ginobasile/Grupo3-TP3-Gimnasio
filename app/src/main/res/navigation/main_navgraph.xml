@@ -39,6 +39,9 @@
         <action
             android:id="@+id/action_homePrincipal_to_usuariosLista"
             app:destination="@id/usuariosLista" />
+        <action
+            android:id="@+id/action_homePrincipal_to_detalleUsuario"
+            app:destination="@id/detalleUsuario" />
     </fragment>
     <fragment
         android:id="@+id/actividadesLista"
@@ -134,4 +137,9 @@
             android:name="usuario"
             app:argType="com.example.gimnasio_grupo3.entities.Usuario" />
     </fragment>
+    <activity
+        android:id="@+id/loginActivity"
+        android:name="com.example.gimnasio_grupo3.activities.LoginActivity"
+        android:label="activity_login"
+        tools:layout="@layout/activity_login" />
 </navigation>

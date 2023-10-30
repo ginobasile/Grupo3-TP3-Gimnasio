@@ -1,4 +1,4 @@
-package com.example.gimnasio_grupo3.fragments.usuarios
+package com.example.gimnasio_grupo3.fragments.loginFragments
 
 import android.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
@@ -10,16 +10,14 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Switch
-import android.widget.TextView
 import androidx.navigation.findNavController
 import com.example.gimnasio_grupo3.R
+import com.example.gimnasio_grupo3.entities.Profesor
 import com.example.gimnasio_grupo3.entities.Usuario
 import com.google.android.material.snackbar.Snackbar
 
-class DetalleUsuario : Fragment() {
+class CrearUsuario : Fragment() {
     lateinit var v : View
-
-    private lateinit var txtId : TextView
     private lateinit var editDetallesNombre : EditText
     private lateinit var editDetallesApellido : EditText
     private lateinit var editDetallesMail : EditText
@@ -28,26 +26,22 @@ class DetalleUsuario : Fragment() {
     private lateinit var editDetallesPeso : EditText
     private lateinit var editDetallesEdad : EditText
     private lateinit var editDetallesContacto : EditText
-    private lateinit var editDetallesAdmin: Switch
     private lateinit var editDetallesDni : EditText
     private lateinit var editDetallesTickets : EditText
 
-    private lateinit var btnDeleteUsuario: Button
-    private lateinit var btnVolver : Button
-    private lateinit var btnModUsuario: Button
-
-
+    private lateinit var btnCreate: Button
+    private lateinit var btnBack: Button
     companion object {
-        fun newInstance() = DetalleUsuario()
+        fun newInstance() = CrearUsuario()
     }
 
-    private lateinit var viewModel: DetalleUsuarioViewModel
+    private lateinit var viewModel: CrearUsuarioViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        v = inflater.inflate(R.layout.fragment_detalle_usuario, container, false)
+        v = inflater.inflate(R.layout.fragment_crear_usuario, container, false)
 
         editDetallesNombre = v.findViewById(R.id.editDetallesNombre)
         editDetallesApellido = v.findViewById(R.id.editDetallesApellido)
@@ -57,15 +51,10 @@ class DetalleUsuario : Fragment() {
         editDetallesPeso = v.findViewById(R.id.editDetallesPeso)
         editDetallesEdad = v.findViewById(R.id.editDetallesEdad)
         editDetallesContacto = v.findViewById(R.id.editDetallesContacto)
-        editDetallesAdmin = v.findViewById(R.id.switch2)
         editDetallesDni = v.findViewById(R.id.editDetallesDni)
-        editDetallesTickets = v.findViewById(R.id.editDetallesTickets)
 
-        txtId = v.findViewById(R.id.textViewIDActividad2)
-
-        btnDeleteUsuario = v.findViewById(R.id.btnDeleteUsuario)
-        btnVolver = v.findViewById(R.id.btnVolver)
-        btnModUsuario = v.findViewById(R.id.btnModUsuario)
+        btnCreate = v.findViewById(R.id.btnCreate)
+        btnBack = v.findViewById(R.id.btnVolver)
 
         return v
     }
@@ -73,27 +62,12 @@ class DetalleUsuario : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        val usuario = DetalleUsuarioArgs.fromBundle(requireArguments()).usuario
-        txtId.text = "Id: ${usuario.id}"
-        viewModel = ViewModelProvider(this).get(DetalleUsuarioViewModel::class.java)
-
-        editDetallesNombre.setText(usuario.nombre);
-        editDetallesApellido.setText(usuario.apellido);
-        editDetallesMail.setText(usuario.mail);
-        editDetallesContraseña.setText(usuario.password);
-        editDetallesAltura.setText(usuario.altura.toString());
-        editDetallesPeso.setText(usuario.peso.toString());
-        editDetallesEdad.setText(usuario.edad.toString());
-        editDetallesContacto.setText(usuario.contacto);
-        editDetallesAdmin.isChecked = usuario.administrador
-        editDetallesDni.setText(usuario.dni.toString());
-        editDetallesTickets.setText(usuario.ticketsRestantes.toString());
-
-        btnVolver.setOnClickListener {
+        btnBack.setOnClickListener {
             v.findNavController().navigateUp()
         }
 
-        btnModUsuario.setOnClickListener {
+        btnCreate.setOnClickListener {
+
             val nuevoNombre = editDetallesNombre.text.toString()
             val nuevoApellido = editDetallesApellido.text.toString()
             val nuevoMail = editDetallesMail.text.toString()
@@ -102,9 +76,7 @@ class DetalleUsuario : Fragment() {
             val nuevoPeso = editDetallesPeso.text.toString()
             val nuevaEdad = editDetallesEdad.text.toString()
             val nuevoContacto = editDetallesContacto.text.toString()
-            val esAdministrador = editDetallesAdmin.isChecked
             val nuevoDni = editDetallesDni.text.toString()
-            val nuevosTickets = editDetallesTickets.text.toString()
 
             if (nuevoNombre.isEmpty()) {
                 editDetallesNombre.error = "El nombre es obligatorio"
@@ -186,18 +158,7 @@ class DetalleUsuario : Fragment() {
                 return@setOnClickListener
             }
 
-            if (nuevosTickets.isEmpty()) {
-                editDetallesTickets.error = "Los tickets son obligatorios"
-                return@setOnClickListener
-            }
-
-            if (nuevosTickets.toInt() < 0) {
-                editDetallesTickets.error = "Los tickets deben ser mayor a 0"
-                return@setOnClickListener
-            }
-
-            val usuarioActualizado = Usuario(
-                usuario.id,
+            val nuevoUsuario = Usuario(
                 nuevoNombre,
                 nuevoApellido,
                 nuevoMail,
@@ -206,34 +167,18 @@ class DetalleUsuario : Fragment() {
                 nuevoPeso.toInt(),
                 nuevaEdad.toInt(),
                 nuevoContacto,
-                esAdministrador,
+                false,
                 nuevoDni.toInt(),
-                nuevosTickets.toInt()
+                0
             )
 
-            confirmAction("Modificar") { confirmed ->
+            confirmAction("Crear") { confirmed ->
                 if (confirmed) {
                     // Llama a la función en el ViewModel y pasa un callback
-                    viewModel.actualizarUsuario(usuarioActualizado) { estado ->
+                    viewModel.crearUsuario(nuevoUsuario) { estado ->
                         Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
 
-                        if (estado == "Usuario actualizado exitosamente") {
-                            v.findNavController().navigateUp()
-                        }
-                    }
-                } else {
-                    Snackbar.make(v, "Acción cancelada", Snackbar.LENGTH_LONG).show()
-                }
-            }
-        }
-
-        btnDeleteUsuario.setOnClickListener {
-            confirmAction("Eliminar") { confirmed ->
-                if (confirmed) {
-                    viewModel.eliminarUsuario(usuario) { estado ->
-                        Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
-
-                        if(estado == "Usuario eliminado exitosamente"){
+                        if (estado == "Usuario creado exitosamente") {
                             v.findNavController().navigateUp()
                         }
                     }
@@ -244,10 +189,16 @@ class DetalleUsuario : Fragment() {
         }
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel = ViewModelProvider(this).get(CrearUsuarioViewModel::class.java)
+        // TODO: Use the ViewModel
+    }
+
     private fun confirmAction(action: String, callback: (Boolean) -> Unit) {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle(action)
-        builder.setMessage("¿Estás seguro de que deseas $action este Usuario?")
+        builder.setMessage("¿Estás seguro de que deseas $action esta cuenta?")
 
         builder.setPositiveButton(action) { dialog, _ ->
             callback(true) // Llama al callback con 'true' cuando el usuario confirma

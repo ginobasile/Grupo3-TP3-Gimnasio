@@ -1,7 +1,10 @@
 package com.example.gimnasio_grupo3.fragments.turnos
 
+import android.annotation.SuppressLint
+import android.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +16,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gimnasio_grupo3.R
 import com.example.gimnasio_grupo3.adapters.TurnoAdapter
+import com.example.gimnasio_grupo3.entities.Paquete
 import com.example.gimnasio_grupo3.entities.Turno
+import com.example.gimnasio_grupo3.entities.TurnoPersona
+import com.example.gimnasio_grupo3.entities.Usuario
+import com.example.gimnasio_grupo3.sessions.MyPreferences
 import com.google.android.material.snackbar.Snackbar
 
 class TurnosLista : Fragment() {
@@ -23,6 +30,8 @@ class TurnosLista : Fragment() {
     lateinit var turnosList: MutableList<Turno>
     private lateinit var btnCrearTurno: Button
     private lateinit var btnBack: Button
+    private lateinit var myPreferences: MyPreferences
+    private var user: Usuario? = null
 
     companion object {
         fun newInstance() = TurnosLista()
@@ -39,6 +48,12 @@ class TurnosLista : Fragment() {
         recyclerTurnos.layoutManager = LinearLayoutManager(requireContext())
         btnCrearTurno = v.findViewById(R.id.buttonTurnos)
         btnBack = v.findViewById(R.id.button8)
+        myPreferences = MyPreferences(requireContext())
+        user = myPreferences.getUser()
+
+        if (myPreferences.isAdmin() != true) {
+            btnCrearTurno.visibility = View.GONE
+        }
 
         btnCrearTurno.setOnClickListener {
             val action = TurnosListaDirections.actionTurnosListaToCrearTurno()
@@ -59,15 +74,79 @@ class TurnosLista : Fragment() {
         viewModel.obtenerTurnos { turnosList ->
             if (turnosList != null) {
                 adapter = TurnoAdapter(turnosList.toMutableList()) { turno ->
-                    val action =
-                        TurnosListaDirections.actionTurnosListaToDetalleTurno(
-                            turno
-                        )
-                    findNavController().navigate(action)
+                    if(myPreferences.isAdmin()) {
+                        val action =
+                            TurnosListaDirections.actionTurnosListaToDetalleTurno(
+                                turno
+                            )
+                        findNavController().navigate(action)
+                    }else{
+                            viewModel.obtenerTurnoPersonasParaFecha(turno.id) { cantidadInscriptos ->
+                                if(cantidadInscriptos != null) {
+                                    if (cantidadInscriptos >= turno.cantPersonasLim){
+                                        Snackbar.make(requireView(), "No hay lugar en el turno seleccionado", Snackbar.LENGTH_SHORT).show()
+                                    }else{
+                                        val dialogBuilder = AlertDialog.Builder(requireContext())
+                                        dialogBuilder.setMessage("¿Desea reservar el turno en la fecha: ${turno.fecha}? Se le descontaran 1 tickets.")
+                                            .setPositiveButton("Sí") { _, _ ->
+                                                restarTicketsAlUsuario()
+                                                val nuevoTurnoPersona =
+                                                    user?.id?.let { TurnoPersona(it, turno.id) }
+                                                if (nuevoTurnoPersona != null) {
+                                                    viewModel.crearTurnoPersona(nuevoTurnoPersona) { estado ->
+                                                        Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
+                                                    }
+                                                }
+                                            }
+                                            .setNegativeButton("No") { _, _ -> }
+                                        val alertDialog = dialogBuilder.create()
+                                        alertDialog.show()
+                                    }
+                                }
+                            }
+                    }
                 }
                 recyclerTurnos.adapter = adapter
             }
         }
+    }
+
+    @SuppressLint("SuspiciousIndentation")
+    private fun restarTicketsAlUsuario() {
+        val misTickets = user?.ticketsRestantes
+
+            if(misTickets!=null && misTickets >= 0) {
+                val actualizarTickets = misTickets - 1
+
+                user?.let { usuario ->
+                    val usuarioActualizado = Usuario(
+                        usuario.id,
+                        usuario.nombre,
+                        usuario.apellido,
+                        usuario.mail,
+                        usuario.password,
+                        usuario.altura,
+                        usuario.peso,
+                        usuario.edad,
+                        usuario.contacto,
+                        usuario.administrador,
+                        usuario.dni,
+                        actualizarTickets
+                    )
+                    viewModel.actualizarTickets(usuarioActualizado){ estado ->
+                        Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
+                        myPreferences.setUser(usuarioActualizado)
+                    }
+
+                    Snackbar.make(requireView(), "turno reservado con éxito", Snackbar.LENGTH_SHORT).show()
+                }
+
+        }else{
+                Snackbar.make(requireView(), "No posees los tickets suficientes", Snackbar.LENGTH_SHORT).show()
+            }
+
+
+
     }
 
 }

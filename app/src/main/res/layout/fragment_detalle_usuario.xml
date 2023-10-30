@@ -8,6 +8,19 @@
     tools:context=".fragments.actividades.DetalleActividad">
 
     <TextView
+        android:id="@+id/textViewIDActividad2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="ID: 1"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDetalleActividad" />
+
+    <TextView
         android:id="@+id/textViewDetalleActividad"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -31,6 +44,17 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnDeleteUsuario"
+        app:layout_constraintStart_toEndOf="@+id/btnVolver" />
+
+    <Button
+        android:id="@+id/btnVolver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Volver"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnModUsuario"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -45,18 +69,20 @@
         app:layout_constraintStart_toEndOf="@+id/btnModUsuario" />
 
     <ScrollView
+        android:id="@+id/scrollView3"
         android:layout_width="0dp"
-        android:layout_height="500dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="25dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="8dp"
         android:foregroundGravity="center"
         android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btnModUsuario"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDetalleActividad"
-        app:layout_constraintVertical_bias="0.159">
+        app:layout_constraintTop_toBottomOf="@+id/textViewIDActividad2">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -66,11 +92,12 @@
             <TextView
                 android:id="@+id/txtDetallesNombre"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginBottom="10dp"
                 android:gravity="center"
-                android:text="Nombre Completo"
-                android:textSize="17sp" />
+                android:text="Nombre:"
+                android:textAlignment="viewStart"
+                android:textSize="24sp" />
 
             <EditText
                 android:id="@+id/editDetallesNombre"
@@ -79,17 +106,42 @@
                 android:layout_marginBottom="25dp"
                 android:ems="10"
                 android:gravity="center"
+                android:hint="nombre"
                 android:inputType="text"
-                android:text="Name" />
+                android:textAlignment="viewStart"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/txtDetallesApellido"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="Apellido:"
+                android:textAlignment="viewStart"
+                android:textSize="24sp" />
+
+            <EditText
+                android:id="@+id/editDetallesApellido"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="25dp"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="apellido"
+                android:inputType="text"
+                android:textAlignment="viewStart"
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/txtDetallesMail"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginBottom="10dp"
                 android:gravity="center"
-                android:text="Mail"
-                android:textSize="17sp" />
+                android:text="Mail:"
+                android:textAlignment="viewStart"
+                android:textSize="24sp" />
 
             <EditText
                 android:id="@+id/editDetallesMail"
@@ -98,17 +150,42 @@
                 android:layout_marginBottom="25dp"
                 android:ems="10"
                 android:gravity="center"
+                android:hint="mail@example.com"
+                android:inputType="text|textEmailAddress"
+                android:textAlignment="viewStart"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/txtDetallesContraseña"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="Contraseña:"
+                android:textAlignment="viewStart"
+                android:textSize="24sp" />
+
+            <EditText
+                android:id="@+id/editDetallesContraseña"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="25dp"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="contraseña"
                 android:inputType="text"
-                android:text="Name" />
+                android:textAlignment="viewStart"
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/txtDetallesAltura"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginBottom="10dp"
                 android:gravity="center"
-                android:text="Altura"
-                android:textSize="17sp" />
+                android:text="Altura:"
+                android:textAlignment="viewStart"
+                android:textSize="24sp" />
 
             <EditText
                 android:id="@+id/editDetallesAltura"
@@ -117,36 +194,42 @@
                 android:layout_marginBottom="25dp"
                 android:ems="10"
                 android:gravity="center"
+                android:hint="180 cm"
                 android:inputType="number"
-                android:text="Name" />
+                android:textAlignment="viewStart"
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/txtDetallesPeso"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginBottom="10dp"
                 android:gravity="center"
-                android:text="Peso"
-                android:textSize="17sp" />
+                android:text="Peso:"
+                android:textAlignment="viewStart"
+                android:textSize="24sp" />
 
             <EditText
-                android:id="@+id/editDetallesPese"
+                android:id="@+id/editDetallesPeso"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25dp"
                 android:ems="10"
                 android:gravity="center"
-                android:inputType="text"
-                android:text="Name" />
+                android:hint="100 kg"
+                android:inputType="number"
+                android:textAlignment="viewStart"
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/txtDetallesEdad"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginBottom="10dp"
                 android:gravity="center"
-                android:text="Edad"
-                android:textSize="17sp" />
+                android:text="Edad:"
+                android:textAlignment="viewStart"
+                android:textSize="24sp" />
 
             <EditText
                 android:id="@+id/editDetallesEdad"
@@ -155,27 +238,87 @@
                 android:layout_marginBottom="25dp"
                 android:ems="10"
                 android:gravity="center"
-                android:inputType="text"
-                android:text="Name" />
+                android:hint="25"
+                android:inputType="number"
+                android:textAlignment="viewStart"
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/txtDetallesContacto"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginBottom="10dp"
                 android:gravity="center"
-                android:text="Contacto"
-                android:textSize="17sp" />
+                android:text="Contacto:"
+                android:textAlignment="viewStart"
+                android:textSize="24sp" />
 
             <EditText
-                android:id="@+id/editDetallesContato"
+                android:id="@+id/editDetallesContacto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25dp"
                 android:ems="10"
                 android:gravity="center"
-                android:inputType="text"
-                android:text="Name" />
+                android:hint="1122334455"
+                android:inputType="phone"
+                android:textAlignment="viewStart"
+                android:textSize="24sp" />
+
+            <Switch
+                android:id="@+id/switch2"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:buttonTint="#673AB7"
+                android:checked="false"
+                android:text="Administrador:"
+                android:textAlignment="viewStart"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/txtDetallesDni"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="Dni:"
+                android:textAlignment="viewStart"
+                android:textSize="24sp" />
+
+            <EditText
+                android:id="@+id/editDetallesDni"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="25dp"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="11222333"
+                android:inputType="number"
+                android:textAlignment="viewStart"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/txtDetallesTickets"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="Tickets:"
+                android:textAlignment="viewStart"
+                android:textSize="24sp" />
+
+            <EditText
+                android:id="@+id/editDetallesTickets"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="25dp"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="120"
+                android:inputType="number"
+                android:textAlignment="viewStart"
+                android:textSize="24sp" />
+
 
         </LinearLayout>
     </ScrollView>
