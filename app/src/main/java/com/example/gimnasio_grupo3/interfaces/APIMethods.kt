@@ -4,6 +4,7 @@ import com.example.gimnasio_grupo3.entities.Actividad
 import com.example.gimnasio_grupo3.entities.Paquete
 import com.example.gimnasio_grupo3.entities.Profesor
 import com.example.gimnasio_grupo3.entities.Turno
+import com.example.gimnasio_grupo3.entities.TurnoPersona
 import com.example.gimnasio_grupo3.entities.Usuario
 import retrofit2.Call
 import retrofit2.http.Body
@@ -94,9 +95,18 @@ interface APIMethods {
     // Update
     @PUT("Usuarios/{id}")
     fun updateUsuario(@Path("id") id: String, @Body usuario: Usuario): Call<Usuario>
-    @PUT("Usuarios/{id}/tickets")
-    fun actualizarTicketsUsuario(@Path("id") id: String, @Body cantidadTickets: Int): Call<Usuario>
+    //@PUT("Usuarios/{id}/tickets")
+    //fun actualizarTicketsUsuario(@Path("id") id: String, @Body cantidadTickets: Int): Call<Usuario>
     // Delete
     @DELETE("Usuarios/{id}")
     fun deleteUsuarios(@Path("id") id: String): Call<Void>
+
+
+    // TURNOPERSONA-TURNOPERSONA-TURNOPERSONA-TURNOPERSONA-TURNOPERSONA-TURNOPERSONA-TURNOPERSONA-TURNOPERSONA-TURNOPERSONA-TURNOPERSONA-TURNOPERSONA
+    @POST("turnoPersona")
+    fun createTurnoPersona(@Body turnoPersona: TurnoPersona): Call<TurnoPersona>
+
+    @GET("turnoPersona")
+    fun getTurnosPersonas(): Call<List<TurnoPersona>>
+
 }
