@@ -2,7 +2,7 @@
 Proyecto de TP3, grupo 3
 
 ## ENDPOINT USERS: https://645ae28c95624ceb210d09ed.mockapi.io/Usuarios
-
+## ENDPOINT TABLA TURNO PERSONA: https://65244a19ea560a22a4e9b387.mockapi.io/turnoPersona
 ## Tareas que faltan:  
 
 - Agregar Loaders mietras llame a la API - Igna
