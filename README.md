@@ -1,6 +1,6 @@
 # Grupo3-TP3-Gimnasio
 Proyecto de TP3, grupo 3
-## Ultimos cambios subidos a la rama ultimosCambios
+## Ultimos cambios subidos a la rama ultimosCambiosGino
 ## ENDPOINT USERS: https://645ae28c95624ceb210d09ed.mockapi.io/Usuarios
 ## ENDPOINT TABLA TURNO PERSONA: https://65244a19ea560a22a4e9b387.mockapi.io/turnoPersona
 ## Tareas que faltan:  
