@@ -10,11 +10,12 @@ Proyecto de TP3, grupo 3
   
 
 
-- Vista con todos los turnos (próximos y pasados) - Tomi
+- Vista con todos los turnos (próximos y pasados) - Gino
+- Agregar Diseño y colores - Gino
+  
 - Agregar imagenes (Usuarios y Actividades) - Tomi 
 
 - Diseño Home
-- Agregar Diseño y colores
 
 
 ## #####################TERMINADOS#####################################
