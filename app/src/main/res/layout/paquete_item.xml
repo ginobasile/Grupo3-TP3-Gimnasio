@@ -10,7 +10,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/mostaza">
 
         <TextView
             android:id="@+id/txtNombrePaquete"
@@ -18,9 +19,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
+            android:drawableLeft="@drawable/paquete_icon"
             android:text="nombrePaquete"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="#FFFFFF"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/linearLayout"
@@ -45,8 +48,10 @@
                 android:id="@+id/txtPrecioPaquete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/precio_icon"
                 android:text="Precio: $100"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="#FFFFFF"
                 android:textSize="20sp" />
 
             <TextView
@@ -57,6 +62,7 @@
                 android:text="Tickets: 50"
                 android:textAlignment="textEnd"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="#FFFFFF"
                 android:textSize="20sp" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

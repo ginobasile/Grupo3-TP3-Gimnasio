@@ -28,6 +28,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:menu="@menu/main_menu" />
+        app:menu="@menu/main_menu"
+        android:background="@color/mostaza"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

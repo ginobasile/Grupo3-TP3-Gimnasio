@@ -12,29 +12,34 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="105dp"
+        android:background="@color/mostaza">
 
         <TextView
             android:id="@+id/txtFecha"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:drawableLeft="@android:drawable/ic_menu_month"
             android:text="FECHA"
+            android:textColor="#FFFFFF"
             android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/txtActividadNombre"
-            app:layout_constraintEnd_toStartOf="@+id/guideline" />
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/txtActividadNombre"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="221dp"
+            android:layout_height="29dp"
+            android:drawableLeft="@drawable/actividad_item"
             android:text="NOMBRE ACTIVIDAD"
             android:textAlignment="center"
+            android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:textStyle="italic"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtFecha" />
 
         <androidx.constraintlayout.widget.Guideline

@@ -38,7 +38,8 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:background="@color/mostaza">
 
                         <TextView
                             android:id="@+id/txtNombreApellido"
@@ -58,11 +59,13 @@
 
                         <TextView
                             android:id="@+id/txtEmail"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="120dp"
+                            android:layout_height="55dp"
                             android:layout_marginBottom="8dp"
+                            android:drawableLeft="@android:drawable/ic_dialog_email"
                             android:gravity="center"
                             android:text="Email"
+                            android:textColor="#FAF8F8"
                             android:textSize="16sp"
                             app:layout_constraintBottom_toTopOf="@+id/txtContacto"
                             app:layout_constraintEnd_toStartOf="@+id/txtEmail2"
@@ -71,24 +74,29 @@
 
                         <TextView
                             android:id="@+id/txtEmail2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="120dp"
+                            android:layout_height="50dp"
                             android:layout_marginBottom="8dp"
+                            android:drawableLeft="@android:drawable/star_big_on"
                             android:gravity="center"
                             android:text="Dni"
+                            android:textColor="#F4F1F1"
                             android:textSize="16sp"
                             app:layout_constraintBottom_toTopOf="@+id/txtEmail3"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/txtEmail"
-                            app:layout_constraintTop_toBottomOf="@+id/txtNombreApellido" />
+                            app:layout_constraintTop_toBottomOf="@+id/txtNombreApellido"
+                            app:layout_constraintVertical_bias="1.0" />
 
                         <TextView
                             android:id="@+id/txtEmail3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="120dp"
+                            android:layout_height="50dp"
                             android:layout_marginBottom="16dp"
+                            android:drawableLeft="@drawable/tickets_icon"
                             android:gravity="center"
                             android:text="Tickets"
+                            android:textColor="#FDFDFD"
                             android:textSize="16sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -96,11 +104,13 @@
 
                         <TextView
                             android:id="@+id/txtContacto"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="120dp"
+                            android:layout_height="50dp"
                             android:layout_marginBottom="16dp"
+                            android:drawableLeft="@android:drawable/stat_sys_speakerphone"
                             android:gravity="center"
                             android:text="Contacto"
+                            android:textColor="#FDFDFD"
                             android:textSize="16sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/txtEmail3"
@@ -122,10 +132,12 @@
 
                 <Button
                     android:id="@+id/btnLogOut"
-                    android:layout_width="wrap_content"
+                    android:layout_width="368dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
+                    android:background="@drawable/button_rounded_red"
+                    android:drawableLeft="@android:drawable/ic_menu_revert"
                     android:text="CERRAR SESIÓN"
                     android:textAlignment="center"
                     android:textSize="20sp"
@@ -141,11 +153,13 @@
 
                     <Button
                         android:id="@+id/btnProfesores"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="180dp"
+                        android:layout_height="51dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
-                        android:text="Ver Profesores"
+                        android:background="@drawable/button_rounded_mostz"
+                        android:drawableLeft="@drawable/profesor_icon"
+                        android:text="Profesores"
                         android:textAlignment="center"
                         android:textSize="20sp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -155,16 +169,19 @@
 
                     <Button
                         android:id="@+id/btnUsuarios"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="180dp"
+                        android:layout_height="51dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
-                        android:text="Ver Usuarios"
+                        android:background="@drawable/button_rounded_mostz"
+                        android:drawableLeft="@android:drawable/ic_menu_myplaces"
+                        android:text="Usuarios"
                         android:textSize="20sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/btnProfesores"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </LinearLayout>

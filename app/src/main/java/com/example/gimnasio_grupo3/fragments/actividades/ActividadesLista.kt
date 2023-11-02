@@ -14,6 +14,8 @@ import com.example.gimnasio_grupo3.R
 import com.example.gimnasio_grupo3.adapters.ActividadAdapter
 import com.example.gimnasio_grupo3.entities.Actividad
 import androidx.navigation.findNavController
+import com.example.gimnasio_grupo3.entities.Usuario
+import com.example.gimnasio_grupo3.sessions.MyPreferences
 
 class ActividadesLista : Fragment() {
 
@@ -23,6 +25,8 @@ class ActividadesLista : Fragment() {
     lateinit var actividadesList: MutableList<Actividad>
     private lateinit var btnCrearActividad: Button
     private lateinit var btnBack: Button
+    private lateinit var myPreferences: MyPreferences
+    private var user: Usuario? = null
     companion object {
         fun newInstance() = ActividadesLista()
     }
@@ -38,11 +42,17 @@ class ActividadesLista : Fragment() {
         recyclerActividades.layoutManager = LinearLayoutManager(requireContext())
         btnCrearActividad = v.findViewById(R.id.buttonActividades)
         btnBack = v.findViewById(R.id.button7)
+        myPreferences = MyPreferences(requireContext())
+        user = myPreferences.getUser()
 
         btnCrearActividad.setOnClickListener {
             val action = ActividadesListaDirections.actionActividadesListaToCrearActividad()
 
             findNavController().navigate(action)
+        }
+
+        if (myPreferences.isAdmin() != true) {
+            btnCrearActividad.visibility = View.GONE
         }
 
         btnBack.setOnClickListener {
@@ -59,11 +69,13 @@ class ActividadesLista : Fragment() {
         viewModel.obtenerActividades { actividadesList ->
             if (actividadesList != null) {
                 adapter = ActividadAdapter(actividadesList.toMutableList()) { actividad ->
-                    val action =
-                        ActividadesListaDirections.actionActividadesListaToDetalleActividad(
-                            actividad
-                        )
-                    findNavController().navigate(action)
+                    if(myPreferences.isAdmin()) {
+                        val action =
+                            ActividadesListaDirections.actionActividadesListaToDetalleActividad(
+                                actividad
+                            )
+                        findNavController().navigate(action)
+                    }
                 }
                 recyclerActividades.adapter = adapter
             }

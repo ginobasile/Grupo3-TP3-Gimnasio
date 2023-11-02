@@ -5,6 +5,7 @@
     android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondo_iniciar"
     tools:context=".fragments.actividades.DetalleActividad">
 
     <EditText
@@ -25,6 +26,7 @@
         android:layout_width="283dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:drawableLeft="@android:drawable/ic_menu_recent_history"
         android:text="Duracion:"
         android:textAlignment="center"
         android:textSize="24sp"
@@ -39,6 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:drawableLeft="@android:drawable/ic_search_category_default"
         android:gravity="center"
         android:paddingTop="32dp"
         android:paddingBottom="16dp"
@@ -68,6 +71,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:drawableLeft="@drawable/actividad_item"
         android:text="Nombre:"
         android:textAlignment="textStart"
         android:textSize="24sp"
@@ -83,6 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="32dp"
+        android:drawableLeft="@drawable/name_icon"
         android:text="ID: 1"
         android:textAlignment="center"
         android:textSize="24sp"
@@ -95,31 +100,37 @@
 
     <Button
         android:id="@+id/ActModi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="110dp"
+        android:layout_height="56dp"
         android:layout_marginBottom="8dp"
+        android:background="@drawable/button_rounded"
+        android:drawableLeft="@android:drawable/ic_popup_sync"
         android:text="Modificar"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/ActDelete"
         app:layout_constraintStart_toEndOf="@+id/ActVolver" />
 
     <Button
         android:id="@+id/ActDelete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="110dp"
+        android:layout_height="56dp"
         android:layout_marginBottom="8dp"
+        android:background="@drawable/button_rounded_red"
+        android:drawableLeft="@android:drawable/ic_menu_delete"
         android:text="Eliminar"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ActModi" />
 
     <Button
         android:id="@+id/ActVolver"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="110dp"
+        android:layout_height="56dp"
         android:layout_marginBottom="8dp"
+        android:background="@drawable/button_rounded_red"
+        android:drawableLeft="?attr/actionModeCloseDrawable"
         android:text="Volver"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"

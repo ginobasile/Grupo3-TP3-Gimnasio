@@ -5,61 +5,78 @@
     android:id="@+id/frameLayout5"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.loginFragments.Login">
+    tools:context=".fragments.loginFragments.Login"
+    android:background="@drawable/fondo_iniciar">
 
     <TextView
         android:id="@+id/textViewDetalleActividad2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="10dp"
         android:gravity="center"
         android:paddingTop="32dp"
         android:paddingBottom="16dp"
         android:text="GIMNASIO APP"
         android:textSize="34sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/inputMail"
-        android:layout_width="295dp"
+        android:layout_width="match_parent"
         android:layout_height="75dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:drawableLeft="@android:drawable/ic_dialog_email"
         android:ems="10"
-        android:hint="User"
+        android:hint="  Ingrese su email"
         android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/inputPass"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDetalleActividad2" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
         android:id="@+id/inputPass"
-        android:layout_width="296dp"
+        android:layout_width="match_parent"
         android:layout_height="68dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:drawableLeft="@android:drawable/ic_lock_lock"
         android:ems="10"
-        android:hint="Password"
-        android:inputType="text"
+        android:hint="Ingrese su password"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/btnNavigate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputMail" />
 
     <Button
         android:id="@+id/btnNavigate"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/button_rounded"
         android:text="Ingresar"
+        android:textColor="#FFFEFE"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+
         app:layout_constraintTop_toBottomOf="@+id/inputPass" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
@@ -70,10 +87,12 @@
 
         <Button
             android:id="@+id/btnNavigate2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="108dp"
+            android:layout_height="50dp"
             android:layout_marginEnd="32dp"
+            android:background="@drawable/button_rounded_red"
             android:text="Registrate"
+            android:textColor="#F1EDED"
             android:textSize="16sp"
             android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="parent"
@@ -87,11 +106,92 @@
             android:gravity="center"
             android:text="¿No tienes una cuenta?"
             android:textAlignment="center"
+            android:textColor="#0C0C0C"
             android:textSize="20sp"
             android:textStyle="italic"
             app:layout_constraintEnd_toStartOf="@+id/btnNavigate2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="15dp"
+        android:src="@drawable/logo_login"
+        app:layout_constraintBottom_toTopOf="@+id/inputMail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDetalleActividad2" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="409dp"
+        android:layout_height="143dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+        <ImageButton
+            android:id="@+id/imageButton9"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:contentDescription="Botón de git"
+            android:scaleType="centerCrop"
+            android:src="@drawable/logo_git"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.79"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.746" />
+
+        <ImageButton
+            android:id="@+id/imageButton8"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:contentDescription="Botón de facebook"
+            android:scaleType="centerCrop"
+            android:src="@drawable/face"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.465"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.746" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:text="Seguinos en nuestras redes!"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/imageButton7"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:contentDescription="Botón de instagram"
+            android:scaleType="centerCrop"
+            android:src="@drawable/insta"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.139"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.746" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
