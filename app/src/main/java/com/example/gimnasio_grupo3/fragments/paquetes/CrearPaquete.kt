@@ -71,7 +71,7 @@ class CrearPaquete : Fragment() {
             val precio = precioText.toInt()
             val tickets = ticketsText.toInt()
 
-            val nuevoPaquete = Paquete(nombre, precio, tickets)
+            val nuevoPaquete = Paquete(nombre, tickets, precio)
 
             confirmAction("Crear") { confirmed ->
                 if (confirmed) {
