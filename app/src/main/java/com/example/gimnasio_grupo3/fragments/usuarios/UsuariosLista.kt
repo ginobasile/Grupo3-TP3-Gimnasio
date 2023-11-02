@@ -7,20 +7,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.gimnasio_grupo3.R
 import com.example.gimnasio_grupo3.adapters.UsuarioAdapter
 
 class UsuariosLista : Fragment() {
 
+    private lateinit var btnVolver : Button
+
     lateinit var v : View
     lateinit var recyclerUsuarios: RecyclerView
     lateinit var adapter: UsuarioAdapter
-
-    private lateinit var btnVolver : Button
+    lateinit var swipe: SwipeRefreshLayout
 
     companion object {
         fun newInstance() = UsuariosLista()
@@ -36,8 +39,11 @@ class UsuariosLista : Fragment() {
 
         recyclerUsuarios = v.findViewById(R.id.reciclerUsuarios)
         recyclerUsuarios.layoutManager = LinearLayoutManager(requireContext())
+        swipe = v.findViewById(R.id.swipeUpdateUsuarios)
 
         btnVolver = v.findViewById(R.id.button5)
+
+        configSwipe()
 
         btnVolver.setOnClickListener {
             v.findNavController().navigateUp()
@@ -46,11 +52,21 @@ class UsuariosLista : Fragment() {
         return v
     }
 
+    private fun configSwipe() {
+
+        swipe.setOnRefreshListener {
+            swipe.isRefreshing = false
+            viewModel.recargarUsuarios()
+        }
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(UsuariosListaViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity()).get(UsuariosListaViewModel::class.java)
 
-        viewModel.obtenerUsuarios { usuariosList ->
+
+
+        viewModel.usuariosCargados.observe(viewLifecycleOwner, Observer{ usuariosList ->
             if (usuariosList != null) {
 
                 adapter = UsuarioAdapter(usuariosList.toMutableList()) { usuario ->
@@ -63,6 +79,9 @@ class UsuariosLista : Fragment() {
             } else {
                 // Maneja los errores aquí si no se pudieron obtener los paquetes
             }
-        }
+        })
+
+        viewModel.cargarUsuarios()
+
     }
 }

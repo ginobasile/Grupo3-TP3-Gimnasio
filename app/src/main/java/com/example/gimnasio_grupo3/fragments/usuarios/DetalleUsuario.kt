@@ -42,7 +42,7 @@ class DetalleUsuario : Fragment() {
     }
 
     private lateinit var viewModel: DetalleUsuarioViewModel
-
+    private lateinit var viewModelLista : UsuariosListaViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -75,7 +75,10 @@ class DetalleUsuario : Fragment() {
 
         val usuario = DetalleUsuarioArgs.fromBundle(requireArguments()).usuario
         txtId.text = "Id: ${usuario.id}"
+
         viewModel = ViewModelProvider(this).get(DetalleUsuarioViewModel::class.java)
+
+        viewModelLista = ViewModelProvider(requireActivity()).get(UsuariosListaViewModel::class.java)
 
         editDetallesNombre.setText(usuario.nombre);
         editDetallesApellido.setText(usuario.apellido);
@@ -218,6 +221,7 @@ class DetalleUsuario : Fragment() {
                         Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
 
                         if (estado == "Usuario actualizado exitosamente") {
+                            viewModelLista.recargarUsuarios()
                             v.findNavController().navigateUp()
                         }
                     }
@@ -232,8 +236,8 @@ class DetalleUsuario : Fragment() {
                 if (confirmed) {
                     viewModel.eliminarUsuario(usuario) { estado ->
                         Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
-
                         if(estado == "Usuario eliminado exitosamente"){
+                            viewModelLista.recargarUsuarios()
                             v.findNavController().navigateUp()
                         }
                     }
