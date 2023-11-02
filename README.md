@@ -12,3 +12,4 @@ Proyecto de TP3, grupo 3
 - ordenar turnos x fecha y si es turno pasado no mostrar (el admin puede ver todo)
 - imagenes en actividades y usuarios - TOMI
 - ver tus datos actualizados
+- que guarde el estado de las listas (implementado en usuario)
