@@ -18,17 +18,14 @@
             android:id="@+id/txtFecha"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="29dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="316dp"
-            android:layout_marginBottom="13dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:drawableLeft="@android:drawable/ic_menu_month"
             android:text="FECHA"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtCantPersonas" />
 
@@ -36,9 +33,7 @@
             android:id="@+id/txtActividadNombre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="29dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="182dp"
             android:layout_marginBottom="8dp"
             android:drawableLeft="@drawable/actividad_item"
             android:text="NOMBRE ACTIVIDAD"
@@ -48,17 +43,14 @@
             android:textStyle="italic"
             app:layout_constraintBottom_toTopOf="@+id/txtProfesorNombre"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/txtProfesorNombre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="29dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="184dp"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:drawableLeft="@drawable/profesor_icon"
             android:text="NOMBRE PROFESOR"
@@ -67,7 +59,6 @@
             android:textStyle="italic"
             app:layout_constraintBottom_toTopOf="@+id/txtCantPersonas"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtActividadNombre" />
 
@@ -75,38 +66,16 @@
             android:id="@+id/txtCantPersonas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="29dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="248dp"
-            android:layout_marginBottom="14dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:drawableLeft="@drawable/personas_item"
             android:text="CANTPErSONAS"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/txtFecha"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtProfesorNombre" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="29dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="274dp"
-            android:layout_marginBottom="8dp"
-            android:drawableLeft="@drawable/tickets_icon"
-            android:text="ID Turno"
-            android:textColor="#FFFFFF"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/txtActividadNombre"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

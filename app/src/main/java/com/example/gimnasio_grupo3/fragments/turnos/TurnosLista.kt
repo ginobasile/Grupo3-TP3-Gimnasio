@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,6 +32,7 @@ class TurnosLista : Fragment() {
     private lateinit var btnCrearTurno: Button
     private lateinit var btnBack: Button
     private lateinit var btnMisTurnos: Button
+    private lateinit var txtCantTickets : TextView
     private lateinit var myPreferences: MyPreferences
     private var user: Usuario? = null
 
@@ -50,6 +52,7 @@ class TurnosLista : Fragment() {
         btnCrearTurno = v.findViewById(R.id.buttonTurnos)
         btnBack = v.findViewById(R.id.button8)
         btnMisTurnos = v.findViewById(R.id.misTurnosButton)
+        txtCantTickets = v.findViewById(R.id.textView6)
         myPreferences = MyPreferences(requireContext())
         user = myPreferences.getUser()
 
@@ -77,7 +80,7 @@ class TurnosLista : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(TurnosListaViewModel::class.java)
-
+        txtCantTickets.text = "Tickets : ${user?.ticketsRestantes.toString()}"
         viewModel.obtenerTurnos { turnosList ->
             if (turnosList != null) {
                 adapter = TurnoAdapter(turnosList.toMutableList()) { turno ->
