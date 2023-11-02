@@ -1,18 +1,15 @@
 # Grupo3-TP3-Gimnasio
 Proyecto de TP3, grupo 3
-## Ultimos cambios subidos a la rama ultimosCambiosGino
+## Ultimos cambios subidos a la rama disenoTerminadoGino
 ## ENDPOINT USERS: https://645ae28c95624ceb210d09ed.mockapi.io/Usuarios
 ## ENDPOINT TABLA TURNO PERSONA: https://65244a19ea560a22a4e9b387.mockapi.io/turnoPersona
 ## Tareas que faltan:  
 
 - Agregar Loaders mietras llame a la API - Igna
 - Shared Mock Api - Igna
-  
-- Agregar Diseño y colores - Gino
-  
+    
 - Agregar imagenes (Usuarios y Actividades) - Tomi 
 
-- Diseño Home - Gino
 
 
 ## #####################TERMINADOS#####################################
@@ -22,3 +19,5 @@ Proyecto de TP3, grupo 3
 - TERMINADO - Al anotarse a un turno, al tocar y aceptar, restar un ticket al usuario y comprobar que haya tickets - Gino
 - TERMINADO - Al anotarse un turno, chequear que haya lugares disponibles (tabla TurnoPersona) - Gino
 - TERMINADO - Vista con todos los turnos (Permite como socio, ver los turnos que te anotaste) - Gino
+- TERMINADO - Diseño Home - Gino
+- TERMINADO - Agregar Diseño y colores - Gino
