@@ -5,14 +5,16 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondo_iniciar"
     android:orientation="vertical"
     tools:context=".fragments.turnos.TurnosLista">
 
     <TextView
         android:id="@+id/textViewTitleTurnos"
-        android:layout_width="match_parent"
+        android:layout_width="246dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:drawableLeft="@drawable/tickets_icon"
         android:gravity="center"
         android:paddingTop="32dp"
         android:paddingBottom="16dp"
@@ -33,27 +35,45 @@
         android:gravity="center">
 
         <Button
-            android:id="@+id/button8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="Volver"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/buttonTurnos"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
             android:id="@+id/buttonTurnos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="129dp"
+            android:layout_height="55dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
+            android:background="@drawable/button_rounded"
             android:text="Crear Turno"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/button8" />
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/button8"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/button8"
+            android:layout_width="142dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/button_rounded_red"
+            android:drawableLeft="?attr/actionModeCloseDrawable"
+            android:text="Volver"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/misTurnosButton"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/misTurnosButton"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="4dp"
+            android:background="@drawable/button_rounded_mostz"
+            android:text="Mis Turnos"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

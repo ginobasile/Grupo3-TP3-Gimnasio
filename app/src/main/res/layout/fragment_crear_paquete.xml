@@ -5,13 +5,15 @@
     android:id="@+id/frameLayout3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.paquetes.CrearPaquete">
+    tools:context=".fragments.paquetes.CrearPaquete"
+    android:background="@drawable/fondo_iniciar">
 
     <TextView
         android:id="@+id/textViewTitle2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
+        android:drawableLeft="@android:drawable/ic_menu_edit"
         android:gravity="center"
         android:paddingTop="32dp"
         android:paddingBottom="16dp"
@@ -29,6 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:drawableLeft="@drawable/paquete_icon"
         android:text="Nombre:"
         android:textAlignment="textStart"
         android:textSize="24sp"
@@ -57,6 +60,7 @@
         android:layout_width="wrap_content"
         android:layout_height="37dp"
         android:layout_marginBottom="8dp"
+        android:drawableLeft="@drawable/precio_icon"
         android:text="Precio:"
         android:textAlignment="textStart"
         android:textSize="24sp"
@@ -87,6 +91,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:drawableLeft="@drawable/tickets_icon"
         android:text="Cantidad de tickets:"
         android:textAlignment="textStart"
         android:textSize="24sp"
@@ -112,9 +117,10 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="180dp"
+        android:layout_height="56dp"
         android:layout_marginBottom="8dp"
+        android:background="@drawable/button_rounded"
         android:text="Crear Paquete"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -123,9 +129,10 @@
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="180dp"
+        android:layout_height="56dp"
         android:layout_marginBottom="8dp"
+        android:background="@drawable/button_rounded_red"
         android:text="Volver"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"

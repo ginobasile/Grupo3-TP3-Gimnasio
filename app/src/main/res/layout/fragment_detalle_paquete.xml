@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.paquetes.DetallePaquete">
+    tools:context=".fragments.paquetes.DetallePaquete"
+    android:background="@drawable/fondo_iniciar">
 
     <EditText
         android:id="@+id/editTextNumber2"
@@ -29,6 +30,7 @@
         android:layout_marginStart="64dp"
         android:layout_marginEnd="64dp"
         android:layout_marginBottom="124dp"
+        android:drawableLeft="@drawable/precio_icon"
         android:text="Precio:"
         android:textAlignment="textStart"
         android:textSize="24sp"
@@ -46,6 +48,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="64dp"
         android:layout_marginBottom="8dp"
+        android:drawableLeft="@drawable/tickets_icon"
         android:text="Cantidad de tickets:"
         android:textAlignment="textStart"
         android:textSize="24sp"
@@ -60,6 +63,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:drawableLeft="@android:drawable/ic_search_category_default"
         android:gravity="center"
         android:paddingTop="32dp"
         android:paddingBottom="16dp"
@@ -76,6 +80,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:layout_marginEnd="64dp"
+        android:drawableLeft="@drawable/paquete_icon"
         android:ems="10"
         android:inputType="text"
         android:text="Nombre Paquete"
@@ -91,6 +96,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:drawableLeft="@drawable/paquete_icon"
         android:text="ID: 1"
         android:textAlignment="center"
         android:textSize="24sp"
@@ -117,31 +123,37 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="110dp"
+        android:layout_height="56dp"
         android:layout_marginBottom="8dp"
+        android:background="@drawable/button_rounded"
+        android:drawableLeft="@android:drawable/ic_popup_sync"
         android:text="Modificar"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button"
         app:layout_constraintStart_toEndOf="@+id/button3" />
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="110dp"
+        android:layout_height="56dp"
         android:layout_marginBottom="8dp"
+        android:background="@drawable/button_rounded_red"
+        android:drawableLeft="@android:drawable/ic_menu_delete"
         android:text="Eliminar"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button2" />
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="110dp"
+        android:layout_height="56dp"
         android:layout_marginBottom="8dp"
+        android:background="@drawable/button_rounded_red"
+        android:drawableLeft="?attr/actionModeCloseDrawable"
         android:text="Volver"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"

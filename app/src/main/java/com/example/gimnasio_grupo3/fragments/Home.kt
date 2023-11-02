@@ -17,6 +17,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.gimnasio_grupo3.R
 import com.example.gimnasio_grupo3.activities.LoginActivity
 import com.example.gimnasio_grupo3.activities.MainActivity
+import com.example.gimnasio_grupo3.entities.Usuario
 import com.example.gimnasio_grupo3.sessions.MyPreferences
 import com.google.android.material.snackbar.Snackbar
 
@@ -31,6 +32,8 @@ class Home : Fragment() {
     lateinit var txtDni : TextView
     lateinit var txtContacto : TextView
     lateinit var txtTickets : TextView
+    private lateinit var myPreferences: MyPreferences
+    private var user: Usuario? = null
     companion object {
         fun newInstance() = Home()
     }
@@ -51,6 +54,10 @@ class Home : Fragment() {
         txtDni = v.findViewById(R.id.txtEmail2)
         txtContacto = v.findViewById(R.id.txtContacto)
         txtTickets = v.findViewById(R.id.txtEmail3)
+        myPreferences = MyPreferences(requireContext())
+        user = myPreferences.getUser()
+
+
 
         btnLogOut.setOnClickListener {
             val myPreferences = MyPreferences(requireContext())
@@ -80,6 +87,11 @@ class Home : Fragment() {
             setDni(user.dni.toString())
             setMail(user.mail)
             setTickets(user.ticketsRestantes.toString())
+        }
+
+        if (myPreferences.isAdmin() != true) {
+            btnProfesores.visibility = View.GONE
+            btnUsuarios.visibility = View.GONE
         }
 
         btnProfesores.setOnClickListener {

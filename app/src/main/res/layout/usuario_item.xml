@@ -10,13 +10,15 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="203dp">
+        android:layout_height="203dp"
+        android:background="@color/mostaza">
 
         <TextView
             android:id="@+id/txtNombreApellido"
-            android:layout_width="0dp"
-            android:layout_height="49dp"
+            android:layout_width="278dp"
+            android:layout_height="47dp"
             android:layout_marginTop="8dp"
+            android:drawableLeft="@drawable/name_icon"
             android:gravity="center"
             android:text="Nombre Apellido"
             android:textSize="24sp"
@@ -31,6 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
+            android:drawableLeft="@android:drawable/ic_dialog_email"
             android:gravity="center"
             android:text="Email"
             android:textSize="16sp"
@@ -44,6 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
+            android:drawableLeft="@drawable/name_icon"
             android:gravity="center"
             android:text="Dni"
             android:textSize="16sp"
@@ -57,6 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
+            android:drawableLeft="@drawable/tickets_icon"
             android:gravity="center"
             android:text="Tickets"
             android:textSize="16sp"
@@ -69,6 +74,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
+            android:drawableLeft="@android:drawable/sym_action_call"
             android:gravity="center"
             android:text="Contacto"
             android:textSize="16sp"

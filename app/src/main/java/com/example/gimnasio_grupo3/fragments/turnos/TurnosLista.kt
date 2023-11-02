@@ -30,6 +30,7 @@ class TurnosLista : Fragment() {
     lateinit var turnosList: MutableList<Turno>
     private lateinit var btnCrearTurno: Button
     private lateinit var btnBack: Button
+    private lateinit var btnMisTurnos: Button
     private lateinit var myPreferences: MyPreferences
     private var user: Usuario? = null
 
@@ -48,6 +49,7 @@ class TurnosLista : Fragment() {
         recyclerTurnos.layoutManager = LinearLayoutManager(requireContext())
         btnCrearTurno = v.findViewById(R.id.buttonTurnos)
         btnBack = v.findViewById(R.id.button8)
+        btnMisTurnos = v.findViewById(R.id.misTurnosButton)
         myPreferences = MyPreferences(requireContext())
         user = myPreferences.getUser()
 
@@ -59,6 +61,11 @@ class TurnosLista : Fragment() {
             val action = TurnosListaDirections.actionTurnosListaToCrearTurno()
             findNavController().navigate(action)
         }
+        btnMisTurnos.setOnClickListener{
+            val action = TurnosListaDirections.actionTurnosListaToMisTurnos()
+            findNavController().navigate(action)
+        }
+
 
         btnBack.setOnClickListener {
             v.findNavController().navigateUp()
@@ -89,12 +96,19 @@ class TurnosLista : Fragment() {
                                         val dialogBuilder = AlertDialog.Builder(requireContext())
                                         dialogBuilder.setMessage("¿Desea reservar el turno en la fecha: ${turno.fecha}? Se le descontaran 1 tickets.")
                                             .setPositiveButton("Sí") { _, _ ->
-                                                restarTicketsAlUsuario()
-                                                val nuevoTurnoPersona =
-                                                    user?.id?.let { TurnoPersona(it, turno.id) }
-                                                if (nuevoTurnoPersona != null) {
-                                                    viewModel.crearTurnoPersona(nuevoTurnoPersona) { estado ->
-                                                        Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
+                                                if(restarTicketsAlUsuario()) {
+                                                    val nuevoTurnoPersona =
+                                                        user?.id?.let { TurnoPersona(it, turno.id) }
+                                                    if (nuevoTurnoPersona != null) {
+                                                        viewModel.crearTurnoPersona(
+                                                            nuevoTurnoPersona
+                                                        ) { estado ->
+                                                            Snackbar.make(
+                                                                v,
+                                                                estado,
+                                                                Snackbar.LENGTH_LONG
+                                                            ).show()
+                                                        }
                                                     }
                                                 }
                                             }
@@ -112,10 +126,10 @@ class TurnosLista : Fragment() {
     }
 
     @SuppressLint("SuspiciousIndentation")
-    private fun restarTicketsAlUsuario() {
+    private fun restarTicketsAlUsuario() : Boolean {
         val misTickets = user?.ticketsRestantes
-
-            if(misTickets!=null && misTickets >= 0) {
+        var operacionExitosa = false
+            if(misTickets!=null && misTickets > 0) {
                 val actualizarTickets = misTickets - 1
 
                 user?.let { usuario ->
@@ -137,7 +151,7 @@ class TurnosLista : Fragment() {
                         Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
                         myPreferences.setUser(usuarioActualizado)
                     }
-
+                    operacionExitosa = true
                     Snackbar.make(requireView(), "turno reservado con éxito", Snackbar.LENGTH_SHORT).show()
                 }
 
@@ -145,7 +159,7 @@ class TurnosLista : Fragment() {
                 Snackbar.make(requireView(), "No posees los tickets suficientes", Snackbar.LENGTH_SHORT).show()
             }
 
-
+    return operacionExitosa
 
     }
 

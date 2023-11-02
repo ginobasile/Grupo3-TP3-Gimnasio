@@ -5,13 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragments.paquetes.PaquetesLista">
+    tools:context=".fragments.paquetes.PaquetesLista"
+    android:background="@drawable/fondo_iniciar">
 
     <TextView
         android:id="@+id/textViewTitle"
-        android:layout_width="match_parent"
+        android:layout_width="333dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:drawableLeft="@drawable/paquete_icon"
         android:gravity="center"
         android:paddingTop="32dp"
         android:paddingBottom="16dp"
@@ -44,6 +46,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:text="Crear Paquete"
+            android:background="@drawable/button_rounded"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -52,10 +55,12 @@
 
         <Button
             android:id="@+id/button6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="180dp"
+            android:layout_height="56dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
+            android:background="@drawable/button_rounded_red"
+            android:drawableLeft="?attr/actionModeCloseDrawable"
             android:text="Volver"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"

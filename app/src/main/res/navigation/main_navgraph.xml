@@ -27,6 +27,9 @@
         <action
             android:id="@+id/action_turnosLista_to_detalleTurno"
             app:destination="@id/detalleTurno" />
+        <action
+            android:id="@+id/action_turnosLista_to_misTurnos"
+            app:destination="@id/misTurnos" />
     </fragment>
     <fragment
         android:id="@+id/homePrincipal"
@@ -142,4 +145,9 @@
         android:name="com.example.gimnasio_grupo3.activities.LoginActivity"
         android:label="activity_login"
         tools:layout="@layout/activity_login" />
+    <fragment
+        android:id="@+id/misTurnos"
+        android:name="com.example.gimnasio_grupo3.fragments.turnos.MisTurnos"
+        android:label="fragment_mis_turnos"
+        tools:layout="@layout/fragment_mis_turnos" />
 </navigation>
