@@ -22,6 +22,14 @@
         android:textSize="34sp"
         android:textStyle="bold" />
 
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tickets"
+        android:textAlignment="center"
+        android:textSize="24sp" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/reciclerTurnos"
         android:layout_width="match_parent"

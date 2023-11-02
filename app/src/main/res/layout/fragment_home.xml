@@ -38,7 +38,7 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="130dp"
                         android:background="@color/mostaza">
 
                         <TextView
@@ -46,75 +46,27 @@
                             android:layout_width="0dp"
                             android:layout_height="49dp"
                             android:layout_marginTop="16dp"
-                            android:layout_marginBottom="8dp"
                             android:gravity="center"
                             android:text="Nombre Apellido"
                             android:textSize="24sp"
                             android:textStyle="bold|italic"
-                            app:layout_constraintBottom_toTopOf="@+id/txtEmail"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.497"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
-                            android:id="@+id/txtEmail"
-                            android:layout_width="120dp"
-                            android:layout_height="55dp"
-                            android:layout_marginBottom="8dp"
-                            android:drawableLeft="@android:drawable/ic_dialog_email"
-                            android:gravity="center"
-                            android:text="Email"
-                            android:textColor="#FAF8F8"
-                            android:textSize="16sp"
-                            app:layout_constraintBottom_toTopOf="@+id/txtContacto"
-                            app:layout_constraintEnd_toStartOf="@+id/txtEmail2"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/txtNombreApellido" />
-
-                        <TextView
-                            android:id="@+id/txtEmail2"
-                            android:layout_width="120dp"
-                            android:layout_height="50dp"
-                            android:layout_marginBottom="8dp"
-                            android:drawableLeft="@android:drawable/star_big_on"
-                            android:gravity="center"
-                            android:text="Dni"
-                            android:textColor="#F4F1F1"
-                            android:textSize="16sp"
-                            app:layout_constraintBottom_toTopOf="@+id/txtEmail3"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/txtEmail"
-                            app:layout_constraintTop_toBottomOf="@+id/txtNombreApellido"
-                            app:layout_constraintVertical_bias="1.0" />
-
-                        <TextView
                             android:id="@+id/txtEmail3"
-                            android:layout_width="120dp"
-                            android:layout_height="50dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="54dp"
                             android:layout_marginBottom="16dp"
                             android:drawableLeft="@drawable/tickets_icon"
                             android:gravity="center"
                             android:text="Tickets"
                             android:textColor="#FDFDFD"
-                            android:textSize="16sp"
+                            android:textSize="30sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/txtContacto" />
-
-                        <TextView
-                            android:id="@+id/txtContacto"
-                            android:layout_width="120dp"
-                            android:layout_height="50dp"
-                            android:layout_marginBottom="16dp"
-                            android:drawableLeft="@android:drawable/stat_sys_speakerphone"
-                            android:gravity="center"
-                            android:text="Contacto"
-                            android:textColor="#FDFDFD"
-                            android:textSize="16sp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/txtEmail3"
-                            app:layout_constraintHorizontal_bias="0.51"
                             app:layout_constraintStart_toStartOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>

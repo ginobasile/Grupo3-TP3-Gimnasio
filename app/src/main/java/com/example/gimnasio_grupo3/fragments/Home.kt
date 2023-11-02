@@ -26,11 +26,7 @@ class Home : Fragment() {
     lateinit var btnProfesores : Button
     lateinit var btnUsuarios : Button
     lateinit var btnLogOut : Button
-
     lateinit var txtNombreCompleto : TextView
-    lateinit var txtEmail : TextView
-    lateinit var txtDni : TextView
-    lateinit var txtContacto : TextView
     lateinit var txtTickets : TextView
     private lateinit var myPreferences: MyPreferences
     private var user: Usuario? = null
@@ -50,9 +46,6 @@ class Home : Fragment() {
         btnLogOut = v.findViewById(R.id.btnLogOut)
 
         txtNombreCompleto = v.findViewById(R.id.txtNombreApellido)
-        txtEmail = v.findViewById(R.id.txtEmail)
-        txtDni = v.findViewById(R.id.txtEmail2)
-        txtContacto = v.findViewById(R.id.txtContacto)
         txtTickets = v.findViewById(R.id.txtEmail3)
         myPreferences = MyPreferences(requireContext())
         user = myPreferences.getUser()
@@ -83,9 +76,6 @@ class Home : Fragment() {
 
         if (user != null) {
             setNombreCompleto(user.nombre, user.apellido)
-            setContacto(user.contacto)
-            setDni(user.dni.toString())
-            setMail(user.mail)
             setTickets(user.ticketsRestantes.toString())
         }
 
@@ -123,17 +113,7 @@ class Home : Fragment() {
         txtNombreCompleto.text = "${apellido}, ${nombre}"
     }
 
-    fun setMail(mail: String){
-        txtEmail.text = "Mail: ${mail}"
-    }
 
-    fun setContacto(contacto: String){
-        txtContacto.text = "Contacto: ${contacto}"
-    }
-
-    fun setDni(dni: String){
-        txtDni.text =  "DNI: ${dni}"
-    }
 
     fun setTickets(tickets: String){
         txtTickets.text = "Tickets: ${tickets}"
