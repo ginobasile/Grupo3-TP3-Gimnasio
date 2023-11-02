@@ -12,7 +12,7 @@ Proyecto de TP3, grupo 3
   
 - Agregar imagenes (Usuarios y Actividades) - Tomi 
 
-- Diseño Home
+- Diseño Home - Gino
 
 
 ## #####################TERMINADOS#####################################
