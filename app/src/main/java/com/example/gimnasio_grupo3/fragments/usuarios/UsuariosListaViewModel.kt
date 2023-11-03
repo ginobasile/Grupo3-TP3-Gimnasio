@@ -1,6 +1,5 @@
 package com.example.gimnasio_grupo3.fragments.usuarios
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.gimnasio_grupo3.RetroFitProviders.UsuariosProvider
@@ -13,23 +12,29 @@ import retrofit2.Response
 class UsuariosListaViewModel : ViewModel() {
 
     var usuariosCargados : MutableLiveData<List<Usuario>> =  MutableLiveData<List<Usuario>>()
+    var state : MutableLiveData<String> =  MutableLiveData<String>()
 
     val retrofit = UsuariosProvider().provideRetrofit()
     val apiService = retrofit.create(APIMethods::class.java)
+
+    init {
+        state.value = "Loading"
+    }
 
     fun cargarUsuarios() {
         val call = apiService.getUsuarios()
 
         if (usuariosCargados.value == null ){
-            Log.d("Guardado","carga Inicial sin datos")
+            state.value = "Loading"
             call.enqueue(object : Callback<List<Usuario>> {
                 override fun onResponse(call: Call<List<Usuario>>, response: Response<List<Usuario>>) {
                     if (response.isSuccessful) {
+                        state.value = "Success"
                         usuariosCargados.value = response.body()
-
                     } else {
                         // La llamada a la API no fue exitosa
                         // Puedes manejar errores aquí
+                        state.value = "Error_1"
                     }
                 }
 
@@ -38,22 +43,17 @@ class UsuariosListaViewModel : ViewModel() {
                     // Puedes manejar errores de red u otros aquí
                 }
             })
-        } else {
-            Log.d("Guardado","carga Inicial con datos")
         }
     }
 
     fun recargarUsuarios() {
+        state.value = "Loading"
         val call = apiService.getUsuarios()
-
-        Log.d("Guardado","recarga de datos")
-
         call.enqueue(object : Callback<List<Usuario>> {
             override fun onResponse(call: Call<List<Usuario>>, response: Response<List<Usuario>>) {
                 if (response.isSuccessful) {
-
+                    state.value = "Success"
                     usuariosCargados.value = response.body()
-
                 } else {
                     // La llamada a la API no fue exitosa
                     // Puedes manejar errores aquí

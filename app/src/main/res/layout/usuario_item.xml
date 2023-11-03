@@ -1,87 +1,72 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardTurno"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    app:cardCornerRadius="8dp"
+    android:maxWidth="380dp"
+    app:cardCornerRadius="15dp"
     app:cardElevation="8dp">
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="203dp"
-        android:background="@color/mostaza">
+        android:layout_height="175dp"
+        android:background="#D8735D">
+
 
         <TextView
             android:id="@+id/txtNombreApellido"
-            android:layout_width="278dp"
+            android:layout_width="300dp"
             android:layout_height="47dp"
             android:layout_marginTop="8dp"
             android:drawableLeft="@drawable/name_icon"
             android:gravity="center"
+            android:paddingLeft="6dp"
+            android:paddingRight="10dp"
             android:text="Nombre Apellido"
             android:textSize="24sp"
             android:textStyle="bold|italic"
+            android:maxLines="1"
+            android:ellipsize="end"
+
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+            app:layout_constraintTop_toBottomOf="@+id/shimmerId" />
 
         <TextView
-            android:id="@+id/txtEmail"
+            android:id="@+id/txtTicketsEnUsuario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:drawableLeft="@android:drawable/ic_dialog_email"
+            android:drawableLeft="@drawable/tickets_icon"
+            android:drawablePadding="5dp"
             android:gravity="center"
-            android:text="Email"
+
+            android:padding="5dp"
+            android:paddingLeft="5dp"
+            android:text="Tickets"
             android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/txtContacto"
-            app:layout_constraintEnd_toStartOf="@+id/txtEmail2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtNombreApellido" />
 
         <TextView
-            android:id="@+id/txtEmail2"
+            android:id="@+id/txtDniEnUsuario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:drawableLeft="@drawable/name_icon"
+            android:drawableLeft="@drawable/dni_icon"
+
+            android:drawablePadding="5dp"
             android:gravity="center"
             android:text="Dni"
             android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/txtEmail3"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/txtEmail"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toBottomOf="@+id/txtNombreApellido" />
-
-        <TextView
-            android:id="@+id/txtEmail3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:drawableLeft="@drawable/tickets_icon"
-            android:gravity="center"
-            android:text="Tickets"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/txtContacto" />
-
-        <TextView
-            android:id="@+id/txtContacto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:drawableLeft="@android:drawable/sym_action_call"
-            android:gravity="center"
-            android:text="Contacto"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/txtEmail3"
-            app:layout_constraintHorizontal_bias="0.51"
-            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/txtAdmin"
@@ -98,7 +83,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/shimmerId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -109,6 +94,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="0dp"
+            app:layout_constraintGuide_percent="0.5"
+            />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

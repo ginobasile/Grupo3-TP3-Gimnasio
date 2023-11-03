@@ -15,54 +15,49 @@ class UsuarioAdapter(
 
     class UsuarioHolder(v : View) : RecyclerView.ViewHolder(v) {
 
-        private var view : View;
+        private var view : View
         init {
-            this.view = v;
+            this.view = v
         }
 
         fun setNombreCompleto(nombre: String, apellido: String){
             val txtNombreApellido: TextView = view.findViewById(R.id.txtNombreApellido)
-            txtNombreApellido.text = "${apellido}, ${nombre}"
-        }
-
-        fun setMail(mail: String){
-            val txtEmail: TextView = view.findViewById(R.id.txtEmail)
-            txtEmail.text = "Mail: ${mail}"
-        }
-
-        fun setContacto(contacto: String){
-            val txtContacto: TextView = view.findViewById(R.id.txtContacto)
-            txtContacto.text = "Contacto: ${contacto}"
+            val txt = "${apellido}, ${nombre}"
+            txtNombreApellido.setText(txt)
         }
 
         fun isAdmin(admin: Boolean){
             val brandTxtView : TextView = view.findViewById(R.id.txtAdmin)
 
             if (!admin){
-                brandTxtView.text = "";
+                val txt = ""
+                brandTxtView.setText(txt)
             }
         }
 
         fun setDni(dni: String){
-            val txtDni: TextView = view.findViewById(R.id.txtEmail2)
-            txtDni.text =  "DNI: ${dni}"
+            val txtDni: TextView = view.findViewById(R.id.txtDniEnUsuario)
+            val txt = "DNI: ${dni}"
+            txtDni.setText(txt)
         }
 
         fun setTickets(tickets: String){
-            val txtTickets: TextView = view.findViewById(R.id.txtEmail3)
-            txtTickets.text = "Tickets: ${tickets}"
+            val txtTickets: TextView = view.findViewById(R.id.txtTicketsEnUsuario)
+            val txt = "Tickets: ${tickets}"
+            txtTickets.setText(txt)
         }
 
         fun setId(id: String){
-            val txtId: TextView = view.findViewById(R.id.textView6)
-            txtId.text = "ID: ${id}"
+            val txtId: TextView = view.findViewById(R.id.shimmerId)
+            val txt = "ID: ${id}"
+            txtId.setText(txt)
         }
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UsuarioHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.usuario_item,parent,false)
-        return (UsuarioAdapter.UsuarioHolder(view))
+        return (UsuarioHolder(view))
     }
 
     override fun getItemCount(): Int = this.usuarios.size
@@ -71,9 +66,6 @@ class UsuarioAdapter(
         val usuario = this.usuarios[position]
 
         holder.setNombreCompleto(usuario.nombre, usuario.apellido)
-        holder.setMail(usuario.mail)
-        holder.setContacto(usuario.contacto)
-        holder.isAdmin(usuario.administrador)
         holder.isAdmin(usuario.administrador)
         holder.setDni(usuario.dni.toString())
         holder.setTickets(usuario.ticketsRestantes.toString())

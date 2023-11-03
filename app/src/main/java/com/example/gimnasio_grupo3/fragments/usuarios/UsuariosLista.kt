@@ -2,13 +2,14 @@ package com.example.gimnasio_grupo3.fragments.usuarios
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,12 +19,11 @@ import com.example.gimnasio_grupo3.adapters.UsuarioAdapter
 
 class UsuariosLista : Fragment() {
 
-    private lateinit var btnVolver : Button
-
     lateinit var v : View
     lateinit var recyclerUsuarios: RecyclerView
     lateinit var adapter: UsuarioAdapter
     lateinit var swipe: SwipeRefreshLayout
+    lateinit var shimmerUsuarios: LinearLayoutCompat
 
     companion object {
         fun newInstance() = UsuariosLista()
@@ -34,20 +34,15 @@ class UsuariosLista : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         v = inflater.inflate(R.layout.fragment_usuarios_lista, container, false)
 
         recyclerUsuarios = v.findViewById(R.id.reciclerUsuarios)
         recyclerUsuarios.layoutManager = LinearLayoutManager(requireContext())
         swipe = v.findViewById(R.id.swipeUpdateUsuarios)
-
-        btnVolver = v.findViewById(R.id.button5)
+        shimmerUsuarios = v.findViewById(R.id.shimmerUsuarios)
 
         configSwipe()
-
-        btnVolver.setOnClickListener {
-            v.findNavController().navigateUp()
-        }
 
         return v
     }
@@ -62,9 +57,24 @@ class UsuariosLista : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
         viewModel = ViewModelProvider(requireActivity()).get(UsuariosListaViewModel::class.java)
 
+        viewModel.state.observe(viewLifecycleOwner,Observer{ state ->
+            Log.d("test",state)
+            when(state){
+                "Loading" -> {
+                    recyclerUsuarios.isVisible = false
+                    shimmerUsuarios.isVisible = true
+                }
+                "Success" -> {
+                    recyclerUsuarios.isVisible = true
+                    shimmerUsuarios.isVisible = false
 
+                }
+            }
+
+        })
 
         viewModel.usuariosCargados.observe(viewLifecycleOwner, Observer{ usuariosList ->
             if (usuariosList != null) {
