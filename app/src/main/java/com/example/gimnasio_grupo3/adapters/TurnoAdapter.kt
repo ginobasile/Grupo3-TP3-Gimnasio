@@ -27,7 +27,6 @@ class TurnoAdapter(
     var profesoresList = mutableListOf<Profesor>()
 
     class TurnoHolder(v: View) : RecyclerView.ViewHolder(v) {
-        val txtTurno: TextView = itemView.findViewById(R.id.textView4)
         val txtActividad: TextView = itemView.findViewById(R.id.txtActividadNombre)
         val txtProfesor: TextView = itemView.findViewById(R.id.txtProfesorNombre)
         val cantPersonas: TextView = itemView.findViewById(R.id.txtCantPersonas)
@@ -134,7 +133,6 @@ class TurnoAdapter(
             profesorFullName = "${profesor.nombre}, ${profesor.apellido}"
         }
 
-        holder.txtTurno.text = "ID Turno: ${turno.id}"
         holder.txtActividad.text = "Actividad: ${actividadNombre}"
         holder.txtProfesor.text = "Profesor: ${profesorFullName}"
         holder.cantPersonas.text = "Límite personas: ${turno.cantPersonasLim}"

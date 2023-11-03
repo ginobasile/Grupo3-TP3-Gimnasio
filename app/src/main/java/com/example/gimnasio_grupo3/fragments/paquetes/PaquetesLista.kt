@@ -76,7 +76,7 @@ class PaquetesLista : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(PaquetesListaViewModel::class.java)
-        txtCantTickets.text = user?.ticketsRestantes.toString()
+        txtCantTickets.text = "Tickets : ${user?.ticketsRestantes.toString()}"
         viewModel.obtenerPaquetes { paquetesList ->
             if (paquetesList != null) {
                 adapter = PaqueteAdapter(paquetesList.toMutableList()) { paquete ->
