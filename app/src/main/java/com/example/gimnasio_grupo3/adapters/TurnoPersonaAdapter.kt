@@ -9,6 +9,9 @@ import com.example.gimnasio_grupo3.R
 import com.example.gimnasio_grupo3.entities.Actividad
 import com.example.gimnasio_grupo3.entities.Turno
 import com.example.gimnasio_grupo3.entities.TurnoPersona
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class TurnoPersonaAdapter(
     private val idUsuarioLogueado: Int,
@@ -17,11 +20,11 @@ class TurnoPersonaAdapter(
     private val listaActividades: List<Actividad>
 ) : RecyclerView.Adapter<TurnoPersonaAdapter.TurnoPersonaHolder>() {
 
-    private val listaFiltrada: List<TurnoPersona>
+    private var listaFiltrada: List<TurnoPersona>
 
     init {
-        // Filtrar la lista de TurnoPersona según el idUsuarioLogueado
         listaFiltrada = listaTurnosPersona.filter { it.idUsuario == idUsuarioLogueado }
+        listaFiltrada = listaFiltrada.sortedBy { obtenerFechaPorIdTurno(it.idTurno) }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TurnoPersonaHolder {
@@ -46,10 +49,12 @@ class TurnoPersonaAdapter(
     inner class TurnoPersonaHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val textViewFecha: TextView = itemView.findViewById(R.id.txtFecha)
         private val textViewActividad: TextView = itemView.findViewById(R.id.txtActividadNombre)
+        private val txtPasado: TextView = itemView.findViewById(R.id.txtMsj)
 
         fun bindTurnoPersona(turnoPersona: TurnoPersona, nombreActividad: String) {
             textViewFecha.text = "Fecha: " + obtenerFechaPorIdTurno(turnoPersona.idTurno)
             textViewActividad.text = "Actividad: $nombreActividad"
+            if (esFechaPasada(turnoPersona.idTurno)) { txtPasado.text = "Pasado" } else { txtPasado.text = "" }
         }
     }
 
@@ -60,11 +65,18 @@ class TurnoPersonaAdapter(
 
     private fun obtenerNombreActividadPorId(idActividad: Int): String {
         val actividad = listaActividades.find { it.id == idActividad }
-        return actividad?.name ?: "Actividad no encontrada" // Devuelve un mensaje si no se encuentra la actividad
+        return actividad?.name ?: "Actividad no encontrada"
     }
 
     private fun obtenerFechaPorIdTurno(idTurno: Int): String {
         val turno = listaTurnos.find { it.id == idTurno }
-        return turno?.fecha ?: "Fecha no encontrada" // Devuelve un mensaje si no se encuentra la fecha
+        return turno?.fecha ?: "Fecha no encontrada"
+    }
+
+    private fun esFechaPasada(idTurno: Int): Boolean {
+        val fechaTurno = obtenerFechaPorIdTurno(idTurno)
+        val fechaTurnoDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(fechaTurno)
+        val fechaActual = Date()
+        return fechaTurnoDate != null && fechaTurnoDate < fechaActual
     }
 }

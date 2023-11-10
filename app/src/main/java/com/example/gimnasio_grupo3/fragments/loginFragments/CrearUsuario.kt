@@ -139,7 +139,7 @@ class CrearUsuario : Fragment() {
             }
 
             if (nuevaEdad.isEmpty()) {
-                editDetallesEdad.error = "El peso es obligatorio"
+                editDetallesEdad.error = "La edad es obligatoria"
                 return@setOnClickListener
             }
 
