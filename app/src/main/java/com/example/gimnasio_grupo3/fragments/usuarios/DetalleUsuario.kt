@@ -1,8 +1,10 @@
 package com.example.gimnasio_grupo3.fragments.usuarios
 
 import android.app.AlertDialog
+import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +15,10 @@ import android.widget.Switch
 import android.widget.TextView
 import androidx.navigation.findNavController
 import com.example.gimnasio_grupo3.R
+import com.example.gimnasio_grupo3.activities.LoginActivity
+import com.example.gimnasio_grupo3.activities.MainActivity
 import com.example.gimnasio_grupo3.entities.Usuario
+import com.example.gimnasio_grupo3.sessions.MyPreferences
 import com.google.android.material.snackbar.Snackbar
 
 class DetalleUsuario : Fragment() {
@@ -36,7 +41,8 @@ class DetalleUsuario : Fragment() {
     private lateinit var btnVolver : Button
     private lateinit var btnModUsuario: Button
 
-
+    private lateinit var myPreferences: MyPreferences
+    private var user: Usuario? = null
     companion object {
         fun newInstance() = DetalleUsuario()
     }
@@ -67,6 +73,9 @@ class DetalleUsuario : Fragment() {
         btnVolver = v.findViewById(R.id.btnVolver)
         btnModUsuario = v.findViewById(R.id.btnModUsuario)
 
+        myPreferences = MyPreferences(requireContext())
+        user = myPreferences.getUser()
+
         return v
     }
 
@@ -91,6 +100,14 @@ class DetalleUsuario : Fragment() {
         editDetallesAdmin.isChecked = usuario.administrador
         editDetallesDni.setText(usuario.dni.toString());
         editDetallesTickets.setText(usuario.ticketsRestantes.toString());
+
+        if (myPreferences.isAdmin()) {
+            editDetallesAdmin.isEnabled = true
+            editDetallesTickets.isEnabled = true
+        } else {
+            editDetallesAdmin.isEnabled = false
+            editDetallesTickets.isEnabled = false
+        }
 
         btnVolver.setOnClickListener {
             v.findNavController().navigateUp()
@@ -170,7 +187,7 @@ class DetalleUsuario : Fragment() {
             }
 
             if (nuevaEdad.isEmpty()) {
-                editDetallesEdad.error = "El peso es obligatorio"
+                editDetallesEdad.error = "La edad es obligatoria"
                 return@setOnClickListener
             }
 
@@ -221,6 +238,12 @@ class DetalleUsuario : Fragment() {
                         Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
 
                         if (estado == "Usuario actualizado exitosamente") {
+
+                            if (usuarioActualizado.id == user?.id) {
+                                myPreferences.setUser(usuarioActualizado)
+                                Log.d("User update", "Mi usuario actualizado")
+                            }
+
                             viewModelLista.recargarUsuarios()
                             v.findNavController().navigateUp()
                         }
@@ -237,6 +260,13 @@ class DetalleUsuario : Fragment() {
                     viewModel.eliminarUsuario(usuario) { estado ->
                         Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
                         if(estado == "Usuario eliminado exitosamente"){
+
+                            if (usuario.id == user?.id) {
+                                myPreferences.deleteUser()
+                                val intent = Intent(activity?.applicationContext, LoginActivity::class.java)
+                                startActivity(intent)
+                            }
+
                             viewModelLista.recargarUsuarios()
                             v.findNavController().navigateUp()
                         }

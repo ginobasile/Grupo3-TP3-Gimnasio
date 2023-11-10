@@ -1,10 +1,10 @@
 package com.example.gimnasio_grupo3.adapters
 
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gimnasio_grupo3.R
@@ -13,39 +13,53 @@ import com.example.gimnasio_grupo3.RetroFitProviders.ProfesoresProvider
 import com.example.gimnasio_grupo3.entities.Actividad
 import com.example.gimnasio_grupo3.entities.Profesor
 import com.example.gimnasio_grupo3.entities.Turno
+import com.example.gimnasio_grupo3.entities.TurnoPersona
 import com.example.gimnasio_grupo3.interfaces.APIMethods
+import com.example.gimnasio_grupo3.sessions.MyPreferences
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class TurnoAdapter(
+    context: Context,
     var turnos: MutableList<Turno>,
-    private val onItemClick: (Turno) -> Unit
+    private val onItemClick: (Turno) -> Unit,
 ) : RecyclerView.Adapter<TurnoAdapter.TurnoHolder>() {
 
     var actividadesList = mutableListOf<Actividad>()
     var profesoresList = mutableListOf<Profesor>()
+    var myPreferences = MyPreferences(context)
+    private var listaFiltrada: List<Turno>
 
     class TurnoHolder(v: View) : RecyclerView.ViewHolder(v) {
         val txtActividad: TextView = itemView.findViewById(R.id.txtActividadNombre)
         val txtProfesor: TextView = itemView.findViewById(R.id.txtProfesorNombre)
         val cantPersonas: TextView = itemView.findViewById(R.id.txtCantPersonas)
         val txtfecha: TextView = itemView.findViewById(R.id.txtFecha)
+        val txtEstado: TextView = itemView.findViewById(R.id.textView4)
     }
 
     init {
-        // Llama a la función obtenerActividades para obtener la lista de actividades al construir el adaptador.
+        listaFiltrada = turnos.sortedByDescending {
+            SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(it.fecha)
+        }
+        Log.d("Lista", listaFiltrada.toString())
         obtenerActividades { actividades ->
             actividades?.let {
                 actividadesList.clear()
                 actividadesList.addAll(it)
-                notifyDataSetChanged() // Notifica al adaptador que los datos han cambiado.
+                notifyDataSetChanged()
             }
         }
 
-        // Llama a la función obtenerProfesores para obtener la lista de profesores al construir el adaptador.
         obtenerProfesores { profesores ->
             profesores?.let {
+                profesoresList.clear()
+                profesoresList.addAll(it)
+                notifyDataSetChanged()
             }
         }
     }
@@ -68,13 +82,11 @@ class TurnoAdapter(
                     }
                     callback(profesoresList)
                 } else {
-                    // La llamada no fue exitosa, maneja los errores aquí
                     callback(null)
                 }
             }
 
             override fun onFailure(call: Call<List<Profesor>>, t: Throwable) {
-                // Maneja errores de conexión aquí
                 callback(null)
             }
         })
@@ -97,13 +109,11 @@ class TurnoAdapter(
                     }
                     callback(actividadesLista)
                 } else {
-                    // La llamada no fue exitosa, maneja los errores aquí
                     callback(null)
                 }
             }
 
             override fun onFailure(call: Call<List<Actividad>>, t: Throwable) {
-                // Maneja errores de conexión aquí
                 callback(null)
             }
         })
@@ -115,21 +125,22 @@ class TurnoAdapter(
     }
 
     override fun getItemCount(): Int {
-        return turnos.size
+        return listaFiltrada.size
     }
 
     override fun onBindViewHolder(holder: TurnoHolder, position: Int) {
-        val turno = turnos[position]
+        val turno = listaFiltrada[position]
 
         val actividad = actividadesList.find { it.id.toString().equals(turno.idActividad) }
         var actividadNombre = ""
-        if(actividad != null) {
+        if (actividad != null) {
             actividadNombre = actividad.name
         }
 
         val profesor = profesoresList.find { it.id.toString().equals(turno.idProfesor) }
         var profesorFullName = ""
-        if(profesor != null) {
+
+        if (profesor != null) {
             profesorFullName = "${profesor.nombre}, ${profesor.apellido}"
         }
 
@@ -138,8 +149,20 @@ class TurnoAdapter(
         holder.cantPersonas.text = "Límite personas: ${turno.cantPersonasLim}"
         holder.txtfecha.text = "Fecha: ${turno.fecha}"
 
+        if (esFechaPasada(turno.fecha)) {
+            holder.txtEstado.text = "Pasado"
+        } else {
+            holder.txtEstado.text = ""
+        }
+
         holder.itemView.setOnClickListener {
             onItemClick(turno)
         }
+    }
+
+    private fun esFechaPasada(fecha: String): Boolean {
+        val fechaTurno = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(fecha)
+        val fechaActual = Date()
+        return fechaTurno != null && fechaTurno < fechaActual
     }
 }

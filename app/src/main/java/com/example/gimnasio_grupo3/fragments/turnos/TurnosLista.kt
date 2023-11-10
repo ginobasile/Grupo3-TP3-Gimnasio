@@ -58,6 +58,8 @@ class TurnosLista : Fragment() {
 
         if (myPreferences.isAdmin() != true) {
             btnCrearTurno.visibility = View.GONE
+        } else {
+            btnMisTurnos.visibility = View.GONE
         }
 
         btnCrearTurno.setOnClickListener {
@@ -83,7 +85,7 @@ class TurnosLista : Fragment() {
         txtCantTickets.text = "Tickets : ${user?.ticketsRestantes.toString()}"
         viewModel.obtenerTurnos { turnosList ->
             if (turnosList != null) {
-                adapter = TurnoAdapter(turnosList.toMutableList()) { turno ->
+                adapter = TurnoAdapter(requireContext(), turnosList.toMutableList()) { turno ->
                     if(myPreferences.isAdmin()) {
                         val action =
                             TurnosListaDirections.actionTurnosListaToDetalleTurno(

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -76,7 +77,7 @@ class PaquetesLista : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(PaquetesListaViewModel::class.java)
-        txtCantTickets.text = "Tickets : ${user?.ticketsRestantes.toString()}"
+        txtCantTickets.text = "Tickets: ${user?.ticketsRestantes.toString()}"
         viewModel.obtenerPaquetes { paquetesList ->
             if (paquetesList != null) {
                 adapter = PaqueteAdapter(paquetesList.toMutableList()) { paquete ->
@@ -104,7 +105,7 @@ class PaquetesLista : Fragment() {
     }
 
     private fun sumarTicketsAlUsuario(paquete: Paquete) {
-        val misTickets = txtCantTickets.text.toString()
+        val misTickets = user?.ticketsRestantes.toString()
         val actualizarTickets = misTickets.toInt() + paquete.cantTickets
 
         user?.let { usuario ->
@@ -126,8 +127,7 @@ class PaquetesLista : Fragment() {
                 Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
                 myPreferences.setUser(usuarioActualizado)
             }
-            txtCantTickets.text = actualizarTickets.toString()
-
+            txtCantTickets.text = "Tickets: ${actualizarTickets}"
 
             Snackbar.make(requireView(), "${paquete.cantTickets} sumados con éxito", Snackbar.LENGTH_SHORT).show()
         }

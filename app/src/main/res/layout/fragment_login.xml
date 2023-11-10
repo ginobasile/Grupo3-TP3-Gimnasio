@@ -33,6 +33,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:drawableLeft="@android:drawable/ic_dialog_email"
+        android:drawablePadding="5dp"
         android:ems="10"
         android:hint="  Ingrese su email"
         android:inputType="text"
@@ -50,8 +51,9 @@
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
         android:drawableLeft="@android:drawable/ic_lock_lock"
+        android:drawablePadding="12dp"
         android:ems="10"
-        android:hint="Ingrese su password"
+        android:hint="Ingrese su contraseña"
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/btnNavigate"
         app:layout_constraintEnd_toEndOf="parent"
@@ -129,10 +131,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="409dp"
         android:layout_height="143dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -142,29 +141,25 @@
             android:id="@+id/imageButton9"
             android:layout_width="80dp"
             android:layout_height="80dp"
+            android:layout_marginBottom="8dp"
             android:contentDescription="Botón de git"
             android:scaleType="centerCrop"
             android:src="@drawable/logo_git"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.79"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.746" />
+            app:layout_constraintStart_toEndOf="@+id/imageButton8" />
 
         <ImageButton
             android:id="@+id/imageButton8"
             android:layout_width="80dp"
             android:layout_height="80dp"
+            android:layout_marginBottom="8dp"
             android:contentDescription="Botón de facebook"
             android:scaleType="centerCrop"
             android:src="@drawable/face"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.465"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.746" />
+            app:layout_constraintEnd_toStartOf="@+id/imageButton9"
+            app:layout_constraintStart_toEndOf="@+id/imageButton7" />
 
         <TextView
             android:id="@+id/textView11"
@@ -173,7 +168,11 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
+            android:layout_marginBottom="16dp"
             android:text="Seguinos en nuestras redes!"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/imageButton9"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -182,15 +181,13 @@
             android:id="@+id/imageButton7"
             android:layout_width="80dp"
             android:layout_height="80dp"
+            android:layout_marginBottom="8dp"
             android:contentDescription="Botón de instagram"
             android:scaleType="centerCrop"
             android:src="@drawable/insta"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.139"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.746" />
+            app:layout_constraintEnd_toStartOf="@+id/imageButton8"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
