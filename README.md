@@ -8,6 +8,7 @@ Proyecto de TP3, grupo 3
 
 - imagenes en actividades y usuarios - TOMI
 - que guarde el estado de las listas (implementado en usuario) (listas: actividades, paquetes, y si es posible turnos) - IGNA
+- Hacer el fetch de profesores en el viewmodel de turnos para solucionar problema profesor no encontrado - JUAMPI
 
 ## FINALIZADO:  
 - agregar permisos admin donde se necesite - JUAMPI
