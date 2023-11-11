@@ -105,6 +105,7 @@ class DetalleUsuario : Fragment() {
             editDetallesAdmin.isEnabled = true
             editDetallesTickets.isEnabled = true
         } else {
+            txtId.visibility = View.INVISIBLE
             editDetallesAdmin.isEnabled = false
             editDetallesTickets.isEnabled = false
         }

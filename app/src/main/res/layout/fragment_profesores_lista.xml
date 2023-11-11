@@ -5,9 +5,9 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondo_iniciar"
     android:orientation="vertical"
-    tools:context=".fragments.profesores.ProfesoresLista"
-    android:background="@drawable/fondo_iniciar">
+    tools:context=".fragments.profesores.ProfesoresLista">
 
     <TextView
         android:id="@+id/textViewTitle"
@@ -15,10 +15,13 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:drawableLeft="@drawable/profesor_icon"
+        android:drawablePadding="-20dp"
         android:gravity="center"
+        android:paddingStart="2dp"
         android:paddingTop="32dp"
         android:paddingBottom="16dp"
         android:text="PROFESORES"
+        android:textColor="#000000"
         android:textSize="34sp"
         android:textStyle="bold" />
 
@@ -41,9 +44,13 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/button_rounded_red"
-            android:drawableLeft="?attr/actionModeCloseDrawable"
-            android:text="Volver"
+            android:drawableLeft="@drawable/arrow"
+            android:drawablePadding="-20dp"
+            android:paddingStart="10dp"
+            android:text="VOLVER"
+            android:textColor="#FFFFFF"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/buttonProfesores"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,13 +58,19 @@
 
         <Button
             android:id="@+id/buttonProfesores"
-            android:layout_width="180dp"
+            android:layout_width="200dp"
             android:layout_height="56dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/button_rounded"
-            android:text="Crear Profesor"
+            android:drawableLeft="@drawable/add"
+            android:drawablePadding="-20dp"
+            android:drawableTint="#FFFFFF"
+            android:paddingStart="10dp"
+            android:text="CREAR PROFESOR"
+            android:textColor="#FFFFFF"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/button5"

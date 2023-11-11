@@ -12,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="175dp"
-        android:background="#D8735D">
+        android:background="#FBC02D">
 
 
         <TextView
@@ -21,16 +21,19 @@
             android:layout_height="47dp"
             android:layout_marginTop="8dp"
             android:drawableLeft="@drawable/name_icon"
+            android:drawablePadding="5dp"
+            android:ellipsize="end"
             android:gravity="center"
+            android:maxLines="1"
             android:paddingLeft="6dp"
             android:paddingRight="10dp"
             android:text="Nombre Apellido"
+            android:textAlignment="textStart"
+
+
+            android:textColor="#000000"
             android:textSize="24sp"
-            android:textStyle="bold|italic"
-            android:maxLines="1"
-            android:ellipsize="end"
-
-
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +50,9 @@
             android:padding="5dp"
             android:paddingLeft="5dp"
             android:text="Tickets"
-            android:textSize="16sp"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="parent"
@@ -57,12 +62,14 @@
             android:id="@+id/txtDniEnUsuario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/dni_icon"
+            android:drawableLeft="@drawable/id_card"
 
             android:drawablePadding="5dp"
             android:gravity="center"
             android:text="Dni"
-            android:textSize="16sp"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
@@ -77,8 +84,9 @@
             android:text="Admin"
             android:textAlignment="center"
             android:textAllCaps="false"
+            android:textColor="#000000"
             android:textSize="20sp"
-            android:textStyle="italic"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -88,6 +96,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="ID: 1"
+            android:textColor="#000000"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/txtNombreApellido"
@@ -101,8 +110,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_begin="0dp"
-            app:layout_constraintGuide_percent="0.5"
-            />
+            app:layout_constraintGuide_percent="0.5" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

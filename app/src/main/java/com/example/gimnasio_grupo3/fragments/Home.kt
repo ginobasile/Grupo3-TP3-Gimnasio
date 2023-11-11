@@ -110,7 +110,8 @@ class Home : Fragment() {
     }
 
     fun setNombreCompleto(nombre: String, apellido: String){
-        txtNombreCompleto.text = "${apellido}, ${nombre}"
+        val nombreCompleto = "${apellido}, ${nombre}"
+        txtNombreCompleto.text = nombreCompleto.uppercase()
     }
 
 

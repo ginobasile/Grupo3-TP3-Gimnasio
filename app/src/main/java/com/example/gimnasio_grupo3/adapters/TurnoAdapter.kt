@@ -43,10 +43,20 @@ class TurnoAdapter(
     }
 
     init {
-        listaFiltrada = turnos.sortedByDescending {
-            SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(it.fecha)
+        listaFiltrada = if (myPreferences.isAdmin()) {
+            turnos.sortedByDescending {
+                SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(it.fecha)
+            }
+        } else {
+            turnos
+                .sortedByDescending {
+                    SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(it.fecha)
+                }
+                .filter { turno -> !esFechaPasada(turno.fecha) }
         }
+
         Log.d("Lista", listaFiltrada.toString())
+
         obtenerActividades { actividades ->
             actividades?.let {
                 actividadesList.clear()

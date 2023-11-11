@@ -5,8 +5,8 @@
     android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.actividades.DetalleActividad"
-    android:background="@drawable/fondo_iniciar">
+    android:background="@drawable/fondo_iniciar"
+    tools:context=".fragments.actividades.DetalleActividad">
 
     <TextView
         android:id="@+id/textViewIDActividad2"
@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:text="ID: 1"
         android:textAlignment="center"
+        android:textColor="#000000"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,14 +24,15 @@
 
     <TextView
         android:id="@+id/textViewDetalleActividad"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:drawableLeft="@android:drawable/ic_search_category_default"
-        android:gravity="center"
+        android:drawablePadding="-40dp"
+        android:gravity="center|center_horizontal"
         android:paddingTop="32dp"
         android:paddingBottom="16dp"
-        android:text="Detalle del Usuario"
+        android:text="DETALLE DEL USUARIO"
+        android:textColor="#000000"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,39 +41,51 @@
 
     <Button
         android:id="@+id/btnModUsuario"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="Modificar"
         android:background="@drawable/button_rounded"
-        android:drawableLeft="@android:drawable/ic_popup_sync"
-        android:textSize="15sp"
+        android:drawableLeft="@drawable/refresh"
+        android:drawableTint="#FFFFFF"
+        android:paddingLeft="10dp"
+        android:text="Modificar"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnDeleteUsuario"
         app:layout_constraintStart_toEndOf="@+id/btnVolver" />
 
     <Button
         android:id="@+id/btnVolver"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="Volver"
         android:background="@drawable/button_rounded_red"
-        android:drawableLeft="?attr/actionModeCloseDrawable"
+        android:drawableLeft="@drawable/arrow"
+        android:drawableTint="#FFFFFF"
+        android:paddingLeft="10dp"
+        android:text="VOLVER"
+        android:textColor="#FFFFFF"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnModUsuario"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnDeleteUsuario"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="Eliminar"
         android:background="@drawable/button_rounded_red"
-        android:drawableLeft="@android:drawable/ic_menu_delete"
-        android:textSize="15sp"
+        android:drawableLeft="@drawable/trash"
+        android:drawableTint="#FFFFFF"
+        android:paddingLeft="10dp"
+        android:text="ELIMNAR"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnModUsuario" />
@@ -81,9 +95,8 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
         android:foregroundGravity="center"
         android:padding="10dp"
         app:layout_constraintBottom_toTopOf="@+id/btnModUsuario"
@@ -103,10 +116,13 @@
                 android:layout_height="50dp"
                 android:layout_marginBottom="10dp"
                 android:drawableLeft="@drawable/name_icon"
+                android:drawablePadding="5dp"
                 android:gravity="center"
                 android:text="Nombre:"
                 android:textAlignment="viewStart"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/editDetallesNombre"
@@ -118,7 +134,9 @@
                 android:hint="nombre"
                 android:inputType="text"
                 android:textAlignment="viewStart"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtDetallesApellido"
@@ -126,10 +144,13 @@
                 android:layout_height="50dp"
                 android:layout_marginBottom="10dp"
                 android:drawableLeft="@drawable/name_icon"
+                android:drawablePadding="5dp"
                 android:gravity="center"
                 android:text="Apellido:"
                 android:textAlignment="viewStart"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/editDetallesApellido"
@@ -141,18 +162,23 @@
                 android:hint="apellido"
                 android:inputType="text"
                 android:textAlignment="viewStart"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtDetallesMail"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginBottom="10dp"
-                android:drawableLeft="@android:drawable/ic_dialog_email"
+                android:drawableLeft="@drawable/email"
+                android:drawablePadding="5dp"
                 android:gravity="center"
                 android:text="Mail:"
                 android:textAlignment="viewStart"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/editDetallesMail"
@@ -164,18 +190,23 @@
                 android:hint="mail@example.com"
                 android:inputType="text|textEmailAddress"
                 android:textAlignment="viewStart"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtDetallesContraseña"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginBottom="10dp"
-                android:drawableLeft="@android:drawable/ic_lock_lock"
+                android:drawableLeft="@drawable/padlock"
+                android:drawablePadding="5dp"
                 android:gravity="center"
                 android:text="Contraseña:"
                 android:textAlignment="viewStart"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/editDetallesContraseña"
@@ -187,7 +218,9 @@
                 android:hint="contraseña"
                 android:inputType="text"
                 android:textAlignment="viewStart"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtDetallesAltura"
@@ -195,10 +228,13 @@
                 android:layout_height="50dp"
                 android:layout_marginBottom="10dp"
                 android:drawableLeft="@drawable/altura_icon"
+                android:drawablePadding="5dp"
                 android:gravity="center"
                 android:text="Altura:"
                 android:textAlignment="viewStart"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/editDetallesAltura"
@@ -210,7 +246,9 @@
                 android:hint="180 cm"
                 android:inputType="number"
                 android:textAlignment="viewStart"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtDetallesPeso"
@@ -218,10 +256,13 @@
                 android:layout_height="50dp"
                 android:layout_marginBottom="10dp"
                 android:drawableLeft="@drawable/peso_icon"
+                android:drawablePadding="5dp"
                 android:gravity="center"
                 android:text="Peso:"
                 android:textAlignment="viewStart"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/editDetallesPeso"
@@ -233,18 +274,23 @@
                 android:hint="100 kg"
                 android:inputType="number"
                 android:textAlignment="viewStart"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtDetallesEdad"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginBottom="10dp"
-                android:drawableLeft="@android:drawable/ic_menu_today"
+                android:drawableLeft="@drawable/calendar"
+                android:drawablePadding="5dp"
                 android:gravity="center"
                 android:text="Edad:"
                 android:textAlignment="viewStart"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/editDetallesEdad"
@@ -256,18 +302,23 @@
                 android:hint="25"
                 android:inputType="number"
                 android:textAlignment="viewStart"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtDetallesContacto"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginBottom="10dp"
-                android:drawableLeft="@android:drawable/sym_action_call"
+                android:drawableLeft="@drawable/call"
+                android:drawablePadding="5dp"
                 android:gravity="center"
                 android:text="Contacto:"
                 android:textAlignment="viewStart"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/editDetallesContacto"
@@ -279,17 +330,24 @@
                 android:hint="1122334455"
                 android:inputType="phone"
                 android:textAlignment="viewStart"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <Switch
                 android:id="@+id/switch2"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:buttonTint="#673AB7"
+                android:layout_height="70dp"
+                android:layout_marginBottom="10dp"
+                android:buttonTint="#FF1100"
                 android:checked="false"
+                android:drawableLeft="@drawable/setting"
+                android:drawablePadding="5dp"
                 android:text="Administrador:"
                 android:textAlignment="viewStart"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtDetallesDni"
@@ -297,10 +355,13 @@
                 android:layout_height="50dp"
                 android:layout_marginBottom="10dp"
                 android:drawableLeft="@drawable/name_icon"
+                android:drawablePadding="5dp"
                 android:gravity="center"
                 android:text="Dni:"
                 android:textAlignment="viewStart"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/editDetallesDni"
@@ -312,7 +373,9 @@
                 android:hint="11222333"
                 android:inputType="number"
                 android:textAlignment="viewStart"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtDetallesTickets"
@@ -320,10 +383,13 @@
                 android:layout_height="50dp"
                 android:layout_marginBottom="10dp"
                 android:drawableLeft="@drawable/tickets_icon"
+                android:drawablePadding="5dp"
                 android:gravity="center"
                 android:text="Tickets:"
                 android:textAlignment="viewStart"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/editDetallesTickets"
@@ -335,7 +401,9 @@
                 android:hint="120"
                 android:inputType="number"
                 android:textAlignment="viewStart"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
 
         </LinearLayout>
