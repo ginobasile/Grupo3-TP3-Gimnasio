@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.app.DatePickerDialog
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -71,6 +72,8 @@ class DetalleTurno : Fragment() {
         super.onStart()
 
         val turnoActual = DetalleTurnoArgs.fromBundle(requireArguments()).datosTurno
+
+        Log.d("Probando", turnoActual.toString())
 
         txtId.text = "Id: ${turnoActual.id}"
         inputCantPersonas.setText(turnoActual.cantPersonasLim.toString())
@@ -148,6 +151,21 @@ class DetalleTurno : Fragment() {
                 )
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 profesoresSpinner.adapter = adapter
+
+                val profesor = profesoresList.find { it.id == turnoActual.idProfesor.toInt() }
+
+                if(profesor != null) {
+                    val index = profesoresList.indexOf(profesor)
+
+//                    Log.d("ListaDeProfesores", index.toString())
+//                    Log.d("ListaDeProfesores", profesor.toString())
+//                    Log.d("ListaDeProfesores", profesoresList.size.toString())
+//                    Log.d("ListaDeProfesores", profesoresList.toString())
+
+                    if (index != -1) {
+                        profesoresSpinner.setSelection(index)
+                    }
+                }
             }
         }
 
@@ -178,6 +196,21 @@ class DetalleTurno : Fragment() {
                 )
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 actividadesSpinner.adapter = adapter
+
+                val actividad = actividadesList.find { it.id == turnoActual.idActividad.toInt() }
+
+                if(actividad != null){
+                    val index = actividadesList.indexOf(actividad)
+
+//                    Log.d("ListaDeActividades", index.toString())
+//                    Log.d("ListaDeActividades", actividad.toString())
+//                    Log.d("ListaDeActividades", actividadesList.size.toString())
+//                    Log.d("ListaDeActividades", actividadesList.toString())
+
+                    if(index != -1) {
+                        actividadesSpinner.setSelection(actividadesList.indexOf(actividad))
+                    }
+                }
             }
         }
 

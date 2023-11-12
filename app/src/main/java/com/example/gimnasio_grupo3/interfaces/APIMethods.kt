@@ -95,14 +95,12 @@ interface APIMethods {
     // Update
     @PUT("Usuarios/{id}")
     fun updateUsuario(@Path("id") id: String, @Body usuario: Usuario): Call<Usuario>
-    //@PUT("Usuarios/{id}/tickets")
-    //fun actualizarTicketsUsuario(@Path("id") id: String, @Body cantidadTickets: Int): Call<Usuario>
+
     // Delete
     @DELETE("Usuarios/{id}")
     fun deleteUsuarios(@Path("id") id: String): Call<Void>
 
-
-    // TURNOPERSONA-TURNOPERSONA-TURNOPERSONA-TURNOPERSONA-TURNOPERSONA-TURNOPERSONA-TURNOPERSONA-TURNOPERSONA-TURNOPERSONA-TURNOPERSONA-TURNOPERSONA
+    // TURNOPERSONA-TURNOPERSONA-TURNOPERSONA-TURNOPERSONA-TURNOPERSONA-TURNOPERSONA-TURNOPERSONA-TURNOPERSONA
     @POST("turnoPersona")
     fun createTurnoPersona(@Body turnoPersona: TurnoPersona): Call<TurnoPersona>
 

@@ -16,25 +16,30 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gimnasio_grupo3.R
+import com.example.gimnasio_grupo3.RetroFitProviders.ProfesoresProvider
 import com.example.gimnasio_grupo3.adapters.TurnoAdapter
-import com.example.gimnasio_grupo3.entities.Paquete
-import com.example.gimnasio_grupo3.entities.Turno
+import com.example.gimnasio_grupo3.entities.Profesor
 import com.example.gimnasio_grupo3.entities.TurnoPersona
 import com.example.gimnasio_grupo3.entities.Usuario
+import com.example.gimnasio_grupo3.interfaces.APIMethods
 import com.example.gimnasio_grupo3.sessions.MyPreferences
 import com.google.android.material.snackbar.Snackbar
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class TurnosLista : Fragment() {
     lateinit var v : View
     lateinit var recyclerTurnos: RecyclerView
     lateinit var adapter: TurnoAdapter
-    lateinit var turnosList: MutableList<Turno>
     private lateinit var btnCrearTurno: Button
     private lateinit var btnBack: Button
     private lateinit var btnMisTurnos: Button
     private lateinit var txtCantTickets : TextView
     private lateinit var myPreferences: MyPreferences
     private var user: Usuario? = null
+
+    var profesoresList = mutableListOf<Profesor>()
 
     companion object {
         fun newInstance() = TurnosLista()
@@ -56,7 +61,7 @@ class TurnosLista : Fragment() {
         myPreferences = MyPreferences(requireContext())
         user = myPreferences.getUser()
 
-        if (myPreferences.isAdmin() != true) {
+        if (!myPreferences.isAdmin()) {
             btnCrearTurno.visibility = View.GONE
         } else {
             btnMisTurnos.visibility = View.GONE
@@ -82,10 +87,18 @@ class TurnosLista : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(TurnosListaViewModel::class.java)
-        txtCantTickets.text = "Tickets : ${user?.ticketsRestantes.toString()}"
+        txtCantTickets.text = "Tickets: ${user?.ticketsRestantes.toString()}"
+
+        this.obtenerProfesores { profesores ->
+            if (profesores != null) {
+                profesoresList = profesores.toMutableList()
+            }
+            Log.d("Probando", profesoresList.toString())
+        }
+
         viewModel.obtenerTurnos { turnosList ->
             if (turnosList != null) {
-                adapter = TurnoAdapter(requireContext(), turnosList.toMutableList()) { turno ->
+                adapter = TurnoAdapter(requireContext(), turnosList.toMutableList(), profesoresList) { turno ->
                     if(myPreferences.isAdmin()) {
                         val action =
                             TurnosListaDirections.actionTurnosListaToDetalleTurno(
@@ -167,5 +180,35 @@ class TurnosLista : Fragment() {
     return operacionExitosa
 
     }
+
+    private fun obtenerProfesores(callback: (List<Profesor>?) -> Unit) {
+        val retrofit = ProfesoresProvider().provideRetrofit()
+        val apiService = retrofit.create(APIMethods::class.java)
+        val call = apiService.getProfesores()
+
+        call.enqueue(object : Callback<List<Profesor>> {
+            override fun onResponse(
+                call: Call<List<Profesor>>,
+                response: Response<List<Profesor>>
+            ) {
+                if (response.isSuccessful) {
+                    val profesoresLista = response.body()
+                    Log.d("hola", profesoresLista.toString())
+                    if (profesoresLista != null) {
+                        profesoresList = profesoresLista.toMutableList()
+                    }
+                    callback(profesoresList)
+                } else {
+                    callback(null)
+                }
+            }
+
+            override fun onFailure(call: Call<List<Profesor>>, t: Throwable) {
+                callback(null)
+            }
+        })
+    }
+
+
 
 }
