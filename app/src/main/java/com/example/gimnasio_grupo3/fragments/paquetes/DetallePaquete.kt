@@ -31,12 +31,17 @@ class DetallePaquete : Fragment() {
 
     private lateinit var viewModel: DetallePaqueteViewModel
 
+    private lateinit var viewModelLista: PaquetesListaViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         v = inflater.inflate(R.layout.fragment_detalle_paquete, container, false)
+
         viewModel = ViewModelProvider(requireActivity()).get(DetallePaqueteViewModel::class.java)
+
+        viewModelLista = ViewModelProvider(requireActivity()).get(PaquetesListaViewModel::class.java)
 
         txtId = v.findViewById(R.id.textView)
         inputNombre = v.findViewById(R.id.editTextText)
@@ -60,6 +65,7 @@ class DetallePaquete : Fragment() {
         inputTickets.setText(paquete.cantTickets.toString())
 
         btnBack.setOnClickListener {
+            viewModelLista.recargarPaquetes()
             v.findNavController().navigateUp()
         }
 
@@ -92,6 +98,7 @@ class DetallePaquete : Fragment() {
                         Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
 
                         if (estado == "Paquete actualizado exitosamente") {
+                            viewModelLista.recargarPaquetes()
                             v.findNavController().navigateUp()
                         }
                     }
@@ -109,6 +116,7 @@ class DetallePaquete : Fragment() {
                         Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
 
                         if (estado == "Paquete eliminado exitosamente") {
+                            viewModelLista.recargarPaquetes()
                             v.findNavController().navigateUp()
                         }
                     }

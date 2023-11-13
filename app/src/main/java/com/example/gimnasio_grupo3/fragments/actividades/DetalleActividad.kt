@@ -29,13 +29,16 @@ class DetalleActividad : Fragment() {
     }
 
     private lateinit var viewModel: DetalleActividadViewModel
+    private lateinit var viewModelLista: ActividadesListaViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         v = inflater.inflate(R.layout.fragment_detalle_actividad, container, false)
+
         viewModel = ViewModelProvider(requireActivity()).get(DetalleActividadViewModel::class.java)
+        viewModelLista = ViewModelProvider(requireActivity()).get(ActividadesListaViewModel::class.java)
 
         txtId = v.findViewById(R.id.textViewIDActividad)
         inputNombre = v.findViewById(R.id.editTextAct)
@@ -83,6 +86,8 @@ class DetalleActividad : Fragment() {
                         Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
 
                         if (estado == "Actividad actualizada exitosamente") {
+
+                            viewModelLista.recargarActividades()
                             v.findNavController().navigateUp()
                         }
                     }
@@ -100,6 +105,7 @@ class DetalleActividad : Fragment() {
                         Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
 
                         if (estado == "Actividad eliminada exitosamente") {
+                            viewModelLista.recargarActividades()
                             v.findNavController().navigateUp()
                         }
                     }

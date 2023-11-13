@@ -28,6 +28,7 @@ class CrearActividad : Fragment() {
     }
 
     private lateinit var viewModel: CrearActividadViewModel
+    private lateinit var viewModelLista: ActividadesListaViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,6 +46,8 @@ class CrearActividad : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
+        viewModelLista = ViewModelProvider(requireActivity()).get(ActividadesListaViewModel::class.java)
 
         btnBack.setOnClickListener {
             v.findNavController().navigateUp()
@@ -74,6 +77,7 @@ class CrearActividad : Fragment() {
                         Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
 
                         if (estado == "Actividad creada exitosamente") {
+                            viewModelLista.recargarActividades()
                             v.findNavController().navigateUp()
                         }
                     }
