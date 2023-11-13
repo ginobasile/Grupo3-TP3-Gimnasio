@@ -10,10 +10,12 @@ import android.view.View
 import android.content.SharedPreferences
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.example.gimnasio_grupo3.Firebase.FirebaseStorageConnection
 import com.example.gimnasio_grupo3.R
 import com.example.gimnasio_grupo3.activities.LoginActivity
 import com.example.gimnasio_grupo3.activities.MainActivity
@@ -28,6 +30,8 @@ class Home : Fragment() {
     lateinit var btnLogOut : Button
     lateinit var txtNombreCompleto : TextView
     lateinit var txtTickets : TextView
+    lateinit var imgUsuario: ImageView
+    private var FirebaseStorageConnection = FirebaseStorageConnection()
     private lateinit var myPreferences: MyPreferences
     private var user: Usuario? = null
     companion object {
@@ -47,6 +51,7 @@ class Home : Fragment() {
 
         txtNombreCompleto = v.findViewById(R.id.txtNombreApellido)
         txtTickets = v.findViewById(R.id.txtEmail3)
+        imgUsuario = v.findViewById(R.id.imgNavUsuario)
         myPreferences = MyPreferences(requireContext())
         user = myPreferences.getUser()
 
@@ -77,6 +82,7 @@ class Home : Fragment() {
         if (user != null) {
             setNombreCompleto(user.nombre, user.apellido)
             setTickets(user.ticketsRestantes.toString())
+            FirebaseStorageConnection.getImage(imgUsuario,"usuarios/${user.dni}.jpg")
         }
 
         if (myPreferences.isAdmin() != true) {
@@ -113,7 +119,6 @@ class Home : Fragment() {
         val nombreCompleto = "${apellido}, ${nombre}"
         txtNombreCompleto.text = nombreCompleto.uppercase()
     }
-
 
 
     fun setTickets(tickets: String){

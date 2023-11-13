@@ -77,6 +77,16 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <ImageView
+                android:id="@+id/imgDetalleUsuario"
+                android:layout_width="match_parent"
+                android:layout_height="161dp"
+                android:adjustViewBounds="false"
+                android:cropToPadding="false"
+                android:scaleType="fitCenter"
+                android:src="@drawable/avatar"
+                app:srcCompat="@drawable/avatar" />
+
             <TextView
                 android:id="@+id/txtDetallesNombre"
                 android:layout_width="match_parent"
