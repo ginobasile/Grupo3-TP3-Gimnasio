@@ -73,7 +73,12 @@ class DetalleActividad : Fragment() {
             }
 
             if (nuevaDuracion.isEmpty()) {
-                inputDuracion.error = "La duracion es obligatoria"
+                inputDuracion.error = "La duración es obligatoria"
+                return@setOnClickListener
+            }
+
+            if (nuevaDuracion.toInt() < 0 || nuevaDuracion.toInt() > 300) {
+                inputDuracion.error = "La duración debe estar entre 0 y 300 minutos"
                 return@setOnClickListener
             }
 

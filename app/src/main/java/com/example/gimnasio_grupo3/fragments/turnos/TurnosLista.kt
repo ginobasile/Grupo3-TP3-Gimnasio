@@ -62,9 +62,9 @@ class TurnosLista : Fragment() {
         user = myPreferences.getUser()
 
         if (!myPreferences.isAdmin()) {
-            btnCrearTurno.visibility = View.GONE
+            btnCrearTurno.visibility = View.INVISIBLE
         } else {
-            btnMisTurnos.visibility = View.GONE
+            btnMisTurnos.visibility = View.INVISIBLE
         }
 
         btnCrearTurno.setOnClickListener {

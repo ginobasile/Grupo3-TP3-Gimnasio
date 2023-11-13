@@ -76,6 +76,12 @@ class CrearTurno : Fragment() {
                 inputCantPersonas.error = "Debe indicar cantidad de personas"
                 return@setOnClickListener
             }
+
+            if (cantPersonas.toInt() < 0 || cantPersonas.toInt() > 100) {
+                inputCantPersonas.error = "La cantidad de personas debe estar entre 1 y 100"
+                return@setOnClickListener
+            }
+
             if (fecha.isEmpty()) {
                 inputFecha.error = "Debe indicar fecha"
                 return@setOnClickListener

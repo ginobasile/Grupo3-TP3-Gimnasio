@@ -89,6 +89,16 @@ class DetallePaquete : Fragment() {
                 return@setOnClickListener
             }
 
+            if (nuevoTickets.toInt() < 0 || nuevoTickets.toInt() > 1000) {
+                inputTickets.error = "La cantidad de tickets no debe ser mayor a 1000"
+                return@setOnClickListener
+            }
+
+            if (nuevoPrecio.toInt() < 0 || nuevoPrecio.toInt() > 100000) {
+                inputPrecio.error = "El precio no debe ser mayor a 100.000"
+                return@setOnClickListener
+            }
+
             val paqueteActualizado = Paquete(paquete.id, nuevoNombre, nuevoTickets.toInt(), nuevoPrecio.toInt())
 
             confirmAction("Modificar") { confirmed ->

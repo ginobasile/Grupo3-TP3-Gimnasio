@@ -91,9 +91,15 @@ class DetalleTurno : Fragment() {
             val nuevaFecha = inputFecha.text.toString()
 
             if (nuevaCantidad.isEmpty()) {
-                inputCantPersonas.error = "Indique una cantidad"
+                inputCantPersonas.error = "Indique una cantidad de personas"
                 return@setOnClickListener
             }
+
+            if (nuevaCantidad.toInt() < 0 || nuevaCantidad.toInt() > 100) {
+                inputCantPersonas.error = "La cantidad de personas debe estar entre 1 y 100"
+                return@setOnClickListener
+            }
+
             if (nuevaFecha.isEmpty()) {
                 inputFecha.error = "la fecha es obligatoria"
                 return@setOnClickListener

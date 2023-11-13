@@ -7,9 +7,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,6 +26,8 @@ class UsuariosLista : Fragment() {
     lateinit var adapter: UsuarioAdapter
     lateinit var swipe: SwipeRefreshLayout
     lateinit var shimmerUsuarios: LinearLayoutCompat
+
+    lateinit var btnVolver: Button
 
     companion object {
         fun newInstance() = UsuariosLista()
@@ -42,6 +46,8 @@ class UsuariosLista : Fragment() {
         swipe = v.findViewById(R.id.swipeUpdateUsuarios)
         shimmerUsuarios = v.findViewById(R.id.shimmerUsuarios)
 
+        btnVolver = v.findViewById(R.id.button11)
+
         configSwipe()
 
         return v
@@ -59,6 +65,10 @@ class UsuariosLista : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         viewModel = ViewModelProvider(requireActivity()).get(UsuariosListaViewModel::class.java)
+
+        btnVolver.setOnClickListener {
+            v.findNavController().navigateUp()
+        }
 
         viewModel.state.observe(viewLifecycleOwner,Observer{ state ->
             Log.d("test",state)

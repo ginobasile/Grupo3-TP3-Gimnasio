@@ -1,5 +1,6 @@
 package com.example.gimnasio_grupo3.fragments
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
@@ -20,6 +21,7 @@ import com.example.gimnasio_grupo3.activities.MainActivity
 import com.example.gimnasio_grupo3.entities.Usuario
 import com.example.gimnasio_grupo3.sessions.MyPreferences
 import com.google.android.material.snackbar.Snackbar
+import retrofit2.Call
 
 class Home : Fragment() {
     lateinit var v : View
@@ -49,15 +51,6 @@ class Home : Fragment() {
         txtTickets = v.findViewById(R.id.txtEmail3)
         myPreferences = MyPreferences(requireContext())
         user = myPreferences.getUser()
-
-
-
-        btnLogOut.setOnClickListener {
-            val myPreferences = MyPreferences(requireContext())
-            myPreferences.deleteUser()
-            val intent = Intent(activity?.applicationContext, LoginActivity::class.java)
-            startActivity(intent)
-        }
 
         return v
     }
@@ -90,9 +83,15 @@ class Home : Fragment() {
         }
 
         btnLogOut.setOnClickListener {
-            myPreferences.deleteUser()
-            val intent = Intent(activity?.applicationContext, LoginActivity::class.java)
-            startActivity(intent)
+            confirmAction() { confirmed ->
+                if(confirmed){
+                    myPreferences.deleteUser()
+                    val intent = Intent(activity?.applicationContext, LoginActivity::class.java)
+                    startActivity(intent)
+                } else {
+                    Snackbar.make(v, "Acción cancelada", Snackbar.LENGTH_LONG).show()
+                }
+            }
         }
 
         btnUsuarios.setOnClickListener() {
@@ -109,14 +108,31 @@ class Home : Fragment() {
         }
     }
 
-    fun setNombreCompleto(nombre: String, apellido: String){
+    private fun setNombreCompleto(nombre: String, apellido: String) {
         val nombreCompleto = "${apellido}, ${nombre}"
         txtNombreCompleto.text = nombreCompleto.uppercase()
     }
 
-
-
-    fun setTickets(tickets: String){
+    private fun setTickets(tickets: String){
         txtTickets.text = "Tickets: ${tickets}"
+    }
+
+    private fun confirmAction(callback: (Boolean) -> Unit) {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Cerrar Sesión")
+        builder.setMessage("¿Estás seguro de que deseas Cerrar Sesión?")
+
+        builder.setPositiveButton("Cerrar Sesión") { dialog, _ ->
+            callback(true) // Llama al callback con 'true' cuando el usuario confirma
+            dialog.dismiss()
+        }
+
+        builder.setNegativeButton("Cancelar") { dialog, _ ->
+            callback(false) // Llama al callback con 'false' cuando el usuario cancela
+            dialog.dismiss()
+        }
+
+        val dialog = builder.create()
+        dialog.show()
     }
 }
