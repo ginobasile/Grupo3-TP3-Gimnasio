@@ -26,6 +26,8 @@ class CrearPaquete : Fragment() {
 
     private lateinit var viewModel: CrearPaqueteViewModel
 
+    private lateinit var viewModelLista: PaquetesListaViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,6 +47,7 @@ class CrearPaquete : Fragment() {
         super.onStart()
 
         btnBack.setOnClickListener {
+            viewModelLista.recargarPaquetes()
             v.findNavController().navigateUp()
         }
 
@@ -80,6 +83,7 @@ class CrearPaquete : Fragment() {
                         Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
 
                         if (estado == "Paquete creado exitosamente") {
+                            viewModelLista.recargarPaquetes()
                             v.findNavController().navigateUp()
                         }
                     }
@@ -112,6 +116,8 @@ class CrearPaquete : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(CrearPaqueteViewModel::class.java)
+
+        viewModelLista = ViewModelProvider(requireActivity()).get(PaquetesListaViewModel::class.java)
         // TODO: Use the ViewModel
     }
 
