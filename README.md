@@ -1,18 +1,20 @@
 # Grupo3-TP3-Gimnasio
 Proyecto de TP3, grupo 3
-## Ultimos cambios subidos a la rama disenoTerminadoGino
-## ENDPOINT USERS: https://645ae28c95624ceb210d09ed.mockapi.io/Usuarios
-## ENDPOINT TABLA TURNO PERSONA: https://65244a19ea560a22a4e9b387.mockapi.io/turnoPersona
+
+## Integrantes:
+- Basile Gino Roberto
+- Varela Juan Ignacio
+- Nobile Tomás Ezequiel
+- Turner Lopez Juan Pablo
+
+#### ENDPOINT USERS: https://645ae28c95624ceb210d09ed.mockapi.io/Usuarios
+#### ENDPOINT TURNOPERSONA: https://65244a19ea560a22a4e9b387.mockapi.io/turnoPersona
+#### ENDPOINT ACTIVIDADES: https://64662c65228bd07b355ddc69.mockapi.io/actividades
+#### ENDPOINT PAQUETES: https://646937ca03bb12ac208876f1.mockapi.io/paquetes
+#### ENDPOINT TURNOS: https://65244a19ea560a22a4e9b387.mockapi.io/turnos
+#### ENDPOINT PROFESORES: https://64662c65228bd07b355ddc69.mockapi.io/profesores
 
 ## Tareas que faltan:  
-
-- imagenes en actividades y usuarios - TOMI
-- que guarde el estado de las listas (implementado en usuario) (listas: actividades, paquetes, y si es posible turnos) - IGNA
-- Hacer el fetch de profesores en el viewmodel de turnos para solucionar problema profesor no encontrado - JUAMPI
-
-## FINALIZADO:  
-- agregar permisos admin donde se necesite - JUAMPI
-- eliminar btn de eliminar en tus propios datos y en usuarios con tu misma cuenta - JUAMPI
-- si es admin mostrar opcion de dar admin a otra cuenta - JUAMPI
-- ordenar turnos x fecha y si es turno pasado no mostrar (el admin puede ver todo) - JUAMPI
-- ver tus datos actualizados
+- Revisión general de la app para buscar mejoras / errores
+- juampi: quiero agregar pantalla de carga en mis turnos (opcional)
+- mergear rama tomi y rama juampi
