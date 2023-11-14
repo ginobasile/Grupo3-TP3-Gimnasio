@@ -107,4 +107,7 @@ interface APIMethods {
     @GET("turnoPersona")
     fun getTurnosPersonas(): Call<List<TurnoPersona>>
 
+    @DELETE("turnoPersona/{id}")
+    fun deleteTurnoPersona(@Path("id") id: String): Call<Void>
+
 }

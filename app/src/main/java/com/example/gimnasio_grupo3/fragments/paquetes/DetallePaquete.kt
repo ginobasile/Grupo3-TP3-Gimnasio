@@ -45,8 +45,8 @@ class DetallePaquete : Fragment() {
 
         txtId = v.findViewById(R.id.textView)
         inputNombre = v.findViewById(R.id.editTextText)
-        inputPrecio = v.findViewById(R.id.editTextNumber2)
-        inputTickets = v.findViewById(R.id.editTextNumber)
+        inputPrecio = v.findViewById(R.id.editTextNumber)
+        inputTickets = v.findViewById(R.id.editTextNumber2)
         btnMod = v.findViewById(R.id.button2)
         btnBack = v.findViewById(R.id.button3)
         btnDelete = v.findViewById(R.id.button)

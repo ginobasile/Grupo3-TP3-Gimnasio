@@ -54,12 +54,6 @@ class MyPreferences(context: Context) {
         return isAdmin
     }
 
-    fun setUserTickets(tickets: Int) {
-        val editor = sharedPreferences.edit()
-        editor.putInt("TICKETS", tickets)
-        editor.apply()
-    }
-
     fun poseeElTurno(turno: Turno) : Boolean {
         var posee = false
         val user = getUser()

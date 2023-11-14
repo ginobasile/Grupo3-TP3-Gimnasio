@@ -68,6 +68,12 @@ class CrearActividad : Fragment() {
             }
 
             val dur = duracionText.toInt()
+
+            if (dur.toInt() < 0 || dur.toInt() > 300) {
+                inputDuracion.error = "La duración debe estar entre 0 y 300 minutos"
+                return@setOnClickListener
+            }
+
             val nuevoActividad = Actividad(nombre, duracionText.toInt())
 
             confirmAction("Crear") { confirmed ->

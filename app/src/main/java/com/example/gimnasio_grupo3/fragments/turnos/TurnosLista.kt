@@ -126,10 +126,14 @@ class TurnosLista : Fragment() {
                 "Loading" -> {
                     recyclerTurnos.isVisible = false
                     shimmerTurnos.isVisible = true
+                    btnCrearTurno.isEnabled = false
+                    btnMisTurnos.isEnabled = false
                 }
                 "Success" -> {
                     recyclerTurnos.isVisible = true
                     shimmerTurnos.isVisible = false
+                    btnCrearTurno.isEnabled = true
+                    btnMisTurnos.isEnabled = true
                 }
             }
         })
@@ -219,12 +223,12 @@ class TurnosLista : Fragment() {
                         actualizarTickets
                     )
                     viewModel.actualizarTickets(usuarioActualizado){ estado ->
-                        Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
+                        //Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
                         myPreferences.setUser(usuarioActualizado)
                         txtCantTickets.text = usuarioActualizado.ticketsRestantes.toString()
                     }
                     operacionExitosa = true
-                    Snackbar.make(requireView(), "turno reservado con éxito", Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(requireView(), "Turno reservado con éxito", Snackbar.LENGTH_SHORT).show()
                 }
 
         }else{

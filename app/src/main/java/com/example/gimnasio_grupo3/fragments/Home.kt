@@ -29,7 +29,7 @@ class Home : Fragment() {
     lateinit var btnUsuarios : Button
     lateinit var btnLogOut : Button
     lateinit var txtNombreCompleto : TextView
-    lateinit var txtTickets : TextView
+    lateinit var txtInfo : TextView
     private lateinit var myPreferences: MyPreferences
     private var user: Usuario? = null
     companion object {
@@ -48,7 +48,7 @@ class Home : Fragment() {
         btnLogOut = v.findViewById(R.id.btnLogOut)
 
         txtNombreCompleto = v.findViewById(R.id.txtNombreApellido)
-        txtTickets = v.findViewById(R.id.txtEmail3)
+        txtInfo = v.findViewById(R.id.txtEmail3)
         myPreferences = MyPreferences(requireContext())
         user = myPreferences.getUser()
 
@@ -75,6 +75,12 @@ class Home : Fragment() {
         if (myPreferences.isAdmin() != true) {
             btnProfesores.visibility = View.GONE
             btnUsuarios.visibility = View.GONE
+        } else {
+            txtInfo.text = "Cuenta de administrador"
+            txtInfo.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+
+            val drawable = requireContext().getDrawable(R.drawable.setting)
+            txtInfo.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
         }
 
         btnProfesores.setOnClickListener {
@@ -114,7 +120,7 @@ class Home : Fragment() {
     }
 
     private fun setTickets(tickets: String){
-        txtTickets.text = "Tickets: ${tickets}"
+        txtInfo.text = "Tickets: ${tickets}"
     }
 
     private fun confirmAction(callback: (Boolean) -> Unit) {

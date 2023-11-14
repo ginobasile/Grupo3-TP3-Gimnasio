@@ -66,19 +66,18 @@ class CrearPaquete : Fragment() {
                 return@setOnClickListener
             }
 
-            if (ticketsText.isEmpty()) {
-                inputTickets.error = "La cantidad de tickets es obligatoria"
-                return@setOnClickListener
-            }
-
             val precio = precioText.toInt()
-            val tickets = ticketsText.toInt()
-
             if (precio < 0 || precio > 100000) {
                 inputPrecio.error = "El precio no debe ser mayor a 100.000"
                 return@setOnClickListener
             }
 
+            if (ticketsText.isEmpty()) {
+                inputTickets.error = "La cantidad de tickets es obligatoria"
+                return@setOnClickListener
+            }
+
+            val tickets = ticketsText.toInt()
             if (tickets < 0 || tickets > 1000) {
                 inputTickets.error = "La cantidad de tickets no debe ser mayor a 1000"
                 return@setOnClickListener

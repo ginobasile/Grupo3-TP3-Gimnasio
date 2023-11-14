@@ -11,6 +11,7 @@ import com.example.gimnasio_grupo3.entities.Actividad
 import com.example.gimnasio_grupo3.entities.Profesor
 import com.example.gimnasio_grupo3.entities.Turno
 import com.example.gimnasio_grupo3.entities.TurnoPersona
+import com.example.gimnasio_grupo3.entities.Usuario
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -20,7 +21,8 @@ class TurnoPersonaAdapter(
     private val listaTurnosPersona: List<TurnoPersona>,
     private val listaTurnos: List<Turno>,
     private val listaActividades: List<Actividad>,
-    private val listaProfesores: List<Profesor>
+    private val listaProfesores: List<Profesor>,
+    private val onItemClick: (TurnoPersona) -> Unit
 ) : RecyclerView.Adapter<TurnoPersonaAdapter.TurnoPersonaHolder>() {
 
     private var listaFiltrada: List<TurnoPersona>
@@ -47,6 +49,10 @@ class TurnoPersonaAdapter(
             val nombreActividad = obtenerNombreActividadPorId(turno.idActividad.toInt())
             val profesor = obtenerNombreProfesorPorId(turno.idProfesor.toInt())
             holder.bindTurnoPersona(turnoPersona, nombreActividad, profesor)
+        }
+
+        holder.itemView.setOnClickListener {
+            onItemClick(turnoPersona)
         }
     }
 
@@ -86,7 +92,7 @@ class TurnoPersonaAdapter(
         return turno?.fecha ?: "Fecha no encontrada"
     }
 
-    private fun esFechaPasada(idTurno: Int): Boolean {
+    fun esFechaPasada(idTurno: Int): Boolean {
         val fechaTurno = obtenerFechaPorIdTurno(idTurno)
         val fechaTurnoDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(fechaTurno)
         val fechaActual = Date()
