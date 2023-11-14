@@ -16,5 +16,4 @@ Proyecto de TP3, grupo 3
 
 ## Tareas que faltan:  
 - Revisión general de la app para buscar mejoras / errores
-- juampi: quiero agregar pantalla de carga en mis turnos (opcional)
 - mergear rama tomi y rama juampi
