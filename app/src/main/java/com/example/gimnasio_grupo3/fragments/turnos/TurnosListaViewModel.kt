@@ -30,10 +30,6 @@ class TurnosListaViewModel : ViewModel() {
         cargarActividades()
     }
 
-    fun recargarTurnos() {
-       obtenerTurnos()
-    }
-
     fun actualizarTickets(usuario: Usuario, callback: (String) -> Unit) {
         val retrofit = UsuariosProvider().provideRetrofit()
         val apiService = retrofit.create(APIMethods::class.java)
@@ -126,8 +122,8 @@ class TurnosListaViewModel : ViewModel() {
             override fun onResponse(call: Call<List<Actividad>>, response: Response<List<Actividad>>) {
                 if (response.isSuccessful) {
                     actividadesCargadas.value = response.body()
-                    Log.d("Carga", "Actividades OK")
-                    cargarProfesores()
+                    Log.d("Loading", "Actividades OK")
+                   cargarProfesores()
                 }
                 else {
                     // La llamada no fue exitosa, maneja los errores aquí
@@ -150,7 +146,7 @@ class TurnosListaViewModel : ViewModel() {
             override fun onResponse(call: Call<List<Profesor>>, response: Response<List<Profesor>>) {
                 if (response.isSuccessful) {
                     profesoresCargados.value = response.body()
-                    Log.d("Carga", "Profesores OK")
+                    Log.d("Loading", "Profesores OK")
                     cargarTurnos()
                 }
                 else {
@@ -173,7 +169,7 @@ class TurnosListaViewModel : ViewModel() {
             override fun onResponse(call: Call<List<Turno>>, response: Response<List<Turno>>) {
                 if (response.isSuccessful) {
                     turnosCargados.value = response.body()
-                    Log.d("Carga", "Turnos OK")
+                    Log.d("Loading", "Turnos OK")
                     state.value = "Success"
                 }
                 else {

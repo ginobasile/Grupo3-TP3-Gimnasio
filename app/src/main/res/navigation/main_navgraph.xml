@@ -162,5 +162,15 @@
         android:id="@+id/misTurnos"
         android:name="com.example.gimnasio_grupo3.fragments.turnos.MisTurnos"
         android:label="fragment_mis_turnos"
-        tools:layout="@layout/fragment_mis_turnos" />
+        tools:layout="@layout/fragment_mis_turnos" >
+        <argument
+            android:name="profesoresList"
+            app:argType="com.example.gimnasio_grupo3.entities.Profesor[]" />
+        <argument
+            android:name="actividadesList"
+            app:argType="com.example.gimnasio_grupo3.entities.Actividad[]" />
+        <argument
+            android:name="turnosList"
+            app:argType="com.example.gimnasio_grupo3.entities.Turno[]" />
+    </fragment>
 </navigation>

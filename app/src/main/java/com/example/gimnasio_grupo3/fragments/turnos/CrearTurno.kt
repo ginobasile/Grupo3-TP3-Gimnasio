@@ -65,7 +65,6 @@ class CrearTurno : Fragment() {
         val actividades = CrearTurnoArgs.fromBundle(requireArguments()).actividadesList
 
         btnBack.setOnClickListener {
-            viewModelLista.recargarTurnos()
             v.findNavController().navigateUp()
         }
 
@@ -99,7 +98,7 @@ class CrearTurno : Fragment() {
                         Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
 
                         if (estado == "Turno creado exitosamente") {
-                            viewModelLista.recargarTurnos()
+                            viewModelLista.obtenerTurnos()
                             v.findNavController().navigateUp()
                         }
                     }

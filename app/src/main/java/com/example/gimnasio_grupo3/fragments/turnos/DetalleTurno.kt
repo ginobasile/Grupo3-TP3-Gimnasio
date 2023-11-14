@@ -86,7 +86,6 @@ class DetalleTurno : Fragment() {
 
 
         btnBack.setOnClickListener {
-            viewModelLista.recargarTurnos()
             v.findNavController().navigateUp()
         }
 
@@ -126,7 +125,7 @@ class DetalleTurno : Fragment() {
                         Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
 
                         if (estado == "Turno actualizado exitosamente") {
-                            viewModelLista.recargarTurnos()
+                            viewModelLista.obtenerTurnos()
                             v.findNavController().navigateUp()
                         }
                     }
@@ -143,7 +142,7 @@ class DetalleTurno : Fragment() {
                         Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
 
                         if (estado == "Turno eliminado exitosamente") {
-                            viewModelLista.recargarTurnos()
+                            viewModelLista.obtenerTurnos()
                             v.findNavController().navigateUp()
                         }
                     }

@@ -22,8 +22,6 @@ class MisTurnos : Fragment() {
     lateinit var v : View
     lateinit var recyclerMisTurnos: RecyclerView
     private lateinit var btnBack: Button
-    private lateinit var actividadList: List<Actividad>
-    private lateinit var turnoList: List<Turno>
     private lateinit var turnoPersonaList: List<TurnoPersona>
     private lateinit var turnoPersonaAdapter: TurnoPersonaAdapter
     private lateinit var myPreferences: MyPreferences
@@ -57,40 +55,26 @@ class MisTurnos : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(MisTurnosViewModel::class.java)
-    viewModel.obtenerActividades { actividades ->
-        if (actividades != null) {
-            actividadList = actividades
-            cargarDatosEnAdapter()
-        } else {
-            // Manejar el caso en el que no se pudieron obtener las actividades
-        }
-    }
 
-    viewModel.obtenerTurnos { turnos ->
-        if (turnos != null) {
-            turnoList = turnos
-            cargarDatosEnAdapter()
-        } else {
-            // Manejar el caso en el que no se pudieron obtener los turnos
+        viewModel.obtenerTurnoPersonas { turnosPersonas ->
+            if (turnosPersonas != null) {
+                turnoPersonaList = turnosPersonas
+                cargarDatosEnAdapter()
+            } else {
+                // Manejar el caso en el que no se pudieron obtener las personas de turno
+            }
         }
     }
-
-    viewModel.obtenerTurnoPersonas { turnosPersonas ->
-        if (turnosPersonas != null) {
-            turnoPersonaList = turnosPersonas
-            cargarDatosEnAdapter()
-        } else {
-            // Manejar el caso en el que no se pudieron obtener las personas de turno
-        }
-    }
-}
 
     private fun cargarDatosEnAdapter() {
-        if (::actividadList.isInitialized && ::turnoList.isInitialized && ::turnoPersonaList.isInitialized) {
-            turnoPersonaAdapter =
-                user?.let { TurnoPersonaAdapter(it.id, turnoPersonaList, turnoList, actividadList) }!!
-            recyclerMisTurnos.adapter = turnoPersonaAdapter
-        }
+
+        val profesores = MisTurnosArgs.fromBundle(requireArguments()).profesoresList
+        val actividades = MisTurnosArgs.fromBundle(requireArguments()).actividadesList
+        val turnos = MisTurnosArgs.fromBundle(requireArguments()).turnosList
+
+        turnoPersonaAdapter =
+            user?.let { TurnoPersonaAdapter(it.id, turnoPersonaList, turnos.toList(), actividades.toList(), profesores.toList()) }!!
+        recyclerMisTurnos.adapter = turnoPersonaAdapter
     }
     }
 

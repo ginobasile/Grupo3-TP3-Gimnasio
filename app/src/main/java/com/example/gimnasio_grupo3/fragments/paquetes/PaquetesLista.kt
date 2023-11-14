@@ -70,6 +70,8 @@ class PaquetesLista : Fragment() {
 
         if (user?.administrador != true) {
             btnCrearPaquete.visibility = View.GONE
+        } else {
+            txtCantTickets.visibility = View.GONE
         }
 
         btnCrearPaquete.setOnClickListener {

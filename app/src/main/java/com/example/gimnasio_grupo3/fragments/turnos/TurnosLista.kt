@@ -24,6 +24,7 @@ import com.example.gimnasio_grupo3.RetroFitProviders.ProfesoresProvider
 import com.example.gimnasio_grupo3.adapters.TurnoAdapter
 import com.example.gimnasio_grupo3.entities.Actividad
 import com.example.gimnasio_grupo3.entities.Profesor
+import com.example.gimnasio_grupo3.entities.Turno
 import com.example.gimnasio_grupo3.entities.TurnoPersona
 import com.example.gimnasio_grupo3.entities.Usuario
 import com.example.gimnasio_grupo3.interfaces.APIMethods
@@ -47,6 +48,7 @@ class TurnosLista : Fragment() {
 
     private lateinit var profesoresArray: Array<Profesor>
     private lateinit var actividadesArray: Array<Actividad>
+    private lateinit var turnosArray: Array<Turno>
 
     lateinit var swipe: SwipeRefreshLayout
     lateinit var shimmerTurnos: LinearLayoutCompat
@@ -58,7 +60,7 @@ class TurnosLista : Fragment() {
     private fun configSwipe() {
         swipe.setOnRefreshListener {
             swipe.isRefreshing = false
-            viewModel.recargarTurnos()
+            viewModel.obtenerTurnos()
         }
     }
 
@@ -92,8 +94,7 @@ class TurnosLista : Fragment() {
             findNavController().navigate(action)
         }
         btnMisTurnos.setOnClickListener{
-            val action = TurnosListaDirections.actionTurnosListaToMisTurnos()
-            findNavController().navigate(action)
+            irAMisTurnos()
         }
 
         btnBack.setOnClickListener {
@@ -105,13 +106,22 @@ class TurnosLista : Fragment() {
         return v
     }
 
+    private fun irAMisTurnos(){
+        val action = TurnosListaDirections.actionTurnosListaToMisTurnos(profesoresArray, actividadesArray, turnosArray)
+        findNavController().navigate(action)
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(TurnosListaViewModel::class.java)
-        txtCantTickets.text = "Tickets: ${user?.ticketsRestantes.toString()}"
+
+        if (user?.administrador == true){
+            txtCantTickets.visibility = View.GONE
+        } else {
+            txtCantTickets.text = "Tickets: ${user?.ticketsRestantes.toString()}"
+        }
 
         viewModel.state.observe(viewLifecycleOwner, Observer{ state ->
-            Log.d("Turno",state)
             when(state){
                 "Loading" -> {
                     recyclerTurnos.isVisible = false
@@ -126,6 +136,8 @@ class TurnosLista : Fragment() {
 
         viewModel.turnosCargados.observe(viewLifecycleOwner, Observer { turnosList ->
             if(turnosList != null) {
+
+                turnosArray = turnosList.toTypedArray()
 
                 val profesoresList: List<Profesor> = viewModel.profesoresCargados.value?.toList() ?: emptyList()
                 val actividadesList: List<Actividad> = viewModel.actividadesCargadas.value?.toList() ?: emptyList()
@@ -146,7 +158,9 @@ class TurnosLista : Fragment() {
                             if(cantidadInscriptos != null) {
                                 if (cantidadInscriptos >= turno.cantPersonasLim){
                                     Snackbar.make(requireView(), "No hay lugar en el turno seleccionado", Snackbar.LENGTH_SHORT).show()
-                                }else{
+                                } else if (myPreferences.poseeElTurno(turno)){
+                                    Snackbar.make(requireView(), "Ya estabas inscripto en el turno seleccionado", Snackbar.LENGTH_SHORT).show()
+                                } else{
                                     val dialogBuilder = AlertDialog.Builder(requireContext())
                                     dialogBuilder.setMessage("¿Desea reservar el turno en la fecha: ${turno.fecha}? Se le descontaran 1 tickets.")
                                         .setPositiveButton("Sí") { _, _ ->
@@ -162,6 +176,7 @@ class TurnosLista : Fragment() {
                                                             estado,
                                                             Snackbar.LENGTH_LONG
                                                         ).show()
+                                                        irAMisTurnos()
                                                     }
                                                 }
                                             }

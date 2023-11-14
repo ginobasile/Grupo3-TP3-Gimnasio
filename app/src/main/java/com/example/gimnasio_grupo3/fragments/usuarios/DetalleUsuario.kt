@@ -18,6 +18,8 @@ import com.example.gimnasio_grupo3.R
 import com.example.gimnasio_grupo3.activities.LoginActivity
 import com.example.gimnasio_grupo3.activities.MainActivity
 import com.example.gimnasio_grupo3.entities.Usuario
+import com.example.gimnasio_grupo3.fragments.turnos.CrearTurnoViewModel
+import com.example.gimnasio_grupo3.fragments.turnos.TurnosListaViewModel
 import com.example.gimnasio_grupo3.sessions.MyPreferences
 import com.google.android.material.snackbar.Snackbar
 
@@ -36,6 +38,7 @@ class DetalleUsuario : Fragment() {
     private lateinit var editDetallesAdmin: Switch
     private lateinit var editDetallesDni : EditText
     private lateinit var editDetallesTickets : EditText
+    private lateinit var txtTickets : TextView
 
     private lateinit var btnDeleteUsuario: Button
     private lateinit var btnVolver : Button
@@ -68,6 +71,7 @@ class DetalleUsuario : Fragment() {
         editDetallesTickets = v.findViewById(R.id.editDetallesTickets)
 
         txtId = v.findViewById(R.id.textViewIDActividad2)
+        txtTickets =  v.findViewById(R.id.txtDetallesTickets)
 
         btnDeleteUsuario = v.findViewById(R.id.btnDeleteUsuario)
         btnVolver = v.findViewById(R.id.btnVolver)
@@ -88,6 +92,7 @@ class DetalleUsuario : Fragment() {
         viewModel = ViewModelProvider(this).get(DetalleUsuarioViewModel::class.java)
 
         viewModelLista = ViewModelProvider(requireActivity()).get(UsuariosListaViewModel::class.java)
+        viewModelLista.recargarUsuarios()
 
         editDetallesNombre.setText(usuario.nombre);
         editDetallesApellido.setText(usuario.apellido);
@@ -101,13 +106,11 @@ class DetalleUsuario : Fragment() {
         editDetallesDni.setText(usuario.dni.toString());
         editDetallesTickets.setText(usuario.ticketsRestantes.toString());
 
-        if (myPreferences.isAdmin()) {
-            editDetallesAdmin.isEnabled = true
-            editDetallesTickets.isEnabled = true
-        } else {
-            txtId.visibility = View.INVISIBLE
-            editDetallesAdmin.isEnabled = false
-            editDetallesTickets.isEnabled = false
+        if (!myPreferences.isAdmin()) {
+            txtId.visibility = View.GONE
+            editDetallesAdmin.visibility = View.GONE
+            editDetallesTickets.visibility = View.GONE
+            txtTickets.visibility = View.GONE
         }
 
         btnVolver.setOnClickListener {
@@ -144,6 +147,13 @@ class DetalleUsuario : Fragment() {
 
             if (!android.util.Patterns.EMAIL_ADDRESS.matcher(nuevoMail).matches()) {
                 editDetallesMail.error = "El formato del mail no es correcto"
+                return@setOnClickListener
+            }
+
+            val mailsList = viewModelLista.usuariosCargados.value?.filter { it.id != usuario.id }?.map { it.mail } ?: emptyList()
+            Log.d("Listas", mailsList.toString())
+            if (mailsList.contains(nuevoMail)) {
+                editDetallesMail.error = "Este mail ya está en uso"
                 return@setOnClickListener
             }
 
@@ -204,6 +214,13 @@ class DetalleUsuario : Fragment() {
 
             if (nuevoDni.isEmpty()) {
                 editDetallesDni.error = "El dni es obligatorio"
+                return@setOnClickListener
+            }
+
+            val dnisList = viewModelLista.usuariosCargados.value?.filter { it.id != usuario.id }?.map { it.dni } ?: emptyList()
+            Log.d("Listas", dnisList.toString())
+            if (dnisList.contains(nuevoDni.toInt())) {
+                editDetallesDni.error = "Este dni ya está en uso"
                 return@setOnClickListener
             }
 
