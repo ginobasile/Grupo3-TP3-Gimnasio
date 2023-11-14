@@ -13,6 +13,7 @@ import androidx.navigation.findNavController
 import com.example.gimnasio_grupo3.R
 import com.example.gimnasio_grupo3.entities.Profesor
 import com.example.gimnasio_grupo3.fragments.profesores.CrearProfesorViewModel
+import com.example.gimnasio_grupo3.fragments.profesores.ProfesoresListaViewModel
 import com.google.android.material.snackbar.Snackbar
 
 class CrearProfesor : Fragment() {
@@ -27,6 +28,7 @@ class CrearProfesor : Fragment() {
     }
 
     private lateinit var viewModel: CrearProfesorViewModel
+    private lateinit var viewModelLista: ProfesoresListaViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,6 +48,7 @@ class CrearProfesor : Fragment() {
         super.onStart()
 
         btnBack.setOnClickListener {
+            viewModelLista.recargarProfesores()
             v.findNavController().navigateUp()
         }
 
@@ -73,6 +76,7 @@ class CrearProfesor : Fragment() {
                         Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
 
                         if (estado == "Profesor creado exitosamente") {
+                            viewModelLista.recargarProfesores()
                             v.findNavController().navigateUp()
                         }
                     }
@@ -105,6 +109,7 @@ class CrearProfesor : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(CrearProfesorViewModel::class.java)
+        viewModelLista = ViewModelProvider(requireActivity()).get(ProfesoresListaViewModel::class.java)
         // TODO: Use the ViewModel
     }
 }

@@ -26,14 +26,13 @@ import java.util.Locale
 class TurnoAdapter(
     context: Context,
     var turnos: MutableList<Turno>,
-    var profesores: MutableList<Profesor>,
+    var profesores: List<Profesor>,
+    var actividades: List<Actividad>,
     private val onItemClick: (Turno) -> Unit,
 ) : RecyclerView.Adapter<TurnoAdapter.TurnoHolder>() {
 
     var myPreferences = MyPreferences(context)
     private var listaFiltrada: List<Turno>
-
-    var actividadesList = mutableListOf<Actividad>()
 
     class TurnoHolder(v: View) : RecyclerView.ViewHolder(v) {
         val txtActividad: TextView = itemView.findViewById(R.id.txtActividadNombre)
@@ -44,14 +43,6 @@ class TurnoAdapter(
     }
 
     init {
-        obtenerActividades { actividades ->
-            actividades?.let {
-                actividadesList.clear()
-                actividadesList.addAll(it)
-                notifyDataSetChanged()
-            }
-        }
-
         listaFiltrada = if (myPreferences.isAdmin()) {
             turnos.sortedByDescending {
                 SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(it.fecha)
@@ -64,7 +55,9 @@ class TurnoAdapter(
                 .filter { turno -> !esFechaPasada(turno.fecha) }
         }
 
-        Log.d("TURNOS", listaFiltrada.toString())
+        Log.d("Carga", turnos.toString())
+        Log.d("Carga", profesores.toString())
+        Log.d("Carga", actividades.toString())
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TurnoHolder {
@@ -79,9 +72,9 @@ class TurnoAdapter(
     override fun onBindViewHolder(holder: TurnoHolder, position: Int) {
         val turno = listaFiltrada[position]
 
-        Log.d("Probando2", actividadesList.toString())
+        Log.d("Probando2", actividades.toString())
 
-        val actividad = actividadesList.find { it.id.toString().equals(turno.idActividad) }
+        val actividad = actividades.find { it.id.toString().equals(turno.idActividad) }
         var actividadNombre = ""
 
         if (actividad != null) {
@@ -121,32 +114,5 @@ class TurnoAdapter(
         val fechaTurno = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(fecha)
         val fechaActual = Date()
         return fechaTurno != null && fechaTurno < fechaActual
-    }
-
-    private fun obtenerActividades(callback: (List<Actividad>?) -> Unit) {
-        val retrofit = ActividadesProvider().provideRetrofit()
-        val apiService = retrofit.create(APIMethods::class.java)
-        val call = apiService.getActividad()
-
-        call.enqueue(object : Callback<List<Actividad>> {
-            override fun onResponse(
-                call: Call<List<Actividad>>,
-                response: Response<List<Actividad>>
-            ) {
-                if (response.isSuccessful) {
-                    val actividadesLista = response.body()
-                    if (actividadesLista != null) {
-                        actividadesList = actividadesLista.toMutableList()
-                    }
-                    callback(actividadesLista)
-                } else {
-                    callback(null)
-                }
-            }
-
-            override fun onFailure(call: Call<List<Actividad>>, t: Throwable) {
-                callback(null)
-            }
-        })
     }
 }

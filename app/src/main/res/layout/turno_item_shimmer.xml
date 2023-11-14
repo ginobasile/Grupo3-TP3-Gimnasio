@@ -1,0 +1,89 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardTurno"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:maxWidth="380dp"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="8dp">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#D8735D">
+
+
+        <FrameLayout
+            android:id="@+id/shimmerNombre"
+            android:layout_width="300dp"
+            android:layout_height="47dp"
+            android:layout_marginTop="16dp"
+
+
+            android:background="#C8C8C9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <FrameLayout
+            android:id="@+id/shimmer2"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+
+            android:layout_marginTop="8dp"
+            android:background="#C8C8C9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shimmerNombre">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/shimmer4"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+
+            android:layout_marginTop="8dp"
+            android:background="#C8C8C9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shimmer2">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/shimmer3"
+            android:layout_width="160dp"
+            android:layout_height="35dp"
+
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:background="#C8C8C9"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.471"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shimmer4">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/shimmer8"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="#C8C8C9"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>

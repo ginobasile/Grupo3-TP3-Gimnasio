@@ -92,8 +92,6 @@ class ActividadesLista : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(requireActivity()).get(ActividadesListaViewModel::class.java)
 
-
-
         viewModel.state.observe(viewLifecycleOwner, Observer{ state ->
             Log.d("test",state)
             when(state){

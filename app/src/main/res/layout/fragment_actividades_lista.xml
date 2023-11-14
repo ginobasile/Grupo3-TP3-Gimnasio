@@ -71,9 +71,11 @@
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/shimmerActividades"
                 android:layout_width="match_parent"
-                android:layout_height="569dp"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintTop_toBottomOf="@+id/textViewTitle">
+
+                <include layout="@layout/actividad_item_shimmer" />
 
                 <include layout="@layout/actividad_item_shimmer" />
 

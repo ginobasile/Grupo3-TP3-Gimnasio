@@ -28,8 +28,6 @@ class CrearTurno : Fragment() {
     private lateinit var inputFecha: EditText
     private lateinit var btnCreate: Button
     private lateinit var btnBack: Button
-    lateinit var actividadesList: MutableList<Actividad>
-    lateinit var profesoresList: MutableList<Profesor>
     lateinit var actividadesSpinner: Spinner
     lateinit var profesoresSpinner: Spinner
     lateinit var idActividad: String
@@ -39,6 +37,7 @@ class CrearTurno : Fragment() {
     }
 
     private lateinit var viewModel: CrearTurnoViewModel
+    private lateinit var  viewModelLista: TurnosListaViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,7 +61,11 @@ class CrearTurno : Fragment() {
     override fun onStart() {
         super.onStart()
 
+        val profesores = CrearTurnoArgs.fromBundle(requireArguments()).profesoresList
+        val actividades = CrearTurnoArgs.fromBundle(requireArguments()).actividadesList
+
         btnBack.setOnClickListener {
+            viewModelLista.recargarTurnos()
             v.findNavController().navigateUp()
         }
 
@@ -96,6 +99,7 @@ class CrearTurno : Fragment() {
                         Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
 
                         if (estado == "Turno creado exitosamente") {
+                            viewModelLista.recargarTurnos()
                             v.findNavController().navigateUp()
                         }
                     }
@@ -105,19 +109,14 @@ class CrearTurno : Fragment() {
             }
         }
 
-        viewModel.obtenerProfesores { listaProfesores ->
-            if (listaProfesores != null) {
-                profesoresList = listaProfesores as MutableList<Profesor>
+        val adapterProfesor = ArrayAdapter(
+            v.context,
+            android.R.layout.simple_spinner_item,
+            formatoProfesor(profesores)
+        )
+        adapterProfesor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        profesoresSpinner.adapter = adapterProfesor
 
-                val adapter = ArrayAdapter(
-                    v.context,
-                    android.R.layout.simple_spinner_item,
-                    formatoProfesor(profesoresList)
-                )
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                profesoresSpinner.adapter = adapter
-            }
-        }
 
         profesoresSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
@@ -126,7 +125,7 @@ class CrearTurno : Fragment() {
                 position: Int,
                 id: Long
             ) {
-                idProfesor = profesoresList[position].id.toString()
+                idProfesor = profesores[position].id.toString()
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -135,19 +134,14 @@ class CrearTurno : Fragment() {
 
         }
 
-        viewModel.obtenerActividades { listaActividades ->
-            if (listaActividades != null) {
-                actividadesList = listaActividades as MutableList<Actividad>
+        val adapterActividad = ArrayAdapter(
+            v.context,
+            android.R.layout.simple_spinner_item,
+            formatoActividad(actividades)
+        )
+        adapterActividad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        actividadesSpinner.adapter = adapterActividad
 
-                val adapter = ArrayAdapter(
-                    v.context,
-                    android.R.layout.simple_spinner_item,
-                    formatoActividad(actividadesList)
-                )
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                actividadesSpinner.adapter = adapter
-            }
-        }
 
         actividadesSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
@@ -156,7 +150,7 @@ class CrearTurno : Fragment() {
                 position: Int,
                 id: Long
             ) {
-                idActividad = actividadesList[position].id.toString()
+                idActividad = actividades[position].id.toString()
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -166,11 +160,11 @@ class CrearTurno : Fragment() {
         }
     }
 
-    fun formatoActividad(actividadesList: MutableList<Actividad>): List<String> {
+    fun formatoActividad(actividadesList: Array<Actividad>): List<String> {
         return actividadesList.map { "${it.name}, ${it.duration} min" }
     }
 
-    fun formatoProfesor(profesoresList: MutableList<Profesor>): List<String> {
+    fun formatoProfesor(profesoresList: Array<Profesor>): List<String> {
         return profesoresList.map { "${it.nombre}, ${it.apellido}" }
     }
 
@@ -217,6 +211,7 @@ class CrearTurno : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(CrearTurnoViewModel::class.java)
+        viewModelLista = ViewModelProvider(requireActivity()).get(TurnosListaViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

@@ -1,9 +1,15 @@
 package com.example.gimnasio_grupo3.fragments.turnos
 
+import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.gimnasio_grupo3.RetroFitProviders.ActividadesProvider
+import com.example.gimnasio_grupo3.RetroFitProviders.ProfesoresProvider
 import com.example.gimnasio_grupo3.RetroFitProviders.TurnosPersonasProvider
 import com.example.gimnasio_grupo3.RetroFitProviders.TurnosProvider
 import com.example.gimnasio_grupo3.RetroFitProviders.UsuariosProvider
+import com.example.gimnasio_grupo3.entities.Actividad
+import com.example.gimnasio_grupo3.entities.Profesor
 import com.example.gimnasio_grupo3.entities.Turno
 import com.example.gimnasio_grupo3.entities.TurnoPersona
 import com.example.gimnasio_grupo3.entities.Usuario
@@ -13,28 +19,19 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class TurnosListaViewModel : ViewModel() {
-    fun obtenerTurnos(callback: (List<Turno>?) -> Unit) {
-        val retrofit = TurnosProvider().provideRetrofit()
-        val apiService = retrofit.create(APIMethods::class.java)
-        val call = apiService.getTurno()
 
-        call.enqueue(object : Callback<List<Turno>> {
-            override fun onResponse(call: Call<List<Turno>>, response: Response<List<Turno>>) {
-                if (response.isSuccessful) {
-                    val turnoLista = response.body()
-                    callback(turnoLista)
-                }
-                else {
-                    // La llamada no fue exitosa, maneja los errores aquí
-                    callback(null)
-                }
-            }
+    var turnosCargados : MutableLiveData<List<Turno>> = MutableLiveData<List<Turno>>()
+    var actividadesCargadas: MutableLiveData<List<Actividad>> = MutableLiveData<List<Actividad>>()
+    var profesoresCargados: MutableLiveData<List<Profesor>> = MutableLiveData<List<Profesor>>()
 
-            override fun onFailure(call: Call<List<Turno>>, t: Throwable) {
-                // Maneja errores de conexión aquí
-                callback(null)
-            }
-        })
+    var state : MutableLiveData<String> = MutableLiveData<String>()
+    fun obtenerTurnos() { // los turnos deben cargar al final para evitar conflictos
+        state.value = "Loading"
+        cargarActividades()
+    }
+
+    fun recargarTurnos() {
+       obtenerTurnos()
     }
 
     fun actualizarTickets(usuario: Usuario, callback: (String) -> Unit) {
@@ -120,4 +117,74 @@ class TurnosListaViewModel : ViewModel() {
         }
     }
 
+    private fun cargarActividades() {
+        val retrofit = ActividadesProvider().provideRetrofit()
+        val apiService = retrofit.create(APIMethods::class.java)
+        val call = apiService.getActividad()
+
+        call.enqueue(object : Callback<List<Actividad>> {
+            override fun onResponse(call: Call<List<Actividad>>, response: Response<List<Actividad>>) {
+                if (response.isSuccessful) {
+                    actividadesCargadas.value = response.body()
+                    Log.d("Carga", "Actividades OK")
+                    cargarProfesores()
+                }
+                else {
+                    // La llamada no fue exitosa, maneja los errores aquí
+                    state.value = "Error_1"
+                }
+            }
+            override fun onFailure(call: Call<List<Actividad>>, t: Throwable) {
+                // Maneja errores de conexión aquí
+            }
+        })
+
+    }
+
+    private fun cargarProfesores() {
+        val retrofit = ProfesoresProvider().provideRetrofit()
+        val apiService = retrofit.create(APIMethods::class.java)
+        val call = apiService.getProfesores()
+
+        call.enqueue(object : Callback<List<Profesor>> {
+            override fun onResponse(call: Call<List<Profesor>>, response: Response<List<Profesor>>) {
+                if (response.isSuccessful) {
+                    profesoresCargados.value = response.body()
+                    Log.d("Carga", "Profesores OK")
+                    cargarTurnos()
+                }
+                else {
+                    // La llamada no fue exitosa, maneja los errores aquí
+                    state.value = "Error_1"
+                }
+            }
+            override fun onFailure(call: Call<List<Profesor>>, t: Throwable) {
+                // Maneja errores de conexión aquí
+            }
+        })
+    }
+
+    private fun cargarTurnos() {
+        val retrofit = TurnosProvider().provideRetrofit()
+        val apiService = retrofit.create(APIMethods::class.java)
+        val call = apiService.getTurno()
+
+        call.enqueue(object : Callback<List<Turno>> {
+            override fun onResponse(call: Call<List<Turno>>, response: Response<List<Turno>>) {
+                if (response.isSuccessful) {
+                    turnosCargados.value = response.body()
+                    Log.d("Carga", "Turnos OK")
+                    state.value = "Success"
+                }
+                else {
+                    // La llamada no fue exitosa, maneja los errores aquí
+                    state.value = "Error_1"
+                }
+            }
+
+            override fun onFailure(call: Call<List<Turno>>, t: Throwable) {
+                // Maneja errores de conexión aquí
+            }
+        })
+    }
 }

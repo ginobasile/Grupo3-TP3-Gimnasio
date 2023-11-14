@@ -33,8 +33,6 @@ class DetalleTurno : Fragment() {
     private lateinit var btnBack: Button
     private lateinit var btnDelete: Button
     private lateinit var txtId: TextView
-    lateinit var actividadesList: MutableList<Actividad>
-    lateinit var profesoresList: MutableList<Profesor>
     lateinit var actividadesSpinner: Spinner
     lateinit var profesoresSpinner: Spinner
     lateinit var idActividad: String
@@ -45,6 +43,7 @@ class DetalleTurno : Fragment() {
     }
 
     private lateinit var viewModel: DetalleTurnoViewModel
+    private lateinit var viewModelLista: TurnosListaViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,6 +51,8 @@ class DetalleTurno : Fragment() {
     ): View? {
         v = inflater.inflate(R.layout.fragment_detalle_turno, container, false)
         viewModel = ViewModelProvider(requireActivity()).get(DetalleTurnoViewModel::class.java)
+
+        viewModelLista = ViewModelProvider(requireActivity()).get(TurnosListaViewModel::class.java)
 
         txtId = v.findViewById(R.id.textViewIDTurno)
         inputCantPersonas = v.findViewById(R.id.editTextCantPersonas)
@@ -61,9 +62,6 @@ class DetalleTurno : Fragment() {
         actividadesSpinner = v.findViewById(R.id.spinner)
         profesoresSpinner = v.findViewById(R.id.spinner2)
         inputFecha = v.findViewById(R.id.inputFecha)
-        inputFecha.setOnClickListener {
-            mostrarCalendario(v)
-        }
 
         return v
     }
@@ -72,8 +70,15 @@ class DetalleTurno : Fragment() {
         super.onStart()
 
         val turnoActual = DetalleTurnoArgs.fromBundle(requireArguments()).datosTurno
+        val profesores = DetalleTurnoArgs.fromBundle(requireArguments()).profesoresList
+        val actividades = DetalleTurnoArgs.fromBundle(requireArguments()).actividadesList
 
-        Log.d("Probando", turnoActual.toString())
+        inputFecha.setOnClickListener {
+            mostrarCalendario(v, turnoActual.fecha)
+        }
+
+        Log.d("DetalleTurno", profesores.joinToString(", "))
+        Log.d("DetalleTurno", actividades.joinToString(", "))
 
         txtId.text = "Id: ${turnoActual.id}"
         inputCantPersonas.setText(turnoActual.cantPersonasLim.toString())
@@ -81,6 +86,7 @@ class DetalleTurno : Fragment() {
 
 
         btnBack.setOnClickListener {
+            viewModelLista.recargarTurnos()
             v.findNavController().navigateUp()
         }
 
@@ -120,6 +126,7 @@ class DetalleTurno : Fragment() {
                         Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
 
                         if (estado == "Turno actualizado exitosamente") {
+                            viewModelLista.recargarTurnos()
                             v.findNavController().navigateUp()
                         }
                     }
@@ -128,7 +135,6 @@ class DetalleTurno : Fragment() {
                 }
             }
         }
-
 
         btnDelete.setOnClickListener {
             confirmAction("Eliminar") { confirmed ->
@@ -137,6 +143,7 @@ class DetalleTurno : Fragment() {
                         Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
 
                         if (estado == "Turno eliminado exitosamente") {
+                            viewModelLista.recargarTurnos()
                             v.findNavController().navigateUp()
                         }
                     }
@@ -146,32 +153,26 @@ class DetalleTurno : Fragment() {
             }
         }
 
-        viewModel.obtenerProfesores { listaProfesores ->
-            if (listaProfesores != null) {
-                profesoresList = listaProfesores as MutableList<Profesor>
+        val adapterProfesor = ArrayAdapter(
+            v.context,
+            android.R.layout.simple_spinner_item,
+            formatoProfesor(profesores)
+        )
+        adapterProfesor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        profesoresSpinner.adapter = adapterProfesor
 
-                val adapter = ArrayAdapter(
-                    v.context,
-                    android.R.layout.simple_spinner_item,
-                    formatoProfesor(profesoresList)
-                )
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                profesoresSpinner.adapter = adapter
+        val profesor = profesores.find { it.id == turnoActual.idProfesor.toInt() }
 
-                val profesor = profesoresList.find { it.id == turnoActual.idProfesor.toInt() }
-
-                if(profesor != null) {
-                    val index = profesoresList.indexOf(profesor)
+        if(profesor != null) {
+            val index = profesores.indexOf(profesor)
 
 //                    Log.d("ListaDeProfesores", index.toString())
 //                    Log.d("ListaDeProfesores", profesor.toString())
 //                    Log.d("ListaDeProfesores", profesoresList.size.toString())
 //                    Log.d("ListaDeProfesores", profesoresList.toString())
 
-                    if (index != -1) {
-                        profesoresSpinner.setSelection(index)
-                    }
-                }
+            if (index != -1) {
+                profesoresSpinner.setSelection(index)
             }
         }
 
@@ -182,43 +183,37 @@ class DetalleTurno : Fragment() {
                 position: Int,
                 id: Long
             ) {
-                idProfesor = profesoresList[position].id.toString()
+                idProfesor = profesores[position].id.toString()
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 TODO("Not yet implemented")
             }
-
         }
 
-        viewModel.obtenerActividades { listaActividades ->
-            if (listaActividades != null) {
-                actividadesList = listaActividades as MutableList<Actividad>
+        val adapterActividad = ArrayAdapter(
+            v.context,
+            android.R.layout.simple_spinner_item,
+            formatoActividad(actividades)
+        )
+        adapterActividad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        actividadesSpinner.adapter = adapterActividad
 
-                val adapter = ArrayAdapter(
-                    v.context,
-                    android.R.layout.simple_spinner_item,
-                    formatoActividad(actividadesList)
-                )
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                actividadesSpinner.adapter = adapter
+        val actividad = actividades.find { it.id == turnoActual.idActividad.toInt() }
 
-                val actividad = actividadesList.find { it.id == turnoActual.idActividad.toInt() }
-
-                if(actividad != null){
-                    val index = actividadesList.indexOf(actividad)
+        if(actividad != null){
+            val index = actividades.indexOf(actividad)
 
 //                    Log.d("ListaDeActividades", index.toString())
 //                    Log.d("ListaDeActividades", actividad.toString())
 //                    Log.d("ListaDeActividades", actividadesList.size.toString())
 //                    Log.d("ListaDeActividades", actividadesList.toString())
 
-                    if(index != -1) {
-                        actividadesSpinner.setSelection(actividadesList.indexOf(actividad))
-                    }
-                }
+            if(index != -1) {
+                actividadesSpinner.setSelection(actividades.indexOf(actividad))
             }
         }
+
 
         actividadesSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
@@ -227,7 +222,7 @@ class DetalleTurno : Fragment() {
                 position: Int,
                 id: Long
             ) {
-                idActividad = actividadesList[position].id.toString()
+                idActividad = actividades[position].id.toString()
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -235,11 +230,11 @@ class DetalleTurno : Fragment() {
             }
         }
     }
-    fun formatoActividad(actividadesList: MutableList<Actividad>): List<String> {
+    fun formatoActividad(actividadesList: Array<Actividad>): List<String> {
         return actividadesList.map { "${it.name}, ${it.duration} min" }
     }
 
-    fun formatoProfesor(profesoresList: MutableList<Profesor>): List<String> {
+    fun formatoProfesor(profesoresList: Array<Profesor>): List<String> {
         return profesoresList.map { "${it.nombre}, ${it.apellido}" }
     }
 
@@ -262,11 +257,16 @@ class DetalleTurno : Fragment() {
         dialog.show()
     }
 
-    fun mostrarCalendario(view: View) {
+    fun mostrarCalendario(view: View, fechaSeleccionada: String) {
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
         val month = calendar.get(Calendar.MONTH)
         val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+        val fechaSeleccionadaParts = fechaSeleccionada.split("/")
+        val selectedYear = fechaSeleccionadaParts[2].toInt()
+        val selectedMonth = fechaSeleccionadaParts[1].toInt() - 1 // Restar 1 porque en Calendar.MONTH enero es 0
+        val selectedDay = fechaSeleccionadaParts[0].toInt()
 
         val datePickerDialog = DatePickerDialog(
             requireContext(),
@@ -280,6 +280,7 @@ class DetalleTurno : Fragment() {
         )
 
         datePickerDialog.datePicker.minDate = System.currentTimeMillis() - 1000
+        datePickerDialog.datePicker.init(selectedYear, selectedMonth, selectedDay, null)
         datePickerDialog.show()
     }
 }
