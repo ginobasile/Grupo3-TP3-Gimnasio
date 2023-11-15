@@ -82,12 +82,12 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/imgDetalleUsuario"
+                android:id="@+id/imgCrearUsuario"
                 android:layout_width="match_parent"
                 android:layout_height="161dp"
                 android:adjustViewBounds="false"
                 android:cropToPadding="false"
-                android:scaleType="fitCenter"
+                android:scaleType="centerCrop"
                 android:src="@drawable/avatar"
                 app:srcCompat="@drawable/avatar" />
 
