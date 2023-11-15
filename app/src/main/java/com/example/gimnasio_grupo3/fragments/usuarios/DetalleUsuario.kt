@@ -48,11 +48,14 @@ class DetalleUsuario : Fragment() {
     private lateinit var btnDeleteUsuario: Button
     private lateinit var btnVolver : Button
     private lateinit var btnModUsuario: Button
+    private lateinit var btnBorrarImagen: Button
 
     private lateinit var myPreferences: MyPreferences
     private var user: Usuario? = null
     private var imageUri : Uri? = null
     private var FirebaseStorageConnection = FirebaseStorageConnection()
+
+    var actBorrarImagen:Boolean = false
 
     companion object {
         fun newInstance() = DetalleUsuario()
@@ -84,6 +87,7 @@ class DetalleUsuario : Fragment() {
         btnDeleteUsuario = v.findViewById(R.id.btnDeleteUsuario)
         btnVolver = v.findViewById(R.id.btnVolver)
         btnModUsuario = v.findViewById(R.id.btnModUsuario)
+        btnBorrarImagen = v.findViewById(R.id.btnBorrarImagen)
 
         myPreferences = MyPreferences(requireContext())
         user = myPreferences.getUser()
@@ -127,6 +131,12 @@ class DetalleUsuario : Fragment() {
 
         btnVolver.setOnClickListener {
             v.findNavController().navigateUp()
+        }
+
+        btnBorrarImagen.setOnClickListener{
+            Picasso.get().load(R.drawable.avatar).into(imgDetalleUsuario)
+            actBorrarImagen = true
+
         }
 
         btnModUsuario.setOnClickListener {
@@ -250,6 +260,9 @@ class DetalleUsuario : Fragment() {
             confirmAction("Modificar") { confirmed ->
                 if (confirmed) {
                     // Llama a la función en el ViewModel y pasa un callback
+                    if(actBorrarImagen && imageUri == null) {
+                        FirebaseStorageConnection.deleteImage("usuarios/${usuario.dni}.jpg")
+                    }
                     FirebaseStorageConnection.uploadImage(imageUri,"usuarios/${usuario.dni}.jpg",v)
                     viewModel.actualizarUsuario(usuarioActualizado) { estado ->
                         Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
@@ -261,7 +274,6 @@ class DetalleUsuario : Fragment() {
 
 
                             viewModelLista.recargarUsuarios()
-                            v.findNavController().navigateUp()
                         }
                     }
                 } else {

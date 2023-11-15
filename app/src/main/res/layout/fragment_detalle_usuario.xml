@@ -120,6 +120,15 @@
                 android:scaleType="fitCenter"
                 android:src="@drawable/avatar" />
 
+            <Button
+                android:id="@+id/btnBorrarImagen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:backgroundTint="#FF0000"
+                android:textColor="#FFFFFF"
+                android:text="Borrar imagen" />
+
             <TextView
                 android:id="@+id/txtDetallesNombre"
                 android:layout_width="match_parent"

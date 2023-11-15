@@ -6,6 +6,7 @@ import android.net.Uri
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import com.example.gimnasio_grupo3.R
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.FirebaseFirestore
@@ -26,44 +27,14 @@ class FirebaseStorageConnection(  ) {
         }
     }
 
-//    fun getImageCache(imageView: ImageView, path: String) {
-//        val cacheFile = File(imageView.context.cacheDir, "picasso-cache/$path")
-//
-//            if (cacheFile.exists()) {
-//                // Image is cached, load it from cache
-//                Picasso.get().load(cacheFile).into(imageView)
-//            } else {
-//                val storageRef: StorageReference = Firebase.storage.reference.child(path)
-//                storageRef.downloadUrl.addOnSuccessListener { uri ->
-//                    // Load the Firebase image into the ImageView and cache it
-//                    Picasso.get().load(uri).into(imageView)
-//                    // Cache the image
-//                    Picasso.get().load(uri).into(object : com.squareup.picasso.Target {
-//                        override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
-//                            cacheFile.parentFile?.mkdirs()
-//                            cacheFile.createNewFile()
-//                            val outputStream = cacheFile.outputStream()
-//                            bitmap?.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
-//                            outputStream.flush()
-//                            outputStream.close()
-//                        }
-//
-//                        override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {
-//                            // Handle failure to load the bitmap
-//                        }
-//
-//                        override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
-//                            // Handle loading image
-//                        }
-//                    })
-//                }.addOnFailureListener {
-//
-//                }
-//            }
-//
-//
-//
-//    }
+    fun deleteImage( path: String) {
+        val storageRef: StorageReference = Firebase.storage.reference.child(path)
+        storageRef.delete().addOnSuccessListener {
+
+        }.addOnFailureListener {
+
+        }
+    }
 
     fun uploadImage(newImgUri: Uri?, path:String, v: View) {
 
