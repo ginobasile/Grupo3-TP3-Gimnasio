@@ -2,6 +2,7 @@ package com.example.gimnasio_grupo3.fragments.usuarios
 
 import android.app.AlertDialog
 import android.content.Intent
+import android.net.Uri
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
@@ -11,17 +12,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Switch
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.findNavController
+import com.example.gimnasio_grupo3.Firebase.FirebaseStorageConnection
 import com.example.gimnasio_grupo3.R
 import com.example.gimnasio_grupo3.activities.LoginActivity
 import com.example.gimnasio_grupo3.activities.MainActivity
 import com.example.gimnasio_grupo3.entities.Usuario
+import com.example.gimnasio_grupo3.fragments.Home
 import com.example.gimnasio_grupo3.fragments.turnos.CrearTurnoViewModel
 import com.example.gimnasio_grupo3.fragments.turnos.TurnosListaViewModel
 import com.example.gimnasio_grupo3.sessions.MyPreferences
 import com.google.android.material.snackbar.Snackbar
+import com.squareup.picasso.Picasso
 
 class DetalleUsuario : Fragment() {
     lateinit var v : View
@@ -40,12 +46,20 @@ class DetalleUsuario : Fragment() {
     private lateinit var editDetallesTickets : EditText
     private lateinit var txtTickets : TextView
 
+    private lateinit var imgDetalleUsuario : ImageView
+
     private lateinit var btnDeleteUsuario: Button
     private lateinit var btnVolver : Button
     private lateinit var btnModUsuario: Button
+    private lateinit var btnBorrarImagen: Button
 
     private lateinit var myPreferences: MyPreferences
     private var user: Usuario? = null
+    private var imageUri : Uri? = null
+    private var FirebaseStorageConnection = FirebaseStorageConnection()
+
+    var actBorrarImagen:Boolean = false
+
     companion object {
         fun newInstance() = DetalleUsuario()
     }
@@ -57,7 +71,6 @@ class DetalleUsuario : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         v = inflater.inflate(R.layout.fragment_detalle_usuario, container, false)
-
         editDetallesNombre = v.findViewById(R.id.editDetallesNombre)
         editDetallesApellido = v.findViewById(R.id.editDetallesApellido)
         editDetallesMail = v.findViewById(R.id.editDetallesMail)
@@ -70,12 +83,15 @@ class DetalleUsuario : Fragment() {
         editDetallesDni = v.findViewById(R.id.editDetallesDni)
         editDetallesTickets = v.findViewById(R.id.editDetallesTickets)
 
+        imgDetalleUsuario = v.findViewById(R.id.imgDetalleUsuario)
+
         txtId = v.findViewById(R.id.textViewIDActividad2)
         txtTickets =  v.findViewById(R.id.txtDetallesTickets)
 
         btnDeleteUsuario = v.findViewById(R.id.btnDeleteUsuario)
         btnVolver = v.findViewById(R.id.btnVolver)
         btnModUsuario = v.findViewById(R.id.btnModUsuario)
+        btnBorrarImagen = v.findViewById(R.id.btnBorrarImagen)
 
         myPreferences = MyPreferences(requireContext())
         user = myPreferences.getUser()
@@ -94,6 +110,9 @@ class DetalleUsuario : Fragment() {
         viewModelLista = ViewModelProvider(requireActivity()).get(UsuariosListaViewModel::class.java)
         viewModelLista.recargarUsuarios()
 
+        FirebaseStorageConnection.getImage(imgDetalleUsuario,"usuarios/${usuario.dni}.jpg")
+
+        registerClickEventForImg()
         editDetallesNombre.setText(usuario.nombre);
         editDetallesApellido.setText(usuario.apellido);
         editDetallesMail.setText(usuario.mail);
@@ -115,6 +134,12 @@ class DetalleUsuario : Fragment() {
 
         btnVolver.setOnClickListener {
             v.findNavController().navigateUp()
+        }
+
+        btnBorrarImagen.setOnClickListener{
+            Picasso.get().load(R.drawable.avatar).into(imgDetalleUsuario)
+            actBorrarImagen = true
+
         }
 
         btnModUsuario.setOnClickListener {
@@ -252,18 +277,20 @@ class DetalleUsuario : Fragment() {
             confirmAction("Modificar") { confirmed ->
                 if (confirmed) {
                     // Llama a la función en el ViewModel y pasa un callback
+                    if(actBorrarImagen && imageUri == null) {
+                        FirebaseStorageConnection.deleteImage("usuarios/${usuario.dni}.jpg")
+                    }
+                    FirebaseStorageConnection.uploadImage(imageUri,"usuarios/${usuario.dni}.jpg",v)
                     viewModel.actualizarUsuario(usuarioActualizado) { estado ->
                         Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
-
                         if (estado == "Usuario actualizado exitosamente") {
-
                             if (usuarioActualizado.id == user?.id) {
                                 myPreferences.setUser(usuarioActualizado)
                                 Log.d("User update", "Mi usuario actualizado")
                             }
 
+
                             viewModelLista.recargarUsuarios()
-                            v.findNavController().navigateUp()
                         }
                     }
                 } else {
@@ -313,6 +340,20 @@ class DetalleUsuario : Fragment() {
 
         val dialog = builder.create()
         dialog.show()
+    }
+
+    private fun registerClickEventForImg() {
+        imgDetalleUsuario.setOnClickListener {
+            resultLauncher.launch("image/*")
+        }
+    }
+
+    private val resultLauncher = registerForActivityResult(
+        ActivityResultContracts.GetContent()
+    ) {
+
+        imageUri = it
+        imgDetalleUsuario.setImageURI(it)
     }
 
 }

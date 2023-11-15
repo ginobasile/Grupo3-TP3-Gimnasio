@@ -1,10 +1,13 @@
 package com.example.gimnasio_grupo3.adapters
 
+import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.gimnasio_grupo3.Firebase.FirebaseStorageConnection
 import com.example.gimnasio_grupo3.R
 import com.example.gimnasio_grupo3.entities.Usuario
 
@@ -41,6 +44,13 @@ class UsuarioAdapter(
             txtDni.setText(txt)
         }
 
+        fun setImage(dni:String){
+            val firebaseStorageConnection = FirebaseStorageConnection()
+            val img : ImageView = view.findViewById(R.id.imgUsuario)
+            firebaseStorageConnection.getImage(img, "usuarios/${dni}.jpg")
+
+        }
+
         fun setTickets(tickets: String){
             val txtTickets: TextView = view.findViewById(R.id.txtTicketsEnUsuario)
             val txt = "Tickets: ${tickets}"
@@ -70,6 +80,7 @@ class UsuarioAdapter(
         holder.setDni(usuario.dni.toString())
         holder.setTickets(usuario.ticketsRestantes.toString())
         holder.setId(usuario.id.toString())
+        holder.setImage(usuario.dni.toString())
 
         holder.itemView.setOnClickListener {
             onItemClick(usuario)

@@ -1,6 +1,7 @@
 package com.example.gimnasio_grupo3.fragments.loginFragments
 
 import android.app.AlertDialog
+import android.net.Uri
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +13,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Switch
 import androidx.navigation.findNavController
+import com.example.gimnasio_grupo3.Firebase.FirebaseStorageConnection
 import com.example.gimnasio_grupo3.R
 import com.example.gimnasio_grupo3.entities.Profesor
 import com.example.gimnasio_grupo3.entities.Usuario
@@ -30,12 +32,14 @@ class CrearUsuario : Fragment() {
     private lateinit var editDetallesDni : EditText
     private lateinit var editDetallesTickets : EditText
 
+    private var imageUri : Uri? = null
+
     private lateinit var btnCreate: Button
     private lateinit var btnBack: Button
     companion object {
         fun newInstance() = CrearUsuario()
     }
-
+    private var FirebaseStorageConnection = FirebaseStorageConnection()
     private lateinit var viewModel: CrearUsuarioViewModel
 
     override fun onCreateView(
@@ -192,9 +196,9 @@ class CrearUsuario : Fragment() {
             confirmAction("Crear") { confirmed ->
                 if (confirmed) {
                     // Llama a la función en el ViewModel y pasa un callback
-                    viewModel.crearUsuario(nuevoUsuario) { estado ->
+                    viewModel.crearUsuario(nuevoUsuario,v) { estado ->
                         Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
-
+                        FirebaseStorageConnection.uploadImage(imageUri,"usuarios/${nuevoUsuario.dni}.jpg",v)
                         if (estado == "Usuario creado exitosamente") {
                             v.findNavController().navigateUp()
                         }

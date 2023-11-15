@@ -1,5 +1,6 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardTurno"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -17,8 +18,8 @@
 
         <TextView
             android:id="@+id/txtNombreApellido"
-            android:layout_width="300dp"
-            android:layout_height="47dp"
+            android:layout_width="231dp"
+            android:layout_height="53dp"
             android:layout_marginTop="8dp"
             android:drawableLeft="@drawable/name_icon"
             android:drawablePadding="5dp"
@@ -28,15 +29,13 @@
             android:paddingLeft="6dp"
             android:paddingRight="10dp"
             android:text="Nombre Apellido"
+
+
             android:textAlignment="textStart"
-
-
             android:textColor="#000000"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/shimmerId" />
 
         <TextView
@@ -55,8 +54,10 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintHorizontal_bias="0.532"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtNombreApellido" />
+            app:layout_constraintTop_toBottomOf="@+id/txtNombreApellido"
+            app:layout_constraintVertical_bias="0.529" />
 
         <TextView
             android:id="@+id/txtDniEnUsuario"
@@ -72,8 +73,10 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.4"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/txtNombreApellido" />
+            app:layout_constraintTop_toBottomOf="@+id/txtNombreApellido"
+            app:layout_constraintVertical_bias="0.461" />
 
         <TextView
             android:id="@+id/txtAdmin"
@@ -97,7 +100,7 @@
             android:layout_marginTop="16dp"
             android:text="ID: 1"
             android:textColor="#000000"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/txtNombreApellido"
             app:layout_constraintEnd_toEndOf="parent"
@@ -109,8 +112,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="0dp"
+            app:layout_constraintGuide_begin="197dp"
             app:layout_constraintGuide_percent="0.5" />
+
+        <ImageView
+            android:id="@+id/imgUsuario"
+            android:layout_width="92dp"
+            android:layout_height="77dp"
+            app:layout_constraintBottom_toTopOf="@+id/txtTicketsEnUsuario"
+            app:layout_constraintEnd_toStartOf="@+id/txtNombreApellido"
+            app:layout_constraintHorizontal_bias="0.342"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.355"
+            android:src="@drawable/avatar" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

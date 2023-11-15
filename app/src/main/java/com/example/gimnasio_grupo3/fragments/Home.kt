@@ -11,10 +11,12 @@ import android.view.View
 import android.content.SharedPreferences
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.example.gimnasio_grupo3.Firebase.FirebaseStorageConnection
 import com.example.gimnasio_grupo3.R
 import com.example.gimnasio_grupo3.activities.LoginActivity
 import com.example.gimnasio_grupo3.activities.MainActivity
@@ -29,6 +31,8 @@ class Home : Fragment() {
     lateinit var btnUsuarios : Button
     lateinit var btnLogOut : Button
     lateinit var txtNombreCompleto : TextView
+    lateinit var imgUsuario: ImageView
+    private var FirebaseStorageConnection = FirebaseStorageConnection()
     lateinit var txtInfo : TextView
     private lateinit var myPreferences: MyPreferences
     private var user: Usuario? = null
@@ -48,6 +52,7 @@ class Home : Fragment() {
         btnLogOut = v.findViewById(R.id.btnLogOut)
 
         txtNombreCompleto = v.findViewById(R.id.txtNombreApellido)
+        imgUsuario = v.findViewById(R.id.imgNavUsuario)
         txtInfo = v.findViewById(R.id.txtEmail3)
         myPreferences = MyPreferences(requireContext())
         user = myPreferences.getUser()
@@ -70,6 +75,7 @@ class Home : Fragment() {
         if (user != null) {
             setNombreCompleto(user.nombre, user.apellido)
             setTickets(user.ticketsRestantes.toString())
+            FirebaseStorageConnection.getImage(imgUsuario,"usuarios/${user.dni}.jpg")
         }
 
         if (myPreferences.isAdmin() != true) {
@@ -127,7 +133,6 @@ class Home : Fragment() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Cerrar Sesión")
         builder.setMessage("¿Estás seguro de que deseas Cerrar Sesión?")
-
         builder.setPositiveButton("Cerrar Sesión") { dialog, _ ->
             callback(true) // Llama al callback con 'true' cuando el usuario confirma
             dialog.dismiss()
