@@ -11,7 +11,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Switch
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.findNavController
 import com.example.gimnasio_grupo3.Firebase.FirebaseStorageConnection
 import com.example.gimnasio_grupo3.R
@@ -31,6 +33,8 @@ class CrearUsuario : Fragment() {
     private lateinit var editDetallesContacto : EditText
     private lateinit var editDetallesDni : EditText
     private lateinit var editDetallesTickets : EditText
+
+    private lateinit var imgCrearUsuario : ImageView
 
     private var imageUri : Uri? = null
 
@@ -58,6 +62,8 @@ class CrearUsuario : Fragment() {
         editDetallesContacto = v.findViewById(R.id.editDetallesContacto)
         editDetallesDni = v.findViewById(R.id.editDetallesDni)
 
+        imgCrearUsuario = v.findViewById(R.id.imgCrearUsuario)
+
         btnCreate = v.findViewById(R.id.btnCreate)
         btnBack = v.findViewById(R.id.btnVolver)
 
@@ -70,8 +76,7 @@ class CrearUsuario : Fragment() {
         val mailsList = CrearUsuarioArgs.fromBundle(requireArguments()).emailsList
         val dnisList = CrearUsuarioArgs.fromBundle(requireArguments()).dnisList
 
-        Log.d("Listas", mailsList.toList().toString())
-        Log.d("Listas", dnisList.toList().toString())
+        registerClickEventForImg()
 
         btnBack.setOnClickListener {
             v.findNavController().navigateUp()
@@ -196,6 +201,7 @@ class CrearUsuario : Fragment() {
             confirmAction("Crear") { confirmed ->
                 if (confirmed) {
                     // Llama a la función en el ViewModel y pasa un callback
+                    FirebaseStorageConnection.uploadImage(imageUri,"usuarios/${nuevoDni}.jpg",v)
                     viewModel.crearUsuario(nuevoUsuario,v) { estado ->
                         Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
                         FirebaseStorageConnection.uploadImage(imageUri,"usuarios/${nuevoUsuario.dni}.jpg",v)
@@ -233,6 +239,20 @@ class CrearUsuario : Fragment() {
 
         val dialog = builder.create()
         dialog.show()
+    }
+
+    private fun registerClickEventForImg() {
+        imgCrearUsuario.setOnClickListener {
+            resultLauncher.launch("image/*")
+        }
+    }
+
+    private val resultLauncher = registerForActivityResult(
+        ActivityResultContracts.GetContent()
+    ) {
+
+        imageUri = it
+        imgCrearUsuario.setImageURI(it)
     }
 
 }

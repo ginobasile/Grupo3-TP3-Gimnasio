@@ -72,6 +72,7 @@ class Home : Fragment() {
         val myPreferences = MyPreferences(requireContext())
         val user = myPreferences.getUser()
 
+
         if (user != null) {
             setNombreCompleto(user.nombre, user.apellido)
             setTickets(user.ticketsRestantes.toString())
