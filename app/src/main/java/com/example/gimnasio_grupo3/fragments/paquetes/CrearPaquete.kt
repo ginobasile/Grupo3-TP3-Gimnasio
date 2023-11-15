@@ -26,6 +26,8 @@ class CrearPaquete : Fragment() {
 
     private lateinit var viewModel: CrearPaqueteViewModel
 
+    private lateinit var viewModelLista: PaquetesListaViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,6 +47,7 @@ class CrearPaquete : Fragment() {
         super.onStart()
 
         btnBack.setOnClickListener {
+            viewModelLista.recargarPaquetes()
             v.findNavController().navigateUp()
         }
 
@@ -63,13 +66,22 @@ class CrearPaquete : Fragment() {
                 return@setOnClickListener
             }
 
+            val precio = precioText.toInt()
+            if (precio < 0 || precio > 100000) {
+                inputPrecio.error = "El precio no debe ser mayor a 100.000"
+                return@setOnClickListener
+            }
+
             if (ticketsText.isEmpty()) {
                 inputTickets.error = "La cantidad de tickets es obligatoria"
                 return@setOnClickListener
             }
 
-            val precio = precioText.toInt()
             val tickets = ticketsText.toInt()
+            if (tickets < 0 || tickets > 1000) {
+                inputTickets.error = "La cantidad de tickets no debe ser mayor a 1000"
+                return@setOnClickListener
+            }
 
             val nuevoPaquete = Paquete(nombre, tickets, precio)
 
@@ -80,6 +92,7 @@ class CrearPaquete : Fragment() {
                         Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
 
                         if (estado == "Paquete creado exitosamente") {
+                            viewModelLista.recargarPaquetes()
                             v.findNavController().navigateUp()
                         }
                     }
@@ -112,6 +125,8 @@ class CrearPaquete : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(CrearPaqueteViewModel::class.java)
+
+        viewModelLista = ViewModelProvider(requireActivity()).get(PaquetesListaViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

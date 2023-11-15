@@ -31,17 +31,22 @@ class DetallePaquete : Fragment() {
 
     private lateinit var viewModel: DetallePaqueteViewModel
 
+    private lateinit var viewModelLista: PaquetesListaViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         v = inflater.inflate(R.layout.fragment_detalle_paquete, container, false)
+
         viewModel = ViewModelProvider(requireActivity()).get(DetallePaqueteViewModel::class.java)
+
+        viewModelLista = ViewModelProvider(requireActivity()).get(PaquetesListaViewModel::class.java)
 
         txtId = v.findViewById(R.id.textView)
         inputNombre = v.findViewById(R.id.editTextText)
-        inputPrecio = v.findViewById(R.id.editTextNumber2)
-        inputTickets = v.findViewById(R.id.editTextNumber)
+        inputPrecio = v.findViewById(R.id.editTextNumber)
+        inputTickets = v.findViewById(R.id.editTextNumber2)
         btnMod = v.findViewById(R.id.button2)
         btnBack = v.findViewById(R.id.button3)
         btnDelete = v.findViewById(R.id.button)
@@ -60,6 +65,7 @@ class DetallePaquete : Fragment() {
         inputTickets.setText(paquete.cantTickets.toString())
 
         btnBack.setOnClickListener {
+            viewModelLista.recargarPaquetes()
             v.findNavController().navigateUp()
         }
 
@@ -83,6 +89,16 @@ class DetallePaquete : Fragment() {
                 return@setOnClickListener
             }
 
+            if (nuevoTickets.toInt() < 0 || nuevoTickets.toInt() > 1000) {
+                inputTickets.error = "La cantidad de tickets no debe ser mayor a 1000"
+                return@setOnClickListener
+            }
+
+            if (nuevoPrecio.toInt() < 0 || nuevoPrecio.toInt() > 100000) {
+                inputPrecio.error = "El precio no debe ser mayor a 100.000"
+                return@setOnClickListener
+            }
+
             val paqueteActualizado = Paquete(paquete.id, nuevoNombre, nuevoTickets.toInt(), nuevoPrecio.toInt())
 
             confirmAction("Modificar") { confirmed ->
@@ -92,6 +108,7 @@ class DetallePaquete : Fragment() {
                         Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
 
                         if (estado == "Paquete actualizado exitosamente") {
+                            viewModelLista.recargarPaquetes()
                             v.findNavController().navigateUp()
                         }
                     }
@@ -109,6 +126,7 @@ class DetallePaquete : Fragment() {
                         Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
 
                         if (estado == "Paquete eliminado exitosamente") {
+                            viewModelLista.recargarPaquetes()
                             v.findNavController().navigateUp()
                         }
                     }

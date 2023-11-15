@@ -7,48 +7,39 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardCornerRadius="8dp"
-    app:cardElevation="15dp">
+    app:cardElevation="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FBC02D">
+        android:background="#D8735D">
 
-        <TextView
-            android:id="@+id/txtNombreActividad"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <FrameLayout
+            android:id="@+id/txtNombreActividadShimmer"
+            android:layout_width="310dp"
+            android:layout_height="30dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
-            android:drawableLeft="@drawable/actividad_item"
+            android:background="#C8C8C9"
             android:drawablePadding="5dp"
-            android:text="nombreActividad"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:textColor="#000000"
-            android:textSize="34sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/actividadDuracion"
+
+            app:layout_constraintBottom_toTopOf="@+id/actividadDuracionShimmer"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/actividadDuracion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/actividadDuracionShimmer"
+            android:layout_width="260dp"
+            android:layout_height="25dp"
             android:layout_marginBottom="16dp"
-            android:drawableLeft="@drawable/time"
+            android:background="#C8C8C9"
             android:drawablePadding="5dp"
-            android:text="duracion"
-            android:textAlignment="textStart"
-            android:textColor="#000000"
-            android:textSize="24sp"
-            android:textStyle="bold"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtNombreActividad"
+            app:layout_constraintTop_toBottomOf="@+id/txtNombreActividadShimmer"
             app:layout_constraintVertical_bias="0.567" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

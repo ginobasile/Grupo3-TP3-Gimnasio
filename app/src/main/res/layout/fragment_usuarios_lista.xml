@@ -10,10 +10,29 @@
     android:orientation="vertical"
     tools:context=".fragments.actividades.ActividadesLista">
 
+    <Button
+        android:id="@+id/button11"
+        android:layout_width="180dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/button_rounded_red"
+        android:drawableLeft="@drawable/arrow"
+        android:drawablePadding="-20dp"
+        android:paddingStart="10dp"
+        android:text="VOLVER"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/swipeUpdateUsuarios" />
+
     <TextView
         android:id="@+id/textViewTitle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="89dp"
         android:layout_gravity="center_horizontal"
         android:gravity="center"
         android:paddingTop="26dp"
@@ -21,9 +40,10 @@
         android:text="USUARIOS"
         android:textAlignment="center"
         android:textColor="#000000"
-        android:textSize="34sp"
 
+        android:textSize="34sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/shimmerFrameLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -32,22 +52,26 @@
         android:id="@+id/swipeUpdateUsuarios"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/button11"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTitle">
+        app:layout_constraintTop_toBottomOf="@+id/shimmerFrameLayout">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/reciclerUsuarios"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerFrameLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/swipeUpdateUsuarios"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTitle">
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -68,7 +92,6 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
 
     </com.facebook.shimmer.ShimmerFrameLayout>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.net.Uri
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -66,6 +67,12 @@ class CrearUsuario : Fragment() {
     override fun onStart() {
         super.onStart()
 
+        val mailsList = CrearUsuarioArgs.fromBundle(requireArguments()).emailsList
+        val dnisList = CrearUsuarioArgs.fromBundle(requireArguments()).dnisList
+
+        Log.d("Listas", mailsList.toList().toString())
+        Log.d("Listas", dnisList.toList().toString())
+
         btnBack.setOnClickListener {
             v.findNavController().navigateUp()
         }
@@ -99,6 +106,11 @@ class CrearUsuario : Fragment() {
 
             if (!android.util.Patterns.EMAIL_ADDRESS.matcher(nuevoMail).matches()) {
                 editDetallesMail.error = "El formato del mail no es correcto"
+                return@setOnClickListener
+            }
+
+            if (mailsList.contains(nuevoMail)) {
+                editDetallesMail.error = "Este mail ya está en uso"
                 return@setOnClickListener
             }
 
@@ -159,6 +171,11 @@ class CrearUsuario : Fragment() {
 
             if (nuevoDni.isEmpty()) {
                 editDetallesDni.error = "El dni es obligatorio"
+                return@setOnClickListener
+            }
+
+            if (dnisList.contains(nuevoDni.toInt())) {
+                editDetallesDni.error = "Este dni ya está en uso"
                 return@setOnClickListener
             }
 

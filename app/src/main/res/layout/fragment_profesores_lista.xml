@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout"
@@ -11,9 +11,8 @@
 
     <TextView
         android:id="@+id/textViewTitle"
-        android:layout_width="332dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
         android:drawableLeft="@drawable/profesor_icon"
         android:drawablePadding="-20dp"
         android:gravity="center"
@@ -23,29 +22,47 @@
         android:text="PROFESORES"
         android:textColor="#000000"
         android:textSize="34sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/reciclerProfesores"
-        android:layout_width="match_parent"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeUpdateProfesores"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/shimmerFrameLayout2">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/reciclerProfesores"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </androidx.recyclerview.widget.RecyclerView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout4"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center">
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <Button
             android:id="@+id/button5"
             android:layout_width="180dp"
             android:layout_height="56dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
             android:background="@drawable/button_rounded_red"
-            android:drawableLeft="@drawable/arrow"
+            android:drawableLeft="?attr/actionModeCloseDrawable"
             android:drawablePadding="-20dp"
+            android:drawableTint="#FFFFFF"
             android:paddingStart="10dp"
             android:text="VOLVER"
             android:textColor="#FFFFFF"
@@ -58,10 +75,8 @@
 
         <Button
             android:id="@+id/buttonProfesores"
-            android:layout_width="200dp"
+            android:layout_width="204dp"
             android:layout_height="56dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
             android:background="@drawable/button_rounded"
             android:drawableLeft="@drawable/add"
             android:drawablePadding="-20dp"
@@ -78,4 +93,39 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</LinearLayout>
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerFrameLayout2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/swipeUpdateProfesores"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitle">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/shimmerProfesores"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTitle">
+
+            <include layout="@layout/profesor_item_shimmer" />
+
+            <include layout="@layout/profesor_item_shimmer" />
+
+            <include layout="@layout/profesor_item_shimmer" />
+
+            <include layout="@layout/profesor_item_shimmer" />
+
+            <include layout="@layout/profesor_item_shimmer" />
+
+            <include layout="@layout/profesor_item_shimmer" />
+
+            <include layout="@layout/profesor_item_shimmer" />
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
