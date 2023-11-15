@@ -63,4 +63,8 @@ dependencies {
 
     implementation ("com.squareup.picasso:picasso:2.8")
 
+
+    implementation ("com.makeramen:roundedimageview:2.3.0")
+
+
 }
