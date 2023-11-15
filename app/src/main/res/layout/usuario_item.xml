@@ -119,6 +119,7 @@
             android:id="@+id/imgUsuario"
             android:layout_width="92dp"
             android:layout_height="77dp"
+            android:scaleType="centerCrop"
             app:layout_constraintBottom_toTopOf="@+id/txtTicketsEnUsuario"
             app:layout_constraintEnd_toStartOf="@+id/txtNombreApellido"
             app:layout_constraintHorizontal_bias="0.342"
