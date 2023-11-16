@@ -13,7 +13,3 @@ Proyecto de TP3, grupo 3
 #### ENDPOINT PAQUETES: https://646937ca03bb12ac208876f1.mockapi.io/paquetes
 #### ENDPOINT TURNOS: https://65244a19ea560a22a4e9b387.mockapi.io/turnos
 #### ENDPOINT PROFESORES: https://64662c65228bd07b355ddc69.mockapi.io/profesores
-
-## Tareas que faltan:  
-- Revisión general de la app para buscar mejoras / errores
-- mergear rama tomi y rama juampi
