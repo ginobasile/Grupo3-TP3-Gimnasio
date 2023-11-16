@@ -12,11 +12,13 @@
         android:id="@+id/titleTurnoCrear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableLeft="@android:drawable/ic_menu_edit"
+        android:drawableLeft="@drawable/pencil"
+        android:drawablePadding="5dp"
         android:gravity="center"
         android:paddingTop="32dp"
         android:paddingBottom="16dp"
-        android:text="Registrarse"
+        android:text="REGISTRARSE"
+        android:textColor="#000000"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/scrollView3"
@@ -28,11 +30,15 @@
         android:id="@+id/btnVolver"
         android:layout_width="180dp"
         android:layout_height="56dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/button_rounded_red"
-        android:drawableLeft="?attr/actionModeCloseDrawable"
+        android:drawableLeft="@drawable/arrow"
+        android:drawablePadding="-25dp"
+        android:paddingStart="15dp"
         android:text="Volver"
+        android:textColor="#FFFFFF"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnCreate"
         app:layout_constraintStart_toStartOf="parent" />
@@ -41,10 +47,16 @@
         android:id="@+id/btnCreate"
         android:layout_width="180dp"
         android:layout_height="56dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/button_rounded"
+        android:drawableLeft="@drawable/add"
+        android:drawablePadding="-10dp"
+        android:drawableTint="#FFFFFF"
+        android:paddingLeft="10dp"
         android:text="Registrarse"
+        android:textColor="#FFFFFF"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnVolver" />
@@ -69,28 +81,44 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <ImageView
+                android:id="@+id/imgCrearUsuario"
+                android:layout_width="match_parent"
+                android:layout_height="161dp"
+                android:adjustViewBounds="false"
+                android:cropToPadding="false"
+                android:scaleType="centerCrop"
+                android:src="@drawable/avatar"
+                app:srcCompat="@drawable/avatar" />
+
             <TextView
                 android:id="@+id/txtDetallesNombre"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginBottom="10dp"
                 android:drawableLeft="@drawable/name_icon"
+                android:drawablePadding="5dp"
                 android:gravity="center"
                 android:text="Nombre:"
                 android:textAlignment="viewStart"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/editDetallesNombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25dp"
+                android:drawablePadding="5dp"
                 android:ems="10"
                 android:gravity="center"
                 android:hint="nombre"
                 android:inputType="text"
                 android:textAlignment="viewStart"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtDetallesApellido"
@@ -98,68 +126,86 @@
                 android:layout_height="50dp"
                 android:layout_marginBottom="10dp"
                 android:drawableLeft="@drawable/name_icon"
+                android:drawablePadding="5dp"
                 android:gravity="center"
                 android:text="Apellido:"
                 android:textAlignment="viewStart"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/editDetallesApellido"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25dp"
+                android:drawablePadding="5dp"
                 android:ems="10"
                 android:gravity="center"
                 android:hint="apellido"
                 android:inputType="text"
                 android:textAlignment="viewStart"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtDetallesMail"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginBottom="10dp"
-                android:drawableLeft="@android:drawable/ic_dialog_email"
+                android:drawableLeft="@drawable/email"
+                android:drawablePadding="5dp"
                 android:gravity="center"
                 android:text="Mail:"
                 android:textAlignment="viewStart"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/editDetallesMail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25dp"
+                android:drawablePadding="5dp"
                 android:ems="10"
                 android:gravity="center"
                 android:hint="mail@example.com"
                 android:inputType="text|textEmailAddress"
                 android:textAlignment="viewStart"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtDetallesContraseña"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginBottom="10dp"
-                android:drawableLeft="@android:drawable/ic_lock_lock"
+                android:drawableLeft="@drawable/padlock"
+                android:drawablePadding="5dp"
                 android:gravity="center"
                 android:text="Contraseña:"
                 android:textAlignment="viewStart"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/editDetallesContraseña"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25dp"
+                android:drawablePadding="5dp"
                 android:ems="10"
                 android:gravity="center"
                 android:hint="contraseña"
                 android:inputType="text"
                 android:textAlignment="viewStart"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtDetallesAltura"
@@ -167,22 +213,28 @@
                 android:layout_height="50dp"
                 android:layout_marginBottom="10dp"
                 android:drawableLeft="@drawable/altura_icon"
+                android:drawablePadding="5dp"
                 android:gravity="center"
                 android:text="Altura:"
                 android:textAlignment="viewStart"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/editDetallesAltura"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25dp"
+                android:drawablePadding="5dp"
                 android:ems="10"
                 android:gravity="center"
                 android:hint="180 cm"
                 android:inputType="number"
                 android:textAlignment="viewStart"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtDetallesPeso"
@@ -190,91 +242,115 @@
                 android:layout_height="50dp"
                 android:layout_marginBottom="10dp"
                 android:drawableLeft="@drawable/peso_icon"
+                android:drawablePadding="5dp"
                 android:gravity="center"
                 android:text="Peso:"
                 android:textAlignment="viewStart"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/editDetallesPeso"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25dp"
+                android:drawablePadding="5dp"
                 android:ems="10"
                 android:gravity="center"
                 android:hint="100 kg"
                 android:inputType="number"
                 android:textAlignment="viewStart"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtDetallesEdad"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginBottom="10dp"
-                android:drawableLeft="@android:drawable/ic_menu_month"
+                android:drawableLeft="@drawable/calendar"
+                android:drawablePadding="5dp"
                 android:gravity="center"
                 android:text="Edad:"
                 android:textAlignment="viewStart"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/editDetallesEdad"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25dp"
+                android:drawablePadding="5dp"
                 android:ems="10"
                 android:gravity="center"
                 android:hint="25"
                 android:inputType="number"
                 android:textAlignment="viewStart"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtDetallesContacto"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginBottom="10dp"
-                android:drawableLeft="@android:drawable/sym_action_call"
+                android:drawableLeft="@drawable/call"
+                android:drawablePadding="5dp"
                 android:gravity="center"
                 android:text="Contacto:"
                 android:textAlignment="viewStart"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/editDetallesContacto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25dp"
+                android:drawablePadding="5dp"
                 android:ems="10"
                 android:gravity="center"
                 android:hint="1122334455"
                 android:inputType="phone"
                 android:textAlignment="viewStart"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtDetallesDni"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginBottom="10dp"
-                android:drawableLeft="@android:drawable/ic_menu_my_calendar"
+                android:drawableLeft="@drawable/id"
+                android:drawablePadding="5dp"
                 android:gravity="center"
                 android:text="Dni:"
                 android:textAlignment="viewStart"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/editDetallesDni"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25dp"
+                android:drawablePadding="5dp"
                 android:ems="10"
                 android:gravity="center"
                 android:hint="11222333"
                 android:inputType="number"
                 android:textAlignment="viewStart"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
 
         </LinearLayout>

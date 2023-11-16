@@ -16,53 +16,6 @@ class DetalleTurnoViewModel : ViewModel() {
     val retrofit = TurnosProvider().provideRetrofit()
     val apiService = retrofit.create(APIMethods::class.java)
 
-    fun obtenerProfesores(callback: (List<Profesor>?) -> Unit) {
-        val retrofit = ProfesoresProvider().provideRetrofit()
-        val apiService = retrofit.create(APIMethods::class.java)
-        val call = apiService.getProfesores()
-
-        call.enqueue(object : Callback<List<Profesor>> {
-            override fun onResponse(call: Call<List<Profesor>>, response: Response<List<Profesor>>) {
-                if (response.isSuccessful) {
-                    val profesoresLista = response.body()
-                    callback(profesoresLista)
-                }
-                else {
-                    // La llamada no fue exitosa, maneja los errores aquí
-                    callback(null)
-                }
-            }
-
-            override fun onFailure(call: Call<List<Profesor>>, t: Throwable) {
-                // Maneja errores de conexión aquí
-                callback(null)
-            }
-        })
-    }
-    fun obtenerActividades(callback: (List<Actividad>?) -> Unit) {
-        val retrofit = ActividadesProvider().provideRetrofit()
-        val apiService = retrofit.create(APIMethods::class.java)
-        val call = apiService.getActividad()
-
-        call.enqueue(object : Callback<List<Actividad>> {
-            override fun onResponse(call: Call<List<Actividad>>, response: Response<List<Actividad>>) {
-                if (response.isSuccessful) {
-                    val actividadesLista = response.body()
-                    callback(actividadesLista)
-                }
-                else {
-                    // La llamada no fue exitosa, maneja los errores aquí
-                    callback(null)
-                }
-            }
-
-            override fun onFailure(call: Call<List<Actividad>>, t: Throwable) {
-                // Maneja errores de conexión aquí
-                callback(null)
-            }
-        })
-    }
-
     fun actualizarTurno(turnoActualizado: Turno, callback: (String) -> Unit) {
         val retrofit = TurnosProvider().provideRetrofit()
         val apiService = retrofit.create(APIMethods::class.java)

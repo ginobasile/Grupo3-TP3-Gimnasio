@@ -29,6 +29,7 @@ class DetalleProfesor : Fragment() {
     }
 
     private lateinit var viewModel: DetalleProfesorViewModel
+    private lateinit var viewModelLista: ProfesoresListaViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,6 +37,8 @@ class DetalleProfesor : Fragment() {
     ): View? {
         v = inflater.inflate(R.layout.fragment_detalle_profesor, container, false)
         viewModel = ViewModelProvider(requireActivity()).get(DetalleProfesorViewModel::class.java)
+
+        viewModelLista = ViewModelProvider(requireActivity()).get(ProfesoresListaViewModel::class.java)
 
         txtId = v.findViewById(R.id.txtIdProfesor)
         inputNombre = v.findViewById(R.id.inputModifNombreProfesor)
@@ -57,6 +60,7 @@ class DetalleProfesor : Fragment() {
         inputApellido.setText(profesorActual.apellido)
 
         btnBack.setOnClickListener {
+            viewModelLista.recargarProfesores()
             v.findNavController().navigateUp()
         }
 
@@ -84,6 +88,7 @@ class DetalleProfesor : Fragment() {
                         Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
 
                         if (estado == "Profesor actualizado exitosamente") {
+                            viewModelLista.recargarProfesores()
                             v.findNavController().navigateUp()
                         }
                     }
@@ -101,6 +106,7 @@ class DetalleProfesor : Fragment() {
                         Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
 
                         if (estado == "Profesor eliminado exitosamente") {
+                            viewModelLista.recargarProfesores()
                             v.findNavController().navigateUp()
                         }
                     }
@@ -129,6 +135,13 @@ class DetalleProfesor : Fragment() {
 
         val dialog = builder.create()
         dialog.show()
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel = ViewModelProvider(this).get(DetalleProfesorViewModel::class.java)
+        viewModelLista = ViewModelProvider(requireActivity()).get(ProfesoresListaViewModel::class.java)
+        // TODO: Use the ViewModel
     }
 
 }

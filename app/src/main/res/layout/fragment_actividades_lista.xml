@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondo_iniciar"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".fragments.actividades.ActividadesLista"
-    android:background="@drawable/fondo_iniciar">
+    app:layout_constraintHorizontal_bias="0"
+    app:layout_constraintVertical_bias="0"
+    tools:context=".fragments.actividades.ActividadesLista">
 
     <TextView
         android:id="@+id/textViewTitle"
@@ -16,25 +19,94 @@
         android:layout_gravity="center_horizontal"
         android:drawableLeft="@drawable/actividad2_item"
         android:drawablePadding="-50dp"
-        android:paddingLeft="20dp"
         android:gravity="center"
+        android:paddingLeft="30dp"
         android:paddingTop="32dp"
         android:paddingBottom="16dp"
         android:text="ACTIVIDADES"
-        android:textSize="34sp"
-        android:textStyle="bold" />
+        android:textColor="#000000"
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/reciclerActividades"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeUpdateActividades"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/reciclerActividades"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/swipeUpdateActividades"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitle">
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/shimmerActividades"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@+id/textViewTitle">
+
+                <include layout="@layout/actividad_item_shimmer" />
+
+                <include layout="@layout/actividad_item_shimmer" />
+
+                <include layout="@layout/actividad_item_shimmer" />
+
+                <include layout="@layout/actividad_item_shimmer" />
+
+                <include layout="@layout/actividad_item_shimmer" />
+
+                <include layout="@layout/actividad_item_shimmer" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center">
+        android:gravity="center"
+        app:flow_firstHorizontalBias="0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent">
 
         <Button
             android:id="@+id/button7"
@@ -44,8 +116,15 @@
             android:layout_marginBottom="8dp"
             android:background="@drawable/button_rounded_red"
             android:drawableLeft="?attr/actionModeCloseDrawable"
+            android:drawablePadding="-20dp"
+            android:drawableTint="#FFFFFF"
+
+            android:paddingStart="10dp"
             android:text="Volver"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/buttonActividades"
             app:layout_constraintStart_toStartOf="parent"
@@ -53,13 +132,21 @@
 
         <Button
             android:id="@+id/buttonActividades"
-            android:layout_width="180dp"
+            android:layout_width="200dp"
             android:layout_height="56dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/button_rounded"
+            android:drawableLeft="@drawable/add"
+            android:drawablePadding="-20dp"
+
+            android:drawableTint="#FFFFFF"
+            android:paddingStart="10dp"
             android:text="Crear Actividad"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/button7"
@@ -67,4 +154,5 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

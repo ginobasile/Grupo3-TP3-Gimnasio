@@ -78,11 +78,11 @@ class Login : Fragment() {
 
         viewModel.obtenerUsuarios { usuarios ->
             userList = usuarios ?: emptyList()
-        }
 
-        btnNavigate2.setOnClickListener {
-            val action = LoginDirections.actionLoginToCrearUsuario()
-            findNavController().navigate(action)
+            btnNavigate2.setOnClickListener {
+                val action = LoginDirections.actionLoginToCrearUsuario(userList.map { it.mail }.toTypedArray(), userList.map { it.dni }.toIntArray())
+                findNavController().navigate(action)
+            }
         }
 
         btnNavigate.setOnClickListener {

@@ -28,6 +28,7 @@ class CrearActividad : Fragment() {
     }
 
     private lateinit var viewModel: CrearActividadViewModel
+    private lateinit var viewModelLista: ActividadesListaViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,6 +46,8 @@ class CrearActividad : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
+        viewModelLista = ViewModelProvider(requireActivity()).get(ActividadesListaViewModel::class.java)
 
         btnBack.setOnClickListener {
             v.findNavController().navigateUp()
@@ -65,6 +68,12 @@ class CrearActividad : Fragment() {
             }
 
             val dur = duracionText.toInt()
+
+            if (dur.toInt() < 0 || dur.toInt() > 300) {
+                inputDuracion.error = "La duración debe estar entre 0 y 300 minutos"
+                return@setOnClickListener
+            }
+
             val nuevoActividad = Actividad(nombre, duracionText.toInt())
 
             confirmAction("Crear") { confirmed ->
@@ -74,6 +83,7 @@ class CrearActividad : Fragment() {
                         Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
 
                         if (estado == "Actividad creada exitosamente") {
+                            viewModelLista.recargarActividades()
                             v.findNavController().navigateUp()
                         }
                     }

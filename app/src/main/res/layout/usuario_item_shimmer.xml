@@ -1,5 +1,6 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardTurno"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -17,23 +18,23 @@
 
         <FrameLayout
             android:id="@+id/shimmerNombre"
-            android:layout_width="300dp"
+            android:layout_width="200dp"
             android:layout_height="47dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="24dp"
+
+
+            android:layout_marginEnd="32dp"
             android:background="#C8C8C9"
-
-
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/shimmerId" />
+            app:layout_constraintTop_toBottomOf="@+id/shimmerAdmin" />
 
         <FrameLayout
             android:id="@+id/shimmerTickets"
             android:layout_width="140dp"
             android:layout_height="25dp"
-            android:background="#C8C8C9"
+            android:layout_marginTop="1dp"
 
+            android:background="#C8C8C9"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="parent"
@@ -55,21 +56,33 @@
 
             android:layout_width="80dp"
             android:layout_height="25dp"
-            android:background="#C8C8C9"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
+            android:background="#C8C8C9"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/shimmerId"
-            android:layout_width="69dp"
-            android:layout_height="32dp"
-            android:background="#C8C8C9"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
 
 
             android:layout_marginTop="16dp"
+            android:background="#C8C8C9"
+            app:layout_constraintEnd_toStartOf="@+id/shimmerId2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/shimmerId2"
+            android:layout_width="69dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="16dp"
+
+
+            android:background="#C8C8C9"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

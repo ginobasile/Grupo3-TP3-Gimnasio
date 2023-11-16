@@ -26,11 +26,11 @@ import java.util.Locale
 class TurnoAdapter(
     context: Context,
     var turnos: MutableList<Turno>,
+    var profesores: List<Profesor>,
+    var actividades: List<Actividad>,
     private val onItemClick: (Turno) -> Unit,
 ) : RecyclerView.Adapter<TurnoAdapter.TurnoHolder>() {
 
-    var actividadesList = mutableListOf<Actividad>()
-    var profesoresList = mutableListOf<Profesor>()
     var myPreferences = MyPreferences(context)
     private var listaFiltrada: List<Turno>
 
@@ -43,80 +43,21 @@ class TurnoAdapter(
     }
 
     init {
-        listaFiltrada = turnos.sortedByDescending {
-            SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(it.fecha)
-        }
-        Log.d("Lista", listaFiltrada.toString())
-        obtenerActividades { actividades ->
-            actividades?.let {
-                actividadesList.clear()
-                actividadesList.addAll(it)
-                notifyDataSetChanged()
+        listaFiltrada = if (myPreferences.isAdmin()) {
+            turnos.sortedByDescending {
+                SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(it.fecha)
             }
-        }
-
-        obtenerProfesores { profesores ->
-            profesores?.let {
-                profesoresList.clear()
-                profesoresList.addAll(it)
-                notifyDataSetChanged()
-            }
-        }
-    }
-
-    fun obtenerProfesores(callback: (List<Profesor>?) -> Unit) {
-        val retrofit = ProfesoresProvider().provideRetrofit()
-        val apiService = retrofit.create(APIMethods::class.java)
-        val call = apiService.getProfesores()
-
-        call.enqueue(object : Callback<List<Profesor>> {
-            override fun onResponse(
-                call: Call<List<Profesor>>,
-                response: Response<List<Profesor>>
-            ) {
-                if (response.isSuccessful) {
-                    val profesoresLista = response.body()
-                    Log.d("hola", profesoresLista.toString())
-                    if (profesoresLista != null) {
-                        profesoresList = profesoresLista.toMutableList()
-                    }
-                    callback(profesoresList)
-                } else {
-                    callback(null)
+        } else {
+            turnos
+                .sortedByDescending {
+                    SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(it.fecha)
                 }
-            }
+                .filter { turno -> !esFechaPasada(turno.fecha) }
+        }
 
-            override fun onFailure(call: Call<List<Profesor>>, t: Throwable) {
-                callback(null)
-            }
-        })
-    }
-
-    fun obtenerActividades(callback: (List<Actividad>?) -> Unit) {
-        val retrofit = ActividadesProvider().provideRetrofit()
-        val apiService = retrofit.create(APIMethods::class.java)
-        val call = apiService.getActividad()
-
-        call.enqueue(object : Callback<List<Actividad>> {
-            override fun onResponse(
-                call: Call<List<Actividad>>,
-                response: Response<List<Actividad>>
-            ) {
-                if (response.isSuccessful) {
-                    val actividadesLista = response.body()
-                    if (actividadesLista != null) {
-                        actividadesList = actividadesLista.toMutableList()
-                    }
-                    callback(actividadesLista)
-                } else {
-                    callback(null)
-                }
-            }
-
-            override fun onFailure(call: Call<List<Actividad>>, t: Throwable) {
-                callback(null)
-            }
-        })
+        Log.d("Carga", turnos.toString())
+        Log.d("Carga", profesores.toString())
+        Log.d("Carga", actividades.toString())
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TurnoHolder {
@@ -131,17 +72,26 @@ class TurnoAdapter(
     override fun onBindViewHolder(holder: TurnoHolder, position: Int) {
         val turno = listaFiltrada[position]
 
-        val actividad = actividadesList.find { it.id.toString().equals(turno.idActividad) }
+        Log.d("Probando2", actividades.toString())
+
+        val actividad = actividades.find { it.id.toString().equals(turno.idActividad) }
         var actividadNombre = ""
+
         if (actividad != null) {
             actividadNombre = actividad.name
+        } else {
+            actividadNombre = "No encontrada"
         }
 
-        val profesor = profesoresList.find { it.id.toString().equals(turno.idProfesor) }
+        val profesor = profesores.find { it.id.toString().equals(turno.idProfesor) }
         var profesorFullName = ""
+
+        Log.d("TurnoProfesor", profesores.toString())
 
         if (profesor != null) {
             profesorFullName = "${profesor.nombre}, ${profesor.apellido}"
+        } else {
+            profesorFullName = "No encontrado"
         }
 
         holder.txtActividad.text = "Actividad: ${actividadNombre}"

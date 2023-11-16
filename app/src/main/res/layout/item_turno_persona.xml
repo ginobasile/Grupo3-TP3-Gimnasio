@@ -12,7 +12,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/mostaza">
 
         <TextView
@@ -21,47 +21,70 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
-            android:drawableLeft="@android:drawable/ic_menu_month"
+            android:layout_marginBottom="8dp"
+            android:drawableLeft="@drawable/calendar"
+            android:drawablePadding="10dp"
+            android:drawableTint="#000000"
+            android:gravity="center_vertical"
             android:text="FECHA"
-            android:textColor="#FFFFFF"
+            android:textColor="#000000"
             android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/txtActividadNombre"
-            app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/txtActividadNombre"
-            android:layout_width="221dp"
-            android:layout_height="29dp"
-            android:layout_marginBottom="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:drawableLeft="@drawable/actividad_item"
+            android:drawablePadding="5dp"
+            android:drawableTint="#000000"
+            android:gravity="center_vertical"
             android:text="NOMBRE ACTIVIDAD"
             android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtFecha" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline"
+        <TextView
+            android:id="@+id/txtActividadNombre2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintGuide_percent="0.7" />
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:drawableLeft="@drawable/name_icon"
+            android:drawablePadding="5dp"
+            android:drawableTint="#000000"
+            android:gravity="center_vertical"
+            android:text="NOMBRE ACTIVIDAD"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtActividadNombre" />
 
         <TextView
             android:id="@+id/txtMsj"
-            android:layout_width="52dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
+            android:drawableTint="#000000"
             android:text="Pasado"
-            android:textColor="#FFFFFF"
+            android:textColor="#000000"
             android:textSize="16sp"
-            android:textStyle="bold|italic"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

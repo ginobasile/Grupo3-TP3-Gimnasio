@@ -6,25 +6,26 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardCornerRadius="8dp"
-    app:cardElevation="8dp">
+    app:cardElevation="15dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/mostaza">
+        android:background="#FBC02D">
 
         <TextView
             android:id="@+id/txtNombrePaquete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="16dp"
             android:drawableLeft="@drawable/paquete_icon"
+            android:drawablePadding="5dp"
             android:text="nombrePaquete"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="#FFFFFF"
-            android:textSize="24sp"
+            android:textColor="#000000"
+            android:textSize="34sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/linearLayout"
             app:layout_constraintEnd_toEndOf="parent"
@@ -47,23 +48,31 @@
             <TextView
                 android:id="@+id/txtPrecioPaquete"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:drawableLeft="@drawable/precio_icon"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
                 android:text="Precio: $100"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp" />
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtTickets"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="32dp"
+                android:drawableLeft="@drawable/tickets_icon"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
                 android:text="Tickets: 50"
-                android:textAlignment="textEnd"
+                android:textAlignment="viewStart"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp" />
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
