@@ -37,7 +37,6 @@
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imgUsuario"
             app:layout_constraintTop_toBottomOf="@+id/shimmerId" />
 
         <TextView
@@ -117,20 +116,30 @@
             app:layout_constraintGuide_begin="184dp"
             app:layout_constraintGuide_percent="0.5" />
 
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/imgUsuario"
-            android:layout_width="92dp"
-            android:layout_height="77dp"
-            android:scaleType="centerCrop"
+        <androidx.cardview.widget.CardView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:cardCornerRadius="30dp"
             app:layout_constraintBottom_toTopOf="@+id/txtTicketsEnUsuario"
             app:layout_constraintEnd_toStartOf="@+id/txtNombreApellido"
-            app:layout_constraintHorizontal_bias="0.342"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.355"
-            android:src="@drawable/avatar"
-            android:layout_margin="2dp"
-            android:radius="20dp"/> <!-- Ajusta el radio según tus preferencias -->
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/imgUsuario"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/avatar"
+                app:layout_constraintBottom_toTopOf="@+id/txtTicketsEnUsuario"
+                app:layout_constraintEnd_toStartOf="@+id/txtNombreApellido"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.cardview.widget.CardView>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
