@@ -7,7 +7,7 @@
     android:layout_margin="8dp"
     android:maxWidth="380dp"
     app:cardCornerRadius="15dp"
-    app:cardElevation="8dp">
+    app:cardElevation="15dp">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,74 +17,71 @@
 
 
         <FrameLayout
-            android:id="@+id/shimmerNombre"
-            android:layout_width="200dp"
-            android:layout_height="47dp"
-            android:layout_marginTop="24dp"
-
-
-            android:layout_marginEnd="32dp"
+            android:id="@+id/txtNombreApellidoShimmer"
+            android:layout_width="231dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="16dp"
             android:background="#C8C8C9"
+            android:drawableLeft="@drawable/name_icon"
+            android:drawablePadding="5dp"
+            android:ellipsize="end"
+
+            android:maxLines="1"
+
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/shimmerAdmin" />
+            app:layout_constraintTop_toBottomOf="@+id/shimmerId" />
 
         <FrameLayout
-            android:id="@+id/shimmerTickets"
-            android:layout_width="140dp"
-            android:layout_height="25dp"
-            android:layout_marginTop="1dp"
+            android:id="@+id/txtTicketsEnUsuarioShimmer"
+            android:layout_width="160dp"
+            android:layout_height="37dp"
 
             android:background="#C8C8C9"
+
+
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintHorizontal_bias="0.532"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/shimmerNombre" />
+            app:layout_constraintTop_toBottomOf="@+id/txtNombreApellidoShimmer"
+            app:layout_constraintVertical_bias="0.529" />
 
         <FrameLayout
-            android:id="@+id/shimmerDni"
-            android:layout_width="140dp"
-            android:layout_height="25dp"
+            android:id="@+id/txtDniEnUsuarioShimmer"
+            android:layout_width="160dp"
+            android:layout_height="37dp"
+
             android:background="#C8C8C9"
+
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.39"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/shimmerNombre" />
+            app:layout_constraintTop_toBottomOf="@+id/txtNombreApellidoShimmer"
+            app:layout_constraintVertical_bias="0.542" />
 
         <FrameLayout
-            android:id="@+id/shimmerAdmin"
-
-            android:layout_width="80dp"
-            android:layout_height="25dp"
+            android:id="@+id/txtAdminShimmer"
+            android:layout_width="72dp"
+            android:layout_height="26dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
+
             android:background="#C8C8C9"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <FrameLayout
             android:id="@+id/shimmerId"
-            android:layout_width="90dp"
-            android:layout_height="80dp"
-
-
-            android:layout_marginStart="1dp"
+            android:layout_width="43dp"
+            android:layout_height="26dp"
             android:layout_marginTop="16dp"
             android:background="#C8C8C9"
-            app:layout_constraintEnd_toStartOf="@+id/shimmerId2"
-            app:layout_constraintHorizontal_bias="0.341"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/shimmerId2"
-            android:layout_width="69dp"
-            android:layout_height="32dp"
-            android:layout_marginTop="16dp"
-
-
-            android:background="#C8C8C9"
+            app:layout_constraintBottom_toTopOf="@+id/txtNombreApellidoShimmer"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -94,7 +91,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_end="197dp" />
+            app:layout_constraintGuide_begin="184dp"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:cardBackgroundColor="#C8C8C9"
+            app:cardCornerRadius="30dp"
+            app:layout_constraintBottom_toTopOf="@+id/txtTicketsEnUsuarioShimmer"
+            app:layout_constraintEnd_toStartOf="@+id/txtNombreApellidoShimmer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+        </androidx.cardview.widget.CardView>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
