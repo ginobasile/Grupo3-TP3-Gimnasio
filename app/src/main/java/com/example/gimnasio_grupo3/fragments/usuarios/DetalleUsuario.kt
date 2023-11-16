@@ -110,7 +110,7 @@ class DetalleUsuario : Fragment() {
         viewModelLista = ViewModelProvider(requireActivity()).get(UsuariosListaViewModel::class.java)
         viewModelLista.recargarUsuarios()
 
-        FirebaseStorageConnection.getImage(imgDetalleUsuario,"usuarios/${usuario.dni}.jpg")
+        FirebaseStorageConnection.getImage(imgDetalleUsuario,"usuarios/${usuario.id}.jpg")
 
         registerClickEventForImg()
         editDetallesNombre.setText(usuario.nombre);
@@ -278,9 +278,9 @@ class DetalleUsuario : Fragment() {
                 if (confirmed) {
                     // Llama a la función en el ViewModel y pasa un callback
                     if(actBorrarImagen && imageUri == null) {
-                        FirebaseStorageConnection.deleteImage("usuarios/${usuario.dni}.jpg")
+                        FirebaseStorageConnection.deleteImage("usuarios/${usuario.id}.jpg")
                     }
-                    FirebaseStorageConnection.uploadImage(imageUri,"usuarios/${usuario.dni}.jpg",v)
+                    FirebaseStorageConnection.uploadImage(imageUri,"usuarios/${usuario.id}.jpg",v)
                     viewModel.actualizarUsuario(usuarioActualizado) { estado ->
                         Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
                         if (estado == "Usuario actualizado exitosamente") {
@@ -351,7 +351,6 @@ class DetalleUsuario : Fragment() {
     private val resultLauncher = registerForActivityResult(
         ActivityResultContracts.GetContent()
     ) {
-
         imageUri = it
         imgDetalleUsuario.setImageURI(it)
     }

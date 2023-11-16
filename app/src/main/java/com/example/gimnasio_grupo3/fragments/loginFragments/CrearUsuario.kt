@@ -18,7 +18,10 @@ import androidx.navigation.findNavController
 import com.example.gimnasio_grupo3.Firebase.FirebaseStorageConnection
 import com.example.gimnasio_grupo3.R
 import com.example.gimnasio_grupo3.entities.Profesor
+import com.example.gimnasio_grupo3.entities.TurnoPersona
 import com.example.gimnasio_grupo3.entities.Usuario
+import com.example.gimnasio_grupo3.fragments.turnos.MisTurnosViewModel
+import com.example.gimnasio_grupo3.fragments.usuarios.DetalleUsuarioViewModel
 import com.google.android.material.snackbar.Snackbar
 
 class CrearUsuario : Fragment() {
@@ -37,6 +40,7 @@ class CrearUsuario : Fragment() {
     private lateinit var imgCrearUsuario : ImageView
 
     private var imageUri : Uri? = null
+    private var nuevoId: Int = 1;
 
     private lateinit var btnCreate: Button
     private lateinit var btnBack: Button
@@ -70,6 +74,7 @@ class CrearUsuario : Fragment() {
         return v
     }
 
+
     override fun onStart() {
         super.onStart()
 
@@ -93,6 +98,7 @@ class CrearUsuario : Fragment() {
             val nuevaEdad = editDetallesEdad.text.toString()
             val nuevoContacto = editDetallesContacto.text.toString()
             val nuevoDni = editDetallesDni.text.toString()
+
 
             if (nuevoNombre.isEmpty()) {
                 editDetallesNombre.error = "El nombre es obligatorio"
@@ -198,13 +204,14 @@ class CrearUsuario : Fragment() {
                 0
             )
 
+
+
             confirmAction("Crear") { confirmed ->
                 if (confirmed) {
                     // Llama a la función en el ViewModel y pasa un callback
-                    FirebaseStorageConnection.uploadImage(imageUri,"usuarios/${nuevoDni}.jpg",v)
+                    FirebaseStorageConnection.uploadImage(imageUri, "usuarios/$nuevoId.jpg",v)
                     viewModel.crearUsuario(nuevoUsuario,v) { estado ->
                         Snackbar.make(v, estado, Snackbar.LENGTH_LONG).show()
-                        FirebaseStorageConnection.uploadImage(imageUri,"usuarios/${nuevoUsuario.dni}.jpg",v)
                         if (estado == "Usuario creado exitosamente") {
                             v.findNavController().navigateUp()
                         }
@@ -216,10 +223,18 @@ class CrearUsuario : Fragment() {
         }
     }
 
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(CrearUsuarioViewModel::class.java)
-        // TODO: Use the ViewModel
+        lateinit var lastUser: Usuario
+        viewModel.obtenerUsuarios { usuarios ->
+
+            if (usuarios != null) {
+                lastUser = usuarios.last();
+                nuevoId =  lastUser.id.toInt() + 1
+            }
+        }
     }
 
     private fun confirmAction(action: String, callback: (Boolean) -> Unit) {
