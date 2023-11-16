@@ -2,7 +2,6 @@ package com.example.gimnasio_grupo3.fragments.usuarios
 
 import androidx.lifecycle.ViewModel
 import com.example.gimnasio_grupo3.RetroFitProviders.UsuariosProvider
-import com.example.gimnasio_grupo3.entities.Actividad
 import com.example.gimnasio_grupo3.entities.Usuario
 import com.example.gimnasio_grupo3.interfaces.APIMethods
 import retrofit2.Call
@@ -19,14 +18,11 @@ class DetalleUsuarioViewModel : ViewModel() {
         val call = apiService.deleteUsuarios(usuario.id.toString())
 
         call.enqueue(object : Callback<Void> {
-
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
 
                 if (response.isSuccessful) {
-
                     callback("Usuario eliminado exitosamente")
                 } else {
-
                     callback("Error al eliminar Usuario")
                 }
             }

@@ -7,6 +7,7 @@ import com.example.gimnasio_grupo3.entities.Turno
 import com.example.gimnasio_grupo3.entities.TurnoPersona
 import com.example.gimnasio_grupo3.entities.Usuario
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
@@ -91,6 +92,9 @@ interface APIMethods {
     // Read
     @GET("Usuarios")
     fun getUsuarios(): Call<List<Usuario>>
+
+    @GET("Usuarios")
+    suspend fun getUsuariosForCorutines(): Response<List<Usuario>>
 
     // Update
     @PUT("Usuarios/{id}")
