@@ -2,11 +2,11 @@ package com.example.gimnasio_grupo3.fragments.usuarios
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.gimnasio_grupo3.RetroFitProviders.UsuariosProvider
 import com.example.gimnasio_grupo3.entities.Usuario
 import com.example.gimnasio_grupo3.interfaces.APIMethods
-import retrofit2.Call
-import retrofit2.Callback
+import kotlinx.coroutines.launch
 import retrofit2.Response
 
 class UsuariosListaViewModel : ViewModel() {
@@ -22,49 +22,42 @@ class UsuariosListaViewModel : ViewModel() {
     }
 
     fun cargarUsuarios() {
-        val call = apiService.getUsuarios()
-
         if (usuariosCargados.value == null ){
-            state.value = "Loading"
-            call.enqueue(object : Callback<List<Usuario>> {
-                override fun onResponse(call: Call<List<Usuario>>, response: Response<List<Usuario>>) {
+            viewModelScope.launch {
+                try {
+                    val response:Response<List<Usuario>> =  apiService.getUsuariosForCorutines()
+
                     if (response.isSuccessful) {
                         state.value = "Success"
                         usuariosCargados.value = response.body()
                     } else {
-                        // La llamada a la API no fue exitosa
-                        // Puedes manejar errores aquí
                         state.value = "Error_1"
                     }
+                } catch (e: Exception) {
+                    state.value = "Error_2"
                 }
-
-                override fun onFailure(call: Call<List<Usuario>>, t: Throwable) {
-                    // Error en la llamada a la API
-                    // Puedes manejar errores de red u otros aquí
-                }
-            })
+            }
         }
     }
 
     fun recargarUsuarios() {
         state.value = "Loading"
-        val call = apiService.getUsuarios()
-        call.enqueue(object : Callback<List<Usuario>> {
-            override fun onResponse(call: Call<List<Usuario>>, response: Response<List<Usuario>>) {
+        viewModelScope.launch {
+            try {
+                val response:Response<List<Usuario>> =  apiService.getUsuariosForCorutines()
+
                 if (response.isSuccessful) {
                     state.value = "Success"
                     usuariosCargados.value = response.body()
                 } else {
-                    // La llamada a la API no fue exitosa
-                    // Puedes manejar errores aquí
+                    state.value = "Error_1"
                 }
+            } catch (e: Exception) {
+                state.value = "Error_2"
             }
+        }
 
-            override fun onFailure(call: Call<List<Usuario>>, t: Throwable) {
-                // Error en la llamada a la API
-                // Puedes manejar errores de red u otros aquí
-            }
-        })
     }
+
 
 }
