@@ -63,6 +63,7 @@ class Home : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        FirebaseStorageConnection.getImageLoadingAndImgDefault(imgUsuario,"usuarios/${user?.id}.jpg")
         // TODO: Use the ViewModel
     }
 
@@ -76,7 +77,6 @@ class Home : Fragment() {
         if (user != null) {
             setNombreCompleto(user.nombre, user.apellido)
             setTickets(user.ticketsRestantes.toString())
-            FirebaseStorageConnection.getImage(imgUsuario,"usuarios/${user.dni}.jpg")
         }
 
         if (myPreferences.isAdmin() != true) {

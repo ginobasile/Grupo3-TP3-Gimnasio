@@ -27,6 +27,17 @@ class FirebaseStorageConnection(  ) {
         }
     }
 
+    fun getImageLoadingAndImgDefault(imageView: ImageView, path: String) {
+        imageView.setImageResource(R.drawable.loading)
+        val storageRef: StorageReference = Firebase.storage.reference.child(path)
+        storageRef.downloadUrl.addOnSuccessListener { uri ->
+            Picasso.get().load(uri).into(imageView)
+        }.addOnFailureListener {
+            imageView.setImageResource(R.drawable.avatar)
+        }
+    }
+
+
     fun deleteImage( path: String) {
         val storageRef: StorageReference = Firebase.storage.reference.child(path)
         storageRef.delete().addOnSuccessListener {
@@ -69,64 +80,5 @@ class FirebaseStorageConnection(  ) {
             }
         }
     }
-
-
-    fun uploadImageCache(newImgUri: Uri?, path:String, v: View,imageView: ImageView) {
-
-        if (newImgUri != null) {
-
-            var storageRef: StorageReference = FirebaseStorage.getInstance().reference.child(path)
-            var firebaseFirestore: FirebaseFirestore = FirebaseFirestore.getInstance()
-
-            newImgUri?.let {
-                try {
-                    storageRef.putFile(it).addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            storageRef.downloadUrl.addOnSuccessListener { uri ->
-                                val map = HashMap<String, Any>()
-                                map["pic"] = uri.toString()
-                                firebaseFirestore.collection("images").add(map)
-                                    .addOnCompleteListener { firestoreTask ->
-
-                                        if (!firestoreTask.isSuccessful) throw Error("Error uploading image")
-                                        else getImage(imageView,path)
-                                    }
-                            }
-                        } else {
-                            throw Error("Error uploading image")
-                        }
-                    }
-                }catch (e:Error){
-                    Snackbar.make(v, e.toString(), Snackbar.LENGTH_LONG).show()
-                    Log.d("uploading image", e.toString())
-                }
-
-            }
-        }
-    }
-
-
-
-//    private var FirebaseStorageConnection = FirebaseStorageConnection()
-
-//    private fun registerClickEventForImg() {
-//        imgView.setOnClickListener {
-//            resultLauncher.launch("image/*")
-//        }
-//    }
-//
-//    private val resultLauncher = registerForActivityResult(
-//        ActivityResultContracts.GetContent()
-//    ) {
-//
-//        imageUri = it
-//        imgView.setImageURI(it)
-//    }
-
-    //
-//
-//
-//
-// implementation ("com.squareup.picasso:picasso:2.8")
 
 }

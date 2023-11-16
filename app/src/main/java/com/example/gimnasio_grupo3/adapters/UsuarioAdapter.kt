@@ -44,10 +44,10 @@ class UsuarioAdapter(
             txtDni.setText(txt)
         }
 
-        fun setImage(dni:String){
+        fun setImage(id:String){
             val firebaseStorageConnection = FirebaseStorageConnection()
             val img : ImageView = view.findViewById(R.id.imgUsuario)
-            firebaseStorageConnection.getImage(img, "usuarios/${dni}.jpg")
+            firebaseStorageConnection.getImageLoadingAndImgDefault(img, "usuarios/${id}.jpg")
 
         }
 
@@ -80,7 +80,7 @@ class UsuarioAdapter(
         holder.setDni(usuario.dni.toString())
         holder.setTickets(usuario.ticketsRestantes.toString())
         holder.setId(usuario.id.toString())
-        holder.setImage(usuario.dni.toString())
+        holder.setImage(usuario.id.toString())
 
         holder.itemView.setOnClickListener {
             onItemClick(usuario)
